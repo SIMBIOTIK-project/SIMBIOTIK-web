@@ -36,7 +36,7 @@ class AppRouterConfig {
                 name: AppRouterConstants.homeScreen,
                 path: AppRouterConstants.homeScreen,
                 builder: (context, state) {
-                  return Center(
+                  return const Center(
                     child: Text('Ini Halaman Dashboard'),
                   );
                 })
