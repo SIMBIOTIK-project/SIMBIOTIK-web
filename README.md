@@ -1,16 +1,32 @@
-# simbiotik_web
+# SIMBIOTIK Dashboard
 
-A new Flutter project.
+### Run Project
+- Clone project 
+```
+git clone https://github.com/SIMBIOTIK-project/SIMBIOTIK-web.git
+```
 
-## Getting Started
+Note: You can use [Project IDX](https://idx.dev) to clone this project.
 
-This project is a starting point for a Flutter application.
+- Create the ```.env``` and ```.env_dev``` in the root project with value
+```
+URL = "https://'name-site-API'"
+``` 
 
-A few resources to get you started if this is your first Flutter project:
+Note: For API URL you can contact Developer/Owner this project
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Run pub get in Terminal
+```
+flutter pub get
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Run Project
+For Development
+```
+flutter run --flavor dev --target lib/main_dev.dart
+```
+
+For Production
+```
+flutter run --flavor prod --target lib/main_prod.dart
+```
