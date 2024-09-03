@@ -23,17 +23,15 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/10-1015x675.png
-  AssetGenImage get a101015x675 =>
-      const AssetGenImage('assets/images/10-1015x675.png');
+  /// File path: assets/images/cash.png
+  AssetGenImage get cash => const AssetGenImage('assets/images/cash.png');
 
-  /// File path: assets/images/Untitled design.png
-  AssetGenImage get untitledDesign =>
-      const AssetGenImage('assets/images/Untitled design.png');
+  /// File path: assets/images/deposit.png
+  AssetGenImage get deposit => const AssetGenImage('assets/images/deposit.png');
 
-  /// File path: assets/images/Untitled_design-removebg-preview.png
-  AssetGenImage get untitledDesignRemovebgPreview =>
-      const AssetGenImage('assets/images/Untitled_design-removebg-preview.png');
+  /// File path: assets/images/design_background.png
+  AssetGenImage get designBackground =>
+      const AssetGenImage('assets/images/design_background.png');
 
   /// File path: assets/images/simbiotik2.png
   AssetGenImage get simbiotik2 =>
@@ -43,14 +41,13 @@ class $AssetsImagesGen {
   AssetGenImage get simbiotik3 =>
       const AssetGenImage('assets/images/simbiotik3.png');
 
+  /// File path: assets/images/withdrawal.png
+  AssetGenImage get withdrawal =>
+      const AssetGenImage('assets/images/withdrawal.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [
-        a101015x675,
-        untitledDesign,
-        untitledDesignRemovebgPreview,
-        simbiotik2,
-        simbiotik3
-      ];
+  List<AssetGenImage> get values =>
+      [cash, deposit, designBackground, simbiotik2, simbiotik3, withdrawal];
 }
 
 class Assets {

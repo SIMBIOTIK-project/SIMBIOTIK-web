@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:simbiotik_web/core/routers/routers.dart';
@@ -36,8 +34,10 @@ class AppRouterConfig {
                 name: AppRouterConstants.homeScreen,
                 path: AppRouterConstants.homeScreen,
                 builder: (context, state) {
-                  return const Center(
-                    child: Text('Ini Halaman Dashboard'),
+                  final uri = Uri.parse(state.uri.toString());
+                  final token = uri.queryParameters['token'];
+                  return HomeScreen(
+                    token: token,
                   );
                 })
           ],

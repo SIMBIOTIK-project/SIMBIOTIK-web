@@ -1,4 +1,4 @@
-// Copyright 2024 ariefsetyonugroho
+// Copyright 2024 SIMBIOTIK Developer
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,7 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-export 'login/login.dart';
-export 'dashboard/dashboard.dart';
-export 'home_screen.dart';
-export 'account/account.dart';
+part of 'register_bloc.dart';
+
+enum RegisterStateStatus {
+  initial,
+  loading,
+  loaded,
+  error;
+
+  bool get isInitial => this == initial;
+  bool get isLoading => this == loading;
+  bool get isLoaded => this == loaded;
+  bool get isError => this == error;
+}
+
+@freezed
+class RegisterState with _$RegisterState {
+  const factory RegisterState({
+    @Default(RegisterStateStatus.initial) RegisterStateStatus status,
+    UserModel? data,
+    @Default('') String? error,
+  }) = _RegisterState;
+}

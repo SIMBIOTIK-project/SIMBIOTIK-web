@@ -1,4 +1,4 @@
-// Copyright 2024 ariefsetyonugroho
+// Copyright 2024 SIMBIOTIK Developer
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,7 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-export 'login/login.dart';
-export 'dashboard/dashboard.dart';
-export 'home_screen.dart';
-export 'account/account.dart';
+part of 'register_bloc.dart';
+
+@freezed
+class RegisterEvent with _$RegisterEvent {
+  const factory RegisterEvent.register({
+    required String name,
+    required String email,
+    required String password,
+    required String passwordConfirmation,
+    required String nik,
+    required String phoneNumber,
+    required String address,
+    required String status,
+  }) = _Register;
+}

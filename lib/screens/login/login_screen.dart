@@ -12,9 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -128,7 +126,7 @@ class _LoginScreenContentState extends State<LoginScreenContent> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Assets.images.untitledDesignRemovebgPreview.image(),
+                        Assets.images.designBackground.image(),
                         Text(
                           '''"Sistem Informasi Manajemen Bank Sampah dengan IoT Timbangan dan Kas Keuangan merupakan solusi inovatif yang mengintegrasikan teknologi timbangan pintar dan manajemen keuangan otomatis untuk pengelolaan bank sampah. Sistem ini memungkinkan pencatatan berat sampah dan transaksi keuangan secara real-time dan akurat, meningkatkan efisiensi operasional dan transparansi keuangan. Dengan pendekatan ini, bank sampah dapat lebih mudah mengelola pengumpulan sampah dan keuangan, mendukung upaya keberlanjutan lingkungan secara lebih efektif."''',
                           textAlign: TextAlign.justify,
@@ -233,52 +231,18 @@ class _LoginScreenContentState extends State<LoginScreenContent> {
                                 obscureText: _obsecurePassword,
                               ),
                             ),
-                            Row(
-                              children: [
-                                const Text(
-                                  'Ingat Saya',
-                                  style: TextStyle(fontSize: 12.0),
-                                ),
-                                Checkbox(
-                                  activeColor: Colors.lightBlue,
-                                  value: _rememberMe,
-                                  onChanged: (bool? newValue) {
-                                    setState(() {
-                                      _rememberMe = newValue ?? false;
-                                      if (_rememberMe == true) {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                            content: Text(
-                                                'Fitur masih dalam pengembangan!'),
-                                          ),
-                                        );
-                                      }
-                                    });
-                                  },
-                                ),
-                              ],
-                            ),
                             const Gap(40),
                             BlocConsumer<AuthBloc, AuthState>(
                               listener: (context, state) {
                                 if (state.status.isLoaded) {
                                   if (state.data?.status ==
-                                      StatusUser.admin.value) {
-                                    // GoRouter.of(context).pushReplacement(
-                                    //   AppRouterConstants.homeScreen,
-                                    // );
-                                    if (_rememberMe == true) {
-                                      if (state.token != null) {
-                                        _savedToken(state.token!);
-                                        _loadToken();
-                                      }
-                                    } else {
-                                      GoRouter.of(context).pushReplacement(
-                                        AppRouterConstants.homeScreen,
-                                        extra: state.token,
-                                      );
+                                      StatusUser.owner.value) {
+                                    if (state.token != null) {
+                                      _savedToken(state.token!);
                                     }
+                                    GoRouter.of(context).go(
+                                      AppRouterConstants.homeScreen,
+                                    );
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
