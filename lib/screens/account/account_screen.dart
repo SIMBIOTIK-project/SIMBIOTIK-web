@@ -19,6 +19,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simbiotik_web/core/blocs/blocs.dart';
+import 'package:simbiotik_web/core/blocs/user/user_bloc.dart';
 import 'package:simbiotik_web/models/models.dart';
 import 'package:simbiotik_web/utils/utils.dart';
 import 'package:simbiotik_web/widgets/register_dialog.dart';
@@ -274,14 +275,62 @@ class _AccountScreenContentState extends State<AccountScreenContent> {
                             DataCell(Text(user.phoneNumber.toString())),
                             DataCell(Text(user.nik.toString())),
                             DataCell(Text(user.address.toString())),
-                            const DataCell(Row(
+                            DataCell(Row(
                               children: [
-                                Icon(
-                                  Icons.delete,
-                                  color: Colors.red,
+                                InkWell(
+                                  onTap: () async {
+                                    bool? result;
+                                    result = await showDialog(
+                                      context: context,
+                                      builder: (BuildContext dialogContext) {
+                                        return AlertDialog(
+                                          title: const Text('Hapus Akun'),
+                                          content: const Text(
+                                              'Apakah anda yakin akan menghapus data?'),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(dialogContext)
+                                                    .pop(true);
+                                              },
+                                              child: const Text('Ya, Hapus'),
+                                            ),
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(dialogContext)
+                                                    .pop();
+                                              },
+                                              child: const Text('Tidak'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+
+                                    if (result == true) {
+                                      _handleDeleteData(user.id.toString());
+                                      _handleUserData(token, 1);
+                                      //TODO: Fix this
+                                      _handleUserData(token, 1);
+                                    }
+                                  },
+                                  child: const Icon(
+                                    Icons.delete,
+                                    color: Colors.red,
+                                  ),
                                 ),
-                                Gap(8.0),
-                                Icon(Icons.edit),
+                                const Gap(8.0),
+                                InkWell(
+                                  onTap: () {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text(
+                                            'Fitur masih dalam tahap pengembangan!'),
+                                      ),
+                                    );
+                                  },
+                                  child: const Icon(Icons.edit),
+                                ),
                               ],
                             ))
                           ],
@@ -404,5 +453,9 @@ class _AccountScreenContentState extends State<AccountScreenContent> {
             page: page,
           ),
         );
+  }
+
+  _handleDeleteData(String id) {
+    context.read<UserBloc>().add(UserEvent.delete(id: id, token: token));
   }
 }

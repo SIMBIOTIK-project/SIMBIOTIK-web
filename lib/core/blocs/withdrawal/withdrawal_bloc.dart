@@ -28,6 +28,7 @@ class WithdrawalBloc extends Bloc<WithdrawalEvent, WithdrawalState> {
     on<_PostWithdrawal>(_onPostWithdrawalData);
     on<_Fetch>(_onFetch);
     on<_FetchAll>(_onFetchAll);
+    on<_Delete>(_onDelete);
   }
 
   Future<void> _onPostWithdrawalData(
@@ -103,6 +104,26 @@ class WithdrawalBloc extends Bloc<WithdrawalEvent, WithdrawalState> {
           error: e.toString(),
         ),
       );
+    }
+  }
+
+  Future<void> _onDelete(_Delete event, Emitter<WithdrawalState> emit) async {
+    emit(state.copyWith(status: WithdrawalStateStatus.loading, error: ''));
+
+    try {
+      await _withdrawalRepository.delete(
+        event.token,
+        event.id,
+      );
+
+      emit(state.copyWith(
+        status: WithdrawalStateStatus.loaded,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: WithdrawalStateStatus.error,
+        error: e.toString(),
+      ));
     }
   }
 }

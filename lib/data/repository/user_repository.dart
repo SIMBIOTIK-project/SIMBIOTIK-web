@@ -53,6 +53,26 @@ class UserRepository {
     }
   }
 
+  Future<UserResponseModel> getUserId(
+    String token,
+    String? id,
+  ) async {
+    final response = await _dio.get(
+      '$api/$id',
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      ),
+    );
+
+    if (response.statusCode == 200) {
+      return UserResponseModel.fromJson(response.data['data']);
+    } else {
+      throw Exception('Gagal memuat data');
+    }
+  }
+
   Future<List<UserModel>> getAllUsers(
     String token,
     String? status,
@@ -70,5 +90,61 @@ class UserRepository {
     } while (currentPage <= totalPages!);
 
     return allUsers;
+  }
+
+  Future<UserResponseModel> edit(
+    String token,
+    String id,
+    String name,
+    String email,
+    String password,
+    String passwordConfirmation,
+    String nik,
+    String phoneNumber,
+    String address,
+    String status,
+  ) async {
+    final response = await _dio.put(
+      '$api/$id',
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      ),
+      data: {
+        'name': name,
+        'email': email,
+        'password': password,
+        'password_confirmation': passwordConfirmation,
+        'nik': nik,
+        'phone_number': phoneNumber,
+        'address': address,
+        'status': status,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return UserResponseModel.fromJson(response.data);
+    } else {
+      throw Exception('Gagal edit data');
+    }
+  }
+
+  Future<void> delete(
+    String token,
+    String id,
+  ) async {
+    final response = await _dio.delete(
+      '$api/$id',
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      ),
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Gagal menghapus data');
+    }
   }
 }

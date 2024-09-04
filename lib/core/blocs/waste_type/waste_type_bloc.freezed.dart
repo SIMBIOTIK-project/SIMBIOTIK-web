@@ -20,44 +20,64 @@ mixin _$WasteTypeEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String token, int? page) fetch,
+    required TResult Function(String token, String? id) fetchId,
     required TResult Function(String token) fetchAll,
     required TResult Function(String token, String type, String price) add,
+    required TResult Function(
+            String token, String id, String type, String price)
+        edit,
+    required TResult Function(String id, String token) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String token, int? page)? fetch,
+    TResult? Function(String token, String? id)? fetchId,
     TResult? Function(String token)? fetchAll,
     TResult? Function(String token, String type, String price)? add,
+    TResult? Function(String token, String id, String type, String price)? edit,
+    TResult? Function(String id, String token)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String token, int? page)? fetch,
+    TResult Function(String token, String? id)? fetchId,
     TResult Function(String token)? fetchAll,
     TResult Function(String token, String type, String price)? add,
+    TResult Function(String token, String id, String type, String price)? edit,
+    TResult Function(String id, String token)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchId value) fetchId,
     required TResult Function(_FetchAll value) fetchAll,
     required TResult Function(_Add value) add,
+    required TResult Function(_Edit value) edit,
+    required TResult Function(_Delete value) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchId value)? fetchId,
     TResult? Function(_FetchAll value)? fetchAll,
     TResult? Function(_Add value)? add,
+    TResult? Function(_Edit value)? edit,
+    TResult? Function(_Delete value)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchId value)? fetchId,
     TResult Function(_FetchAll value)? fetchAll,
     TResult Function(_Add value)? add,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -175,8 +195,13 @@ class _$FetchImpl implements _Fetch {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String token, int? page) fetch,
+    required TResult Function(String token, String? id) fetchId,
     required TResult Function(String token) fetchAll,
     required TResult Function(String token, String type, String price) add,
+    required TResult Function(
+            String token, String id, String type, String price)
+        edit,
+    required TResult Function(String id, String token) delete,
   }) {
     return fetch(token, page);
   }
@@ -185,8 +210,11 @@ class _$FetchImpl implements _Fetch {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String token, int? page)? fetch,
+    TResult? Function(String token, String? id)? fetchId,
     TResult? Function(String token)? fetchAll,
     TResult? Function(String token, String type, String price)? add,
+    TResult? Function(String token, String id, String type, String price)? edit,
+    TResult? Function(String id, String token)? delete,
   }) {
     return fetch?.call(token, page);
   }
@@ -195,8 +223,11 @@ class _$FetchImpl implements _Fetch {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String token, int? page)? fetch,
+    TResult Function(String token, String? id)? fetchId,
     TResult Function(String token)? fetchAll,
     TResult Function(String token, String type, String price)? add,
+    TResult Function(String token, String id, String type, String price)? edit,
+    TResult Function(String id, String token)? delete,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -209,8 +240,11 @@ class _$FetchImpl implements _Fetch {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchId value) fetchId,
     required TResult Function(_FetchAll value) fetchAll,
     required TResult Function(_Add value) add,
+    required TResult Function(_Edit value) edit,
+    required TResult Function(_Delete value) delete,
   }) {
     return fetch(this);
   }
@@ -219,8 +253,11 @@ class _$FetchImpl implements _Fetch {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchId value)? fetchId,
     TResult? Function(_FetchAll value)? fetchAll,
     TResult? Function(_Add value)? add,
+    TResult? Function(_Edit value)? edit,
+    TResult? Function(_Delete value)? delete,
   }) {
     return fetch?.call(this);
   }
@@ -229,8 +266,11 @@ class _$FetchImpl implements _Fetch {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchId value)? fetchId,
     TResult Function(_FetchAll value)? fetchAll,
     TResult Function(_Add value)? add,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -250,6 +290,179 @@ abstract class _Fetch implements WasteTypeEvent {
   @override
   @JsonKey(ignore: true)
   _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FetchIdImplCopyWith<$Res>
+    implements $WasteTypeEventCopyWith<$Res> {
+  factory _$$FetchIdImplCopyWith(
+          _$FetchIdImpl value, $Res Function(_$FetchIdImpl) then) =
+      __$$FetchIdImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String token, String? id});
+}
+
+/// @nodoc
+class __$$FetchIdImplCopyWithImpl<$Res>
+    extends _$WasteTypeEventCopyWithImpl<$Res, _$FetchIdImpl>
+    implements _$$FetchIdImplCopyWith<$Res> {
+  __$$FetchIdImplCopyWithImpl(
+      _$FetchIdImpl _value, $Res Function(_$FetchIdImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? token = null,
+    Object? id = freezed,
+  }) {
+    return _then(_$FetchIdImpl(
+      token: null == token
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$FetchIdImpl implements _FetchId {
+  const _$FetchIdImpl({required this.token, this.id});
+
+  @override
+  final String token;
+  @override
+  final String? id;
+
+  @override
+  String toString() {
+    return 'WasteTypeEvent.fetchId(token: $token, id: $id)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FetchIdImpl &&
+            (identical(other.token, token) || other.token == token) &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, token, id);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FetchIdImplCopyWith<_$FetchIdImpl> get copyWith =>
+      __$$FetchIdImplCopyWithImpl<_$FetchIdImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String token, int? page) fetch,
+    required TResult Function(String token, String? id) fetchId,
+    required TResult Function(String token) fetchAll,
+    required TResult Function(String token, String type, String price) add,
+    required TResult Function(
+            String token, String id, String type, String price)
+        edit,
+    required TResult Function(String id, String token) delete,
+  }) {
+    return fetchId(token, id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String token, int? page)? fetch,
+    TResult? Function(String token, String? id)? fetchId,
+    TResult? Function(String token)? fetchAll,
+    TResult? Function(String token, String type, String price)? add,
+    TResult? Function(String token, String id, String type, String price)? edit,
+    TResult? Function(String id, String token)? delete,
+  }) {
+    return fetchId?.call(token, id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String token, int? page)? fetch,
+    TResult Function(String token, String? id)? fetchId,
+    TResult Function(String token)? fetchAll,
+    TResult Function(String token, String type, String price)? add,
+    TResult Function(String token, String id, String type, String price)? edit,
+    TResult Function(String id, String token)? delete,
+    required TResult orElse(),
+  }) {
+    if (fetchId != null) {
+      return fetchId(token, id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchId value) fetchId,
+    required TResult Function(_FetchAll value) fetchAll,
+    required TResult Function(_Add value) add,
+    required TResult Function(_Edit value) edit,
+    required TResult Function(_Delete value) delete,
+  }) {
+    return fetchId(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchId value)? fetchId,
+    TResult? Function(_FetchAll value)? fetchAll,
+    TResult? Function(_Add value)? add,
+    TResult? Function(_Edit value)? edit,
+    TResult? Function(_Delete value)? delete,
+  }) {
+    return fetchId?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchId value)? fetchId,
+    TResult Function(_FetchAll value)? fetchAll,
+    TResult Function(_Add value)? add,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Delete value)? delete,
+    required TResult orElse(),
+  }) {
+    if (fetchId != null) {
+      return fetchId(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchId implements WasteTypeEvent {
+  const factory _FetchId({required final String token, final String? id}) =
+      _$FetchIdImpl;
+
+  @override
+  String get token;
+  String? get id;
+  @override
+  @JsonKey(ignore: true)
+  _$$FetchIdImplCopyWith<_$FetchIdImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -320,8 +533,13 @@ class _$FetchAllImpl implements _FetchAll {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String token, int? page) fetch,
+    required TResult Function(String token, String? id) fetchId,
     required TResult Function(String token) fetchAll,
     required TResult Function(String token, String type, String price) add,
+    required TResult Function(
+            String token, String id, String type, String price)
+        edit,
+    required TResult Function(String id, String token) delete,
   }) {
     return fetchAll(token);
   }
@@ -330,8 +548,11 @@ class _$FetchAllImpl implements _FetchAll {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String token, int? page)? fetch,
+    TResult? Function(String token, String? id)? fetchId,
     TResult? Function(String token)? fetchAll,
     TResult? Function(String token, String type, String price)? add,
+    TResult? Function(String token, String id, String type, String price)? edit,
+    TResult? Function(String id, String token)? delete,
   }) {
     return fetchAll?.call(token);
   }
@@ -340,8 +561,11 @@ class _$FetchAllImpl implements _FetchAll {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String token, int? page)? fetch,
+    TResult Function(String token, String? id)? fetchId,
     TResult Function(String token)? fetchAll,
     TResult Function(String token, String type, String price)? add,
+    TResult Function(String token, String id, String type, String price)? edit,
+    TResult Function(String id, String token)? delete,
     required TResult orElse(),
   }) {
     if (fetchAll != null) {
@@ -354,8 +578,11 @@ class _$FetchAllImpl implements _FetchAll {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchId value) fetchId,
     required TResult Function(_FetchAll value) fetchAll,
     required TResult Function(_Add value) add,
+    required TResult Function(_Edit value) edit,
+    required TResult Function(_Delete value) delete,
   }) {
     return fetchAll(this);
   }
@@ -364,8 +591,11 @@ class _$FetchAllImpl implements _FetchAll {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchId value)? fetchId,
     TResult? Function(_FetchAll value)? fetchAll,
     TResult? Function(_Add value)? add,
+    TResult? Function(_Edit value)? edit,
+    TResult? Function(_Delete value)? delete,
   }) {
     return fetchAll?.call(this);
   }
@@ -374,8 +604,11 @@ class _$FetchAllImpl implements _FetchAll {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchId value)? fetchId,
     TResult Function(_FetchAll value)? fetchAll,
     TResult Function(_Add value)? add,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (fetchAll != null) {
@@ -478,8 +711,13 @@ class _$AddImpl implements _Add {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String token, int? page) fetch,
+    required TResult Function(String token, String? id) fetchId,
     required TResult Function(String token) fetchAll,
     required TResult Function(String token, String type, String price) add,
+    required TResult Function(
+            String token, String id, String type, String price)
+        edit,
+    required TResult Function(String id, String token) delete,
   }) {
     return add(token, type, price);
   }
@@ -488,8 +726,11 @@ class _$AddImpl implements _Add {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String token, int? page)? fetch,
+    TResult? Function(String token, String? id)? fetchId,
     TResult? Function(String token)? fetchAll,
     TResult? Function(String token, String type, String price)? add,
+    TResult? Function(String token, String id, String type, String price)? edit,
+    TResult? Function(String id, String token)? delete,
   }) {
     return add?.call(token, type, price);
   }
@@ -498,8 +739,11 @@ class _$AddImpl implements _Add {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String token, int? page)? fetch,
+    TResult Function(String token, String? id)? fetchId,
     TResult Function(String token)? fetchAll,
     TResult Function(String token, String type, String price)? add,
+    TResult Function(String token, String id, String type, String price)? edit,
+    TResult Function(String id, String token)? delete,
     required TResult orElse(),
   }) {
     if (add != null) {
@@ -512,8 +756,11 @@ class _$AddImpl implements _Add {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchId value) fetchId,
     required TResult Function(_FetchAll value) fetchAll,
     required TResult Function(_Add value) add,
+    required TResult Function(_Edit value) edit,
+    required TResult Function(_Delete value) delete,
   }) {
     return add(this);
   }
@@ -522,8 +769,11 @@ class _$AddImpl implements _Add {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchId value)? fetchId,
     TResult? Function(_FetchAll value)? fetchAll,
     TResult? Function(_Add value)? add,
+    TResult? Function(_Edit value)? edit,
+    TResult? Function(_Delete value)? delete,
   }) {
     return add?.call(this);
   }
@@ -532,8 +782,11 @@ class _$AddImpl implements _Add {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchId value)? fetchId,
     TResult Function(_FetchAll value)? fetchAll,
     TResult Function(_Add value)? add,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (add != null) {
@@ -560,10 +813,381 @@ abstract class _Add implements WasteTypeEvent {
 }
 
 /// @nodoc
+abstract class _$$EditImplCopyWith<$Res>
+    implements $WasteTypeEventCopyWith<$Res> {
+  factory _$$EditImplCopyWith(
+          _$EditImpl value, $Res Function(_$EditImpl) then) =
+      __$$EditImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String token, String id, String type, String price});
+}
+
+/// @nodoc
+class __$$EditImplCopyWithImpl<$Res>
+    extends _$WasteTypeEventCopyWithImpl<$Res, _$EditImpl>
+    implements _$$EditImplCopyWith<$Res> {
+  __$$EditImplCopyWithImpl(_$EditImpl _value, $Res Function(_$EditImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? token = null,
+    Object? id = null,
+    Object? type = null,
+    Object? price = null,
+  }) {
+    return _then(_$EditImpl(
+      token: null == token
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$EditImpl implements _Edit {
+  const _$EditImpl(
+      {required this.token,
+      required this.id,
+      required this.type,
+      required this.price});
+
+  @override
+  final String token;
+  @override
+  final String id;
+  @override
+  final String type;
+  @override
+  final String price;
+
+  @override
+  String toString() {
+    return 'WasteTypeEvent.edit(token: $token, id: $id, type: $type, price: $price)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$EditImpl &&
+            (identical(other.token, token) || other.token == token) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.price, price) || other.price == price));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, token, id, type, price);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$EditImplCopyWith<_$EditImpl> get copyWith =>
+      __$$EditImplCopyWithImpl<_$EditImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String token, int? page) fetch,
+    required TResult Function(String token, String? id) fetchId,
+    required TResult Function(String token) fetchAll,
+    required TResult Function(String token, String type, String price) add,
+    required TResult Function(
+            String token, String id, String type, String price)
+        edit,
+    required TResult Function(String id, String token) delete,
+  }) {
+    return edit(token, id, type, price);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String token, int? page)? fetch,
+    TResult? Function(String token, String? id)? fetchId,
+    TResult? Function(String token)? fetchAll,
+    TResult? Function(String token, String type, String price)? add,
+    TResult? Function(String token, String id, String type, String price)? edit,
+    TResult? Function(String id, String token)? delete,
+  }) {
+    return edit?.call(token, id, type, price);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String token, int? page)? fetch,
+    TResult Function(String token, String? id)? fetchId,
+    TResult Function(String token)? fetchAll,
+    TResult Function(String token, String type, String price)? add,
+    TResult Function(String token, String id, String type, String price)? edit,
+    TResult Function(String id, String token)? delete,
+    required TResult orElse(),
+  }) {
+    if (edit != null) {
+      return edit(token, id, type, price);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchId value) fetchId,
+    required TResult Function(_FetchAll value) fetchAll,
+    required TResult Function(_Add value) add,
+    required TResult Function(_Edit value) edit,
+    required TResult Function(_Delete value) delete,
+  }) {
+    return edit(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchId value)? fetchId,
+    TResult? Function(_FetchAll value)? fetchAll,
+    TResult? Function(_Add value)? add,
+    TResult? Function(_Edit value)? edit,
+    TResult? Function(_Delete value)? delete,
+  }) {
+    return edit?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchId value)? fetchId,
+    TResult Function(_FetchAll value)? fetchAll,
+    TResult Function(_Add value)? add,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Delete value)? delete,
+    required TResult orElse(),
+  }) {
+    if (edit != null) {
+      return edit(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Edit implements WasteTypeEvent {
+  const factory _Edit(
+      {required final String token,
+      required final String id,
+      required final String type,
+      required final String price}) = _$EditImpl;
+
+  @override
+  String get token;
+  String get id;
+  String get type;
+  String get price;
+  @override
+  @JsonKey(ignore: true)
+  _$$EditImplCopyWith<_$EditImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DeleteImplCopyWith<$Res>
+    implements $WasteTypeEventCopyWith<$Res> {
+  factory _$$DeleteImplCopyWith(
+          _$DeleteImpl value, $Res Function(_$DeleteImpl) then) =
+      __$$DeleteImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String id, String token});
+}
+
+/// @nodoc
+class __$$DeleteImplCopyWithImpl<$Res>
+    extends _$WasteTypeEventCopyWithImpl<$Res, _$DeleteImpl>
+    implements _$$DeleteImplCopyWith<$Res> {
+  __$$DeleteImplCopyWithImpl(
+      _$DeleteImpl _value, $Res Function(_$DeleteImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? token = null,
+  }) {
+    return _then(_$DeleteImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      token: null == token
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DeleteImpl implements _Delete {
+  const _$DeleteImpl({required this.id, required this.token});
+
+  @override
+  final String id;
+  @override
+  final String token;
+
+  @override
+  String toString() {
+    return 'WasteTypeEvent.delete(id: $id, token: $token)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DeleteImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.token, token) || other.token == token));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id, token);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DeleteImplCopyWith<_$DeleteImpl> get copyWith =>
+      __$$DeleteImplCopyWithImpl<_$DeleteImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String token, int? page) fetch,
+    required TResult Function(String token, String? id) fetchId,
+    required TResult Function(String token) fetchAll,
+    required TResult Function(String token, String type, String price) add,
+    required TResult Function(
+            String token, String id, String type, String price)
+        edit,
+    required TResult Function(String id, String token) delete,
+  }) {
+    return delete(id, token);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String token, int? page)? fetch,
+    TResult? Function(String token, String? id)? fetchId,
+    TResult? Function(String token)? fetchAll,
+    TResult? Function(String token, String type, String price)? add,
+    TResult? Function(String token, String id, String type, String price)? edit,
+    TResult? Function(String id, String token)? delete,
+  }) {
+    return delete?.call(id, token);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String token, int? page)? fetch,
+    TResult Function(String token, String? id)? fetchId,
+    TResult Function(String token)? fetchAll,
+    TResult Function(String token, String type, String price)? add,
+    TResult Function(String token, String id, String type, String price)? edit,
+    TResult Function(String id, String token)? delete,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete(id, token);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchId value) fetchId,
+    required TResult Function(_FetchAll value) fetchAll,
+    required TResult Function(_Add value) add,
+    required TResult Function(_Edit value) edit,
+    required TResult Function(_Delete value) delete,
+  }) {
+    return delete(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchId value)? fetchId,
+    TResult? Function(_FetchAll value)? fetchAll,
+    TResult? Function(_Add value)? add,
+    TResult? Function(_Edit value)? edit,
+    TResult? Function(_Delete value)? delete,
+  }) {
+    return delete?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchId value)? fetchId,
+    TResult Function(_FetchAll value)? fetchAll,
+    TResult Function(_Add value)? add,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Delete value)? delete,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Delete implements WasteTypeEvent {
+  const factory _Delete(
+      {required final String id, required final String token}) = _$DeleteImpl;
+
+  String get id;
+  @override
+  String get token;
+  @override
+  @JsonKey(ignore: true)
+  _$$DeleteImplCopyWith<_$DeleteImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$WasteTypeState {
   WasteTypeStateStatus get status => throw _privateConstructorUsedError;
   WasteTypeResponseModel? get data => throw _privateConstructorUsedError;
   List<WasteTypesModel>? get allData => throw _privateConstructorUsedError;
+  WasteTypesModel? get dataId => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -581,9 +1205,11 @@ abstract class $WasteTypeStateCopyWith<$Res> {
       {WasteTypeStateStatus status,
       WasteTypeResponseModel? data,
       List<WasteTypesModel>? allData,
+      WasteTypesModel? dataId,
       String? error});
 
   $WasteTypeResponseModelCopyWith<$Res>? get data;
+  $WasteTypesModelCopyWith<$Res>? get dataId;
 }
 
 /// @nodoc
@@ -602,6 +1228,7 @@ class _$WasteTypeStateCopyWithImpl<$Res, $Val extends WasteTypeState>
     Object? status = null,
     Object? data = freezed,
     Object? allData = freezed,
+    Object? dataId = freezed,
     Object? error = freezed,
   }) {
     return _then(_value.copyWith(
@@ -617,6 +1244,10 @@ class _$WasteTypeStateCopyWithImpl<$Res, $Val extends WasteTypeState>
           ? _value.allData
           : allData // ignore: cast_nullable_to_non_nullable
               as List<WasteTypesModel>?,
+      dataId: freezed == dataId
+          ? _value.dataId
+          : dataId // ignore: cast_nullable_to_non_nullable
+              as WasteTypesModel?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -635,6 +1266,18 @@ class _$WasteTypeStateCopyWithImpl<$Res, $Val extends WasteTypeState>
       return _then(_value.copyWith(data: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $WasteTypesModelCopyWith<$Res>? get dataId {
+    if (_value.dataId == null) {
+      return null;
+    }
+
+    return $WasteTypesModelCopyWith<$Res>(_value.dataId!, (value) {
+      return _then(_value.copyWith(dataId: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -649,10 +1292,13 @@ abstract class _$$WasteTypeStateImplCopyWith<$Res>
       {WasteTypeStateStatus status,
       WasteTypeResponseModel? data,
       List<WasteTypesModel>? allData,
+      WasteTypesModel? dataId,
       String? error});
 
   @override
   $WasteTypeResponseModelCopyWith<$Res>? get data;
+  @override
+  $WasteTypesModelCopyWith<$Res>? get dataId;
 }
 
 /// @nodoc
@@ -669,6 +1315,7 @@ class __$$WasteTypeStateImplCopyWithImpl<$Res>
     Object? status = null,
     Object? data = freezed,
     Object? allData = freezed,
+    Object? dataId = freezed,
     Object? error = freezed,
   }) {
     return _then(_$WasteTypeStateImpl(
@@ -684,6 +1331,10 @@ class __$$WasteTypeStateImplCopyWithImpl<$Res>
           ? _value._allData
           : allData // ignore: cast_nullable_to_non_nullable
               as List<WasteTypesModel>?,
+      dataId: freezed == dataId
+          ? _value.dataId
+          : dataId // ignore: cast_nullable_to_non_nullable
+              as WasteTypesModel?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -699,6 +1350,7 @@ class _$WasteTypeStateImpl implements _WasteTypeState {
       {this.status = WasteTypeStateStatus.initial,
       this.data,
       final List<WasteTypesModel>? allData,
+      this.dataId,
       this.error = ''})
       : _allData = allData;
 
@@ -718,12 +1370,14 @@ class _$WasteTypeStateImpl implements _WasteTypeState {
   }
 
   @override
+  final WasteTypesModel? dataId;
+  @override
   @JsonKey()
   final String? error;
 
   @override
   String toString() {
-    return 'WasteTypeState(status: $status, data: $data, allData: $allData, error: $error)';
+    return 'WasteTypeState(status: $status, data: $data, allData: $allData, dataId: $dataId, error: $error)';
   }
 
   @override
@@ -734,12 +1388,13 @@ class _$WasteTypeStateImpl implements _WasteTypeState {
             (identical(other.status, status) || other.status == status) &&
             (identical(other.data, data) || other.data == data) &&
             const DeepCollectionEquality().equals(other._allData, _allData) &&
+            (identical(other.dataId, dataId) || other.dataId == dataId) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, status, data,
-      const DeepCollectionEquality().hash(_allData), error);
+      const DeepCollectionEquality().hash(_allData), dataId, error);
 
   @JsonKey(ignore: true)
   @override
@@ -754,6 +1409,7 @@ abstract class _WasteTypeState implements WasteTypeState {
       {final WasteTypeStateStatus status,
       final WasteTypeResponseModel? data,
       final List<WasteTypesModel>? allData,
+      final WasteTypesModel? dataId,
       final String? error}) = _$WasteTypeStateImpl;
 
   @override
@@ -762,6 +1418,8 @@ abstract class _WasteTypeState implements WasteTypeState {
   WasteTypeResponseModel? get data;
   @override
   List<WasteTypesModel>? get allData;
+  @override
+  WasteTypesModel? get dataId;
   @override
   String? get error;
   @override

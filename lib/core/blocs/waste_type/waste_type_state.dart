@@ -32,6 +32,7 @@ class WasteTypeState with _$WasteTypeState {
     @Default(WasteTypeStateStatus.initial) WasteTypeStateStatus status,
     WasteTypeResponseModel? data,
     List<WasteTypesModel>? allData,
+    WasteTypesModel? dataId,
     @Default('') String? error,
   }) = _WasteTypeState;
 }

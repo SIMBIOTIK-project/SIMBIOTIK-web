@@ -32,6 +32,7 @@ class UserState with _$UserState {
     @Default(UserStateStatus.initial) UserStateStatus status,
     UserResponseModel? data,
     List<UserModel>? allData,
+    UserModel? dataId,
     @Default('') String? error,
   }) = _UserState;
 }

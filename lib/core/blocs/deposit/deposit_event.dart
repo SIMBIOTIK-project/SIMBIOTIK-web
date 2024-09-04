@@ -30,4 +30,9 @@ class DepositEvent with _$DepositEvent {
     required String token,
     String? idUser,
   }) = _FetchAll;
+
+  const factory DepositEvent.delete({
+    required String id,
+    required String token,
+  }) = _Delete;
 }

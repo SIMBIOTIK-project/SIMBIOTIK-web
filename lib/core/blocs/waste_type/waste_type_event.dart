@@ -21,6 +21,11 @@ class WasteTypeEvent with _$WasteTypeEvent {
     int? page,
   }) = _Fetch;
 
+  const factory WasteTypeEvent.fetchId({
+    required String token,
+    String? id,
+  }) = _FetchId;
+
   const factory WasteTypeEvent.fetchAll({
     required String token,
   }) = _FetchAll;
@@ -30,4 +35,16 @@ class WasteTypeEvent with _$WasteTypeEvent {
     required String type,
     required String price,
   }) = _Add;
+
+  const factory WasteTypeEvent.edit({
+    required String token,
+    required String id,
+    required String type,
+    required String price,
+  }) = _Edit;
+
+  const factory WasteTypeEvent.delete({
+    required String id,
+    required String token,
+  }) = _Delete;
 }

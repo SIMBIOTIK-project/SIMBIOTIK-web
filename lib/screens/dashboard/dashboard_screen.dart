@@ -17,6 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simbiotik_web/core/blocs/blocs.dart';
+import 'package:simbiotik_web/core/blocs/withdrawal/withdrawal_bloc.dart';
 import 'package:simbiotik_web/gen/assets.gen.dart';
 import 'package:simbiotik_web/models/models.dart';
 import 'package:simbiotik_web/utils/utils.dart';
@@ -270,10 +271,50 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
                             DataCell(Text(withdrawal.createdBy.toString())),
                             DataCell(Text(formattedDate(
                                 withdrawal.createdAt.toString()))),
-                            const DataCell(Icon(
-                              Icons.delete,
-                              color: Colors.red,
-                            ))
+                            DataCell(
+                              InkWell(
+                                onTap: () async {
+                                  bool? result;
+                                  result = await showDialog(
+                                    context: context,
+                                    builder: (BuildContext dialogContext) {
+                                      return AlertDialog(
+                                        title: const Text('Hapus Penarikan'),
+                                        content: const Text(
+                                            'Apakah anda yakin akan menghapus data?'),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(dialogContext)
+                                                  .pop(true);
+                                            },
+                                            child: const Text('Ya, Hapus'),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(dialogContext).pop();
+                                            },
+                                            child: const Text('Tidak'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+
+                                  if (result == true) {
+                                    _handleDeleteWithdrawalData(
+                                        withdrawal.id.toString());
+                                    _handlePaginationWithdrawal(token, 1);
+                                    //TODO: Fix this
+                                    _handlePaginationWithdrawal(token, 1);
+                                  }
+                                },
+                                child: const Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                ),
+                              ),
+                            )
                           ],
                         );
                       }).toList(),
@@ -437,10 +478,50 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
                             DataCell(Text(deposit.createdBy.toString())),
                             DataCell(Text(
                                 formattedDate(deposit.createdAt.toString()))),
-                            const DataCell(Icon(
-                              Icons.delete,
-                              color: Colors.red,
-                            ))
+                            DataCell(
+                              InkWell(
+                                onTap: () async {
+                                  bool? result;
+                                  result = await showDialog(
+                                    context: context,
+                                    builder: (BuildContext dialogContext) {
+                                      return AlertDialog(
+                                        title: const Text('Hapus Setoran'),
+                                        content: const Text(
+                                            'Apakah anda yakin akan menghapus data?'),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(dialogContext)
+                                                  .pop(true);
+                                            },
+                                            child: const Text('Ya, Hapus'),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(dialogContext).pop();
+                                            },
+                                            child: const Text('Tidak'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+
+                                  if (result == true) {
+                                    _handleDeleteDepositData(
+                                        deposit.id.toString());
+                                    _handlePaginationDeposit(token, 1);
+                                    //TODO: Fix this
+                                    _handlePaginationDeposit(token, 1);
+                                  }
+                                },
+                                child: const Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                ),
+                              ),
+                            )
                           ],
                         );
                       }).toList(),
@@ -608,5 +689,15 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
           token: token,
           page: page,
         ));
+  }
+
+  _handleDeleteWithdrawalData(String id) {
+    context
+        .read<WithdrawalBloc>()
+        .add(WithdrawalEvent.delete(id: id, token: token));
+  }
+
+  _handleDeleteDepositData(String id) {
+    context.read<DepositBloc>().add(DepositEvent.delete(id: id, token: token));
   }
 }

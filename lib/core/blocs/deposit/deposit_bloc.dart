@@ -28,6 +28,7 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
     on<_PostDeposit>(_onPostDepositData);
     on<_Fetch>(_onFetch);
     on<_FetchAll>(_onFetchAll);
+    on<_Delete>(_onDelete);
   }
 
   Future<void> _onPostDepositData(
@@ -100,6 +101,26 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
           error: e.toString(),
         ),
       );
+    }
+  }
+
+  Future<void> _onDelete(_Delete event, Emitter<DepositState> emit) async {
+    emit(state.copyWith(status: DepositStateStatus.loading, error: ''));
+
+    try {
+      await _depositRepository.delete(
+        event.token,
+        event.id,
+      );
+
+      emit(state.copyWith(
+        status: DepositStateStatus.loaded,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: DepositStateStatus.error,
+        error: e.toString(),
+      ));
     }
   }
 }

@@ -49,6 +49,26 @@ class WasteTypeRepository {
     }
   }
 
+  Future<WasteTypeResponseModel> getWasteTypeId(
+    String token,
+    String? id,
+  ) async {
+    final response = await _dio.get(
+      '$api/$id',
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      ),
+    );
+
+    if (response.statusCode == 200) {
+      return WasteTypeResponseModel.fromJson(response.data['data']);
+    } else {
+      throw Exception('Gagal memuat data');
+    }
+  }
+
   Future<List<WasteTypesModel>> getAllWasteType(
     String token,
   ) async {
@@ -87,7 +107,51 @@ class WasteTypeRepository {
     if (response.statusCode == 201) {
       return WasteTypeResponseModel.fromJson(response.data);
     } else {
-      throw Exception('Gagal registrasi');
+      throw Exception('Gagal tambah data');
+    }
+  }
+
+  Future<WasteTypeResponseModel> edit(
+    String token,
+    String id,
+    String type,
+    String price,
+  ) async {
+    final response = await _dio.put(
+      '$api/$id',
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      ),
+      data: {
+        'type': type,
+        'price': price,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return WasteTypeResponseModel.fromJson(response.data);
+    } else {
+      throw Exception('Gagal edit data');
+    }
+  }
+
+  Future<void> delete(
+    String token,
+    String id,
+  ) async {
+    final response = await _dio.delete(
+      '$api/$id',
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      ),
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Gagal menghapus data');
     }
   }
 }

@@ -45,6 +45,7 @@ class LoginScreenContent extends StatefulWidget {
 class _LoginScreenContentState extends State<LoginScreenContent> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  String token = '';
 
   bool _obsecurePassword = true;
 
@@ -232,7 +233,7 @@ class _LoginScreenContentState extends State<LoginScreenContent> {
                                     if (state.token != null) {
                                       _savedToken(state.token!);
                                     }
-                                    GoRouter.of(context).go(
+                                    GoRouter.of(context).pushReplacement(
                                       AppRouterConstants.homeScreen,
                                     );
                                   } else {

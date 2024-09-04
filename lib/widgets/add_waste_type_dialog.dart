@@ -21,15 +21,39 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simbiotik_web/core/blocs/blocs.dart';
 import 'package:simbiotik_web/core/blocs/waste_type/waste_type.dart';
 import 'package:simbiotik_web/data/data.dart';
+import 'package:simbiotik_web/models/models.dart';
 
-class AddWasteTypeDialog extends StatefulWidget {
-  const AddWasteTypeDialog({super.key});
+class AddWasteTypeDialog extends StatelessWidget {
+  final WasteTypesModel? data;
+  const AddWasteTypeDialog({
+    this.data,
+    super.key,
+  });
 
   @override
-  State<AddWasteTypeDialog> createState() => _AddWasteTypeDialogState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => WasteTypeBloc(WasteTypeRepository()),
+      child: AddWasteTypeDialogContent(
+        data: data,
+      ),
+    );
+  }
 }
 
-class _AddWasteTypeDialogState extends State<AddWasteTypeDialog> {
+class AddWasteTypeDialogContent extends StatefulWidget {
+  final WasteTypesModel? data;
+  const AddWasteTypeDialogContent({
+    this.data,
+    super.key,
+  });
+
+  @override
+  State<AddWasteTypeDialogContent> createState() =>
+      _AddWasteTypeDialogContentState();
+}
+
+class _AddWasteTypeDialogContentState extends State<AddWasteTypeDialogContent> {
   final TextEditingController _type = TextEditingController();
   final TextEditingController _price = TextEditingController();
   String token = '';
@@ -38,6 +62,10 @@ class _AddWasteTypeDialogState extends State<AddWasteTypeDialog> {
   void initState() {
     super.initState();
     _loadToken();
+    if (widget.data != null) {
+      _type.text = widget.data!.type!;
+      _price.text = widget.data!.price!;
+    }
   }
 
   Future<void> _loadToken() async {
@@ -51,232 +79,248 @@ class _AddWasteTypeDialogState extends State<AddWasteTypeDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => WasteTypeBloc(
-        WasteTypeRepository(),
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
       ),
-      child: Dialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: SelectionArea(
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: Colors.white,
-            ),
-            constraints: const BoxConstraints(maxWidth: 676, minWidth: 400),
-            child: CustomScrollView(
-              physics: const ScrollPhysics(),
-              slivers: <Widget>[
-                SliverPadding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 16,
-                    horizontal: 24,
-                  ),
-                  sliver: SliverPersistentHeader(
-                    delegate: _SectionHeaderDelegate(
-                      title: 'Tambah Jenis Sampah',
-                      onPressedClose: () {
-                        Navigator.of(context).pop();
-                      },
-                      subtitle: null,
-                    ),
-                    pinned: true,
-                  ),
+      child: SelectionArea(
+        child: Container(
+          height: MediaQuery.of(context).size.height * .4,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: Colors.white,
+          ),
+          constraints: const BoxConstraints(maxWidth: 676, minWidth: 400),
+          child: CustomScrollView(
+            physics: const ScrollPhysics(),
+            slivers: <Widget>[
+              SliverPadding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 16,
+                  horizontal: 24,
                 ),
-                SliverPadding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 24,
+                sliver: SliverPersistentHeader(
+                  delegate: _SectionHeaderDelegate(
+                    title: widget.data != null
+                        ? 'Edit Jenis Sampah'
+                        : 'Tambah Jenis Sampah',
+                    onPressedClose: () {
+                      Navigator.of(context).pop();
+                    },
+                    subtitle: null,
                   ),
-                  sliver: SliverList(
-                    delegate: SliverChildListDelegate([
-                      const Gap(10),
-                      const Row(
-                        children: [
-                          Text(
-                            'Jenis Sampah',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          Text(
-                            '*',
-                            style: TextStyle(color: Colors.red),
-                          )
-                        ],
-                      ),
-                      const Gap(4),
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.black12,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            8.0,
+                  pinned: true,
+                ),
+              ),
+              SliverPadding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                ),
+                sliver: SliverList(
+                  delegate: SliverChildListDelegate([
+                    const Gap(10),
+                    const Row(
+                      children: [
+                        Text(
+                          'Jenis Sampah',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
-                        height: 40,
-                        padding: const EdgeInsets.fromLTRB(
-                          8,
-                          4,
-                          8,
-                          4,
+                        Text(
+                          '*',
+                          style: TextStyle(color: Colors.red),
+                        )
+                      ],
+                    ),
+                    const Gap(4),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.black12,
                         ),
-                        child: TextFormField(
-                          controller: _type,
-                          decoration: const InputDecoration(
-                            hintText: 'Masukkan Jenis Sampah',
-                            border: InputBorder.none,
-                            contentPadding: EdgeInsets.symmetric(
-                              vertical: 12.0,
-                            ),
-                          ),
+                        borderRadius: BorderRadius.circular(
+                          8.0,
                         ),
                       ),
-                      const Gap(8),
-                      const Row(
-                        children: [
-                          Text(
-                            'Harga',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          Text(
-                            '*',
-                            style: TextStyle(color: Colors.red),
-                          )
-                        ],
+                      height: 40,
+                      padding: const EdgeInsets.fromLTRB(
+                        8,
+                        4,
+                        8,
+                        4,
                       ),
-                      const Gap(4),
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.black12,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            8.0,
+                      child: TextFormField(
+                        initialValue: widget.data?.type,
+                        decoration: const InputDecoration(
+                          hintText: 'Masukkan Jenis Sampah',
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.symmetric(
+                            vertical: 12.0,
                           ),
                         ),
-                        height: 40,
-                        padding: const EdgeInsets.fromLTRB(
-                          8,
-                          4,
-                          8,
-                          4,
-                        ),
-                        child: TextFormField(
-                          keyboardType: TextInputType.number,
-                          inputFormatters: <TextInputFormatter>[
-                            FilteringTextInputFormatter.allow(
-                                RegExp(r'^[0-9]*[.,]?[0-9]*$')),
-                          ],
-                          decoration: const InputDecoration(
-                            hintText: 'Masukkan Harga',
-                            border: InputBorder.none,
-                            contentPadding: EdgeInsets.symmetric(
-                              vertical: 12.0,
-                            ),
-                          ),
-                          onChanged: (value) {
-                            setState(() {
-                              _price.text = value;
-                            });
-                          },
-                        ),
-                      ),
-                      const Gap(40),
-                      BlocConsumer<WasteTypeBloc, WasteTypeState>(
-                        listener: (context, state) {
-                          if (state.status.isLoading) {
-                            const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          } else if (state.status.isLoaded) {
-                            Navigator.of(context).pop(true);
-                            Navigator.of(context).pop(true);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content:
-                                    Text('Akun baru berhasil ditambahkan!'),
-                              ),
-                            );
-                          } else if (state.status.isError) {
-                            Navigator.of(context).pop();
-                            Navigator.of(context).pop();
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Gagal menambahkan akun!'),
-                              ),
-                            );
-                          }
+                        onChanged: (value) {
+                          setState(() {
+                            _type.text = value;
+                          });
                         },
-                        builder: (context, state) {
-                          return SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.teal,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5.0),
-                                  )),
-                              onPressed: (_type.text.isNotEmpty &&
-                                      _price.text.isNotEmpty)
-                                  ? () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext dialogContext) {
-                                          return AlertDialog(
-                                            title: const Text(
-                                                'Tambah Jenis Sampah'),
-                                            content: const Text(
-                                                'Apakah anda yakin akan menyimpan data?'),
-                                            actions: <Widget>[
-                                              TextButton(
-                                                onPressed: () {
-                                                  context
-                                                      .read<WasteTypeBloc>()
-                                                      .add(WasteTypeEvent.add(
-                                                        token: token,
-                                                        type: _type.text,
-                                                        price: _price.text,
-                                                      ));
-                                                },
-                                                child: const Text('Ya, Simpan'),
-                                              ),
-                                              TextButton(
-                                                onPressed: () {
-                                                  Navigator.of(dialogContext)
-                                                      .pop();
-                                                },
-                                                child: const Text('Tidak'),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                    }
-                                  : null,
-                              child: const Text(
-                                'Simpan',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                      ),
+                    ),
+                    const Gap(8),
+                    const Row(
+                      children: [
+                        Text(
+                          'Harga',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        Text(
+                          '*',
+                          style: TextStyle(color: Colors.red),
+                        )
+                      ],
+                    ),
+                    const Gap(4),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.black12,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          8.0,
+                        ),
+                      ),
+                      height: 40,
+                      padding: const EdgeInsets.fromLTRB(
+                        8,
+                        4,
+                        8,
+                        4,
+                      ),
+                      child: TextFormField(
+                        initialValue: widget.data?.price,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r'^[0-9]*[.,]?[0-9]*$')),
+                        ],
+                        decoration: const InputDecoration(
+                          hintText: 'Masukkan Harga',
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.symmetric(
+                            vertical: 12.0,
+                          ),
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            _price.text = value;
+                          });
+                        },
+                      ),
+                    ),
+                    const Gap(40),
+                    BlocConsumer<WasteTypeBloc, WasteTypeState>(
+                      listener: (context, state) {
+                        if (state.status.isLoading) {
+                          const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else if (state.status.isLoaded) {
+                          Navigator.of(context).pop(true);
+                          Navigator.of(context).pop(true);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content:
+                                  Text('Jenis Sampah Berhasil Ditambahkan!'),
                             ),
                           );
-                        },
-                      )
-                    ]),
-                  ),
-                )
-              ],
-            ),
+                        } else if (state.status.isError) {
+                          Navigator.of(context).pop();
+                          Navigator.of(context).pop();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Gagal Menambahkan Jenis Sampah!'),
+                            ),
+                          );
+                        }
+                      },
+                      builder: (context, state) {
+                        return SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.teal,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                )),
+                            onPressed: (_type.text.isNotEmpty &&
+                                    _price.text.isNotEmpty)
+                                ? () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext dialogContext) {
+                                        return AlertDialog(
+                                          title: Text(widget.data != null
+                                              ? 'Edit Jenis Sampah'
+                                              : 'Tambah Jenis Sampah'),
+                                          content: const Text(
+                                              'Apakah anda yakin akan menyimpan data?'),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () {
+                                                widget.data != null
+                                                    ? context
+                                                        .read<WasteTypeBloc>()
+                                                        .add(
+                                                            WasteTypeEvent.edit(
+                                                          token: token,
+                                                          id: widget.data!.id
+                                                              .toString(),
+                                                          type: _type.text,
+                                                          price: _price.text,
+                                                        ))
+                                                    : context
+                                                        .read<WasteTypeBloc>()
+                                                        .add(WasteTypeEvent.add(
+                                                          token: token,
+                                                          type: _type.text,
+                                                          price: _price.text,
+                                                        ));
+                                              },
+                                              child: const Text('Ya, Simpan'),
+                                            ),
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(dialogContext)
+                                                    .pop();
+                                              },
+                                              child: const Text('Tidak'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  }
+                                : null,
+                            child: const Text(
+                              'Simpan',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    )
+                  ]),
+                ),
+              )
+            ],
           ),
         ),
       ),

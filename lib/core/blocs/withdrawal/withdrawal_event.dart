@@ -30,4 +30,9 @@ class WithdrawalEvent with _$WithdrawalEvent {
     required String token,
     String? idUser,
   }) = _FetchAll;
+
+  const factory WithdrawalEvent.delete({
+    required String id,
+    required String token,
+  }) = _Delete;
 }

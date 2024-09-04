@@ -90,4 +90,22 @@ class WithdrawalRepository {
 
     return allWithdrawals;
   }
+
+  Future<void> delete(
+    String token,
+    String id,
+  ) async {
+    final response = await _dio.delete(
+      '$api/$id',
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      ),
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Gagal menghapus data');
+    }
+  }
 }

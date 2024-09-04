@@ -17,8 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$UserEvent {
   String get token => throw _privateConstructorUsedError;
-  String? get status => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
@@ -26,6 +24,20 @@ mixin _$UserEvent {
         fetch,
     required TResult Function(String token, String? status, String? name)
         fetchAll,
+    required TResult Function(String token, String? id) fetchId,
+    required TResult Function(
+            String token,
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)
+        edit,
+    required TResult Function(String id, String token) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -33,6 +45,20 @@ mixin _$UserEvent {
     TResult? Function(String token, String? status, String? name, int? page)?
         fetch,
     TResult? Function(String token, String? status, String? name)? fetchAll,
+    TResult? Function(String token, String? id)? fetchId,
+    TResult? Function(
+            String token,
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)?
+        edit,
+    TResult? Function(String id, String token)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,6 +66,20 @@ mixin _$UserEvent {
     TResult Function(String token, String? status, String? name, int? page)?
         fetch,
     TResult Function(String token, String? status, String? name)? fetchAll,
+    TResult Function(String token, String? id)? fetchId,
+    TResult Function(
+            String token,
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)?
+        edit,
+    TResult Function(String id, String token)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,18 +87,27 @@ mixin _$UserEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchAll value) fetchAll,
+    required TResult Function(_FetchId value) fetchId,
+    required TResult Function(_Edit value) edit,
+    required TResult Function(_Delete value) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchAll value)? fetchAll,
+    TResult? Function(_FetchId value)? fetchId,
+    TResult? Function(_Edit value)? edit,
+    TResult? Function(_Delete value)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchAll value)? fetchAll,
+    TResult Function(_FetchId value)? fetchId,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -73,7 +122,7 @@ abstract class $UserEventCopyWith<$Res> {
   factory $UserEventCopyWith(UserEvent value, $Res Function(UserEvent) then) =
       _$UserEventCopyWithImpl<$Res, UserEvent>;
   @useResult
-  $Res call({String token, String? status, String? name});
+  $Res call({String token});
 }
 
 /// @nodoc
@@ -90,22 +139,12 @@ class _$UserEventCopyWithImpl<$Res, $Val extends UserEvent>
   @override
   $Res call({
     Object? token = null,
-    Object? status = freezed,
-    Object? name = freezed,
   }) {
     return _then(_value.copyWith(
       token: null == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String,
-      status: freezed == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
   }
 }
@@ -204,6 +243,20 @@ class _$FetchImpl implements _Fetch {
         fetch,
     required TResult Function(String token, String? status, String? name)
         fetchAll,
+    required TResult Function(String token, String? id) fetchId,
+    required TResult Function(
+            String token,
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)
+        edit,
+    required TResult Function(String id, String token) delete,
   }) {
     return fetch(token, status, name, page);
   }
@@ -214,6 +267,20 @@ class _$FetchImpl implements _Fetch {
     TResult? Function(String token, String? status, String? name, int? page)?
         fetch,
     TResult? Function(String token, String? status, String? name)? fetchAll,
+    TResult? Function(String token, String? id)? fetchId,
+    TResult? Function(
+            String token,
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)?
+        edit,
+    TResult? Function(String id, String token)? delete,
   }) {
     return fetch?.call(token, status, name, page);
   }
@@ -224,6 +291,20 @@ class _$FetchImpl implements _Fetch {
     TResult Function(String token, String? status, String? name, int? page)?
         fetch,
     TResult Function(String token, String? status, String? name)? fetchAll,
+    TResult Function(String token, String? id)? fetchId,
+    TResult Function(
+            String token,
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)?
+        edit,
+    TResult Function(String id, String token)? delete,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -237,6 +318,9 @@ class _$FetchImpl implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchAll value) fetchAll,
+    required TResult Function(_FetchId value) fetchId,
+    required TResult Function(_Edit value) edit,
+    required TResult Function(_Delete value) delete,
   }) {
     return fetch(this);
   }
@@ -246,6 +330,9 @@ class _$FetchImpl implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchAll value)? fetchAll,
+    TResult? Function(_FetchId value)? fetchId,
+    TResult? Function(_Edit value)? edit,
+    TResult? Function(_Delete value)? delete,
   }) {
     return fetch?.call(this);
   }
@@ -255,6 +342,9 @@ class _$FetchImpl implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchAll value)? fetchAll,
+    TResult Function(_FetchId value)? fetchId,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -273,9 +363,7 @@ abstract class _Fetch implements UserEvent {
 
   @override
   String get token;
-  @override
   String? get status;
-  @override
   String? get name;
   int? get page;
   @override
@@ -371,6 +459,20 @@ class _$FetchAllImpl implements _FetchAll {
         fetch,
     required TResult Function(String token, String? status, String? name)
         fetchAll,
+    required TResult Function(String token, String? id) fetchId,
+    required TResult Function(
+            String token,
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)
+        edit,
+    required TResult Function(String id, String token) delete,
   }) {
     return fetchAll(token, status, name);
   }
@@ -381,6 +483,20 @@ class _$FetchAllImpl implements _FetchAll {
     TResult? Function(String token, String? status, String? name, int? page)?
         fetch,
     TResult? Function(String token, String? status, String? name)? fetchAll,
+    TResult? Function(String token, String? id)? fetchId,
+    TResult? Function(
+            String token,
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)?
+        edit,
+    TResult? Function(String id, String token)? delete,
   }) {
     return fetchAll?.call(token, status, name);
   }
@@ -391,6 +507,20 @@ class _$FetchAllImpl implements _FetchAll {
     TResult Function(String token, String? status, String? name, int? page)?
         fetch,
     TResult Function(String token, String? status, String? name)? fetchAll,
+    TResult Function(String token, String? id)? fetchId,
+    TResult Function(
+            String token,
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)?
+        edit,
+    TResult Function(String id, String token)? delete,
     required TResult orElse(),
   }) {
     if (fetchAll != null) {
@@ -404,6 +534,9 @@ class _$FetchAllImpl implements _FetchAll {
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchAll value) fetchAll,
+    required TResult Function(_FetchId value) fetchId,
+    required TResult Function(_Edit value) edit,
+    required TResult Function(_Delete value) delete,
   }) {
     return fetchAll(this);
   }
@@ -413,6 +546,9 @@ class _$FetchAllImpl implements _FetchAll {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchAll value)? fetchAll,
+    TResult? Function(_FetchId value)? fetchId,
+    TResult? Function(_Edit value)? edit,
+    TResult? Function(_Delete value)? delete,
   }) {
     return fetchAll?.call(this);
   }
@@ -422,6 +558,9 @@ class _$FetchAllImpl implements _FetchAll {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchAll value)? fetchAll,
+    TResult Function(_FetchId value)? fetchId,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (fetchAll != null) {
@@ -439,9 +578,7 @@ abstract class _FetchAll implements UserEvent {
 
   @override
   String get token;
-  @override
   String? get status;
-  @override
   String? get name;
   @override
   @JsonKey(ignore: true)
@@ -450,10 +587,725 @@ abstract class _FetchAll implements UserEvent {
 }
 
 /// @nodoc
+abstract class _$$FetchIdImplCopyWith<$Res>
+    implements $UserEventCopyWith<$Res> {
+  factory _$$FetchIdImplCopyWith(
+          _$FetchIdImpl value, $Res Function(_$FetchIdImpl) then) =
+      __$$FetchIdImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String token, String? id});
+}
+
+/// @nodoc
+class __$$FetchIdImplCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$FetchIdImpl>
+    implements _$$FetchIdImplCopyWith<$Res> {
+  __$$FetchIdImplCopyWithImpl(
+      _$FetchIdImpl _value, $Res Function(_$FetchIdImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? token = null,
+    Object? id = freezed,
+  }) {
+    return _then(_$FetchIdImpl(
+      token: null == token
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$FetchIdImpl implements _FetchId {
+  const _$FetchIdImpl({required this.token, this.id});
+
+  @override
+  final String token;
+  @override
+  final String? id;
+
+  @override
+  String toString() {
+    return 'UserEvent.fetchId(token: $token, id: $id)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FetchIdImpl &&
+            (identical(other.token, token) || other.token == token) &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, token, id);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FetchIdImplCopyWith<_$FetchIdImpl> get copyWith =>
+      __$$FetchIdImplCopyWithImpl<_$FetchIdImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String token, String? status, String? name, int? page)
+        fetch,
+    required TResult Function(String token, String? status, String? name)
+        fetchAll,
+    required TResult Function(String token, String? id) fetchId,
+    required TResult Function(
+            String token,
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)
+        edit,
+    required TResult Function(String id, String token) delete,
+  }) {
+    return fetchId(token, id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String token, String? status, String? name, int? page)?
+        fetch,
+    TResult? Function(String token, String? status, String? name)? fetchAll,
+    TResult? Function(String token, String? id)? fetchId,
+    TResult? Function(
+            String token,
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)?
+        edit,
+    TResult? Function(String id, String token)? delete,
+  }) {
+    return fetchId?.call(token, id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String token, String? status, String? name, int? page)?
+        fetch,
+    TResult Function(String token, String? status, String? name)? fetchAll,
+    TResult Function(String token, String? id)? fetchId,
+    TResult Function(
+            String token,
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)?
+        edit,
+    TResult Function(String id, String token)? delete,
+    required TResult orElse(),
+  }) {
+    if (fetchId != null) {
+      return fetchId(token, id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchAll value) fetchAll,
+    required TResult Function(_FetchId value) fetchId,
+    required TResult Function(_Edit value) edit,
+    required TResult Function(_Delete value) delete,
+  }) {
+    return fetchId(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchAll value)? fetchAll,
+    TResult? Function(_FetchId value)? fetchId,
+    TResult? Function(_Edit value)? edit,
+    TResult? Function(_Delete value)? delete,
+  }) {
+    return fetchId?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchAll value)? fetchAll,
+    TResult Function(_FetchId value)? fetchId,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Delete value)? delete,
+    required TResult orElse(),
+  }) {
+    if (fetchId != null) {
+      return fetchId(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchId implements UserEvent {
+  const factory _FetchId({required final String token, final String? id}) =
+      _$FetchIdImpl;
+
+  @override
+  String get token;
+  String? get id;
+  @override
+  @JsonKey(ignore: true)
+  _$$FetchIdImplCopyWith<_$FetchIdImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$EditImplCopyWith<$Res> implements $UserEventCopyWith<$Res> {
+  factory _$$EditImplCopyWith(
+          _$EditImpl value, $Res Function(_$EditImpl) then) =
+      __$$EditImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String token,
+      String id,
+      String name,
+      String email,
+      String password,
+      String passwordConfirmation,
+      String nik,
+      String phoneNumber,
+      String address,
+      String status});
+}
+
+/// @nodoc
+class __$$EditImplCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$EditImpl>
+    implements _$$EditImplCopyWith<$Res> {
+  __$$EditImplCopyWithImpl(_$EditImpl _value, $Res Function(_$EditImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? token = null,
+    Object? id = null,
+    Object? name = null,
+    Object? email = null,
+    Object? password = null,
+    Object? passwordConfirmation = null,
+    Object? nik = null,
+    Object? phoneNumber = null,
+    Object? address = null,
+    Object? status = null,
+  }) {
+    return _then(_$EditImpl(
+      token: null == token
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      passwordConfirmation: null == passwordConfirmation
+          ? _value.passwordConfirmation
+          : passwordConfirmation // ignore: cast_nullable_to_non_nullable
+              as String,
+      nik: null == nik
+          ? _value.nik
+          : nik // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneNumber: null == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      address: null == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$EditImpl implements _Edit {
+  const _$EditImpl(
+      {required this.token,
+      required this.id,
+      required this.name,
+      required this.email,
+      required this.password,
+      required this.passwordConfirmation,
+      required this.nik,
+      required this.phoneNumber,
+      required this.address,
+      required this.status});
+
+  @override
+  final String token;
+  @override
+  final String id;
+  @override
+  final String name;
+  @override
+  final String email;
+  @override
+  final String password;
+  @override
+  final String passwordConfirmation;
+  @override
+  final String nik;
+  @override
+  final String phoneNumber;
+  @override
+  final String address;
+  @override
+  final String status;
+
+  @override
+  String toString() {
+    return 'UserEvent.edit(token: $token, id: $id, name: $name, email: $email, password: $password, passwordConfirmation: $passwordConfirmation, nik: $nik, phoneNumber: $phoneNumber, address: $address, status: $status)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$EditImpl &&
+            (identical(other.token, token) || other.token == token) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
+            (identical(other.passwordConfirmation, passwordConfirmation) ||
+                other.passwordConfirmation == passwordConfirmation) &&
+            (identical(other.nik, nik) || other.nik == nik) &&
+            (identical(other.phoneNumber, phoneNumber) ||
+                other.phoneNumber == phoneNumber) &&
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.status, status) || other.status == status));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, token, id, name, email, password,
+      passwordConfirmation, nik, phoneNumber, address, status);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$EditImplCopyWith<_$EditImpl> get copyWith =>
+      __$$EditImplCopyWithImpl<_$EditImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String token, String? status, String? name, int? page)
+        fetch,
+    required TResult Function(String token, String? status, String? name)
+        fetchAll,
+    required TResult Function(String token, String? id) fetchId,
+    required TResult Function(
+            String token,
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)
+        edit,
+    required TResult Function(String id, String token) delete,
+  }) {
+    return edit(token, id, name, email, password, passwordConfirmation, nik,
+        phoneNumber, address, status);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String token, String? status, String? name, int? page)?
+        fetch,
+    TResult? Function(String token, String? status, String? name)? fetchAll,
+    TResult? Function(String token, String? id)? fetchId,
+    TResult? Function(
+            String token,
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)?
+        edit,
+    TResult? Function(String id, String token)? delete,
+  }) {
+    return edit?.call(token, id, name, email, password, passwordConfirmation,
+        nik, phoneNumber, address, status);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String token, String? status, String? name, int? page)?
+        fetch,
+    TResult Function(String token, String? status, String? name)? fetchAll,
+    TResult Function(String token, String? id)? fetchId,
+    TResult Function(
+            String token,
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)?
+        edit,
+    TResult Function(String id, String token)? delete,
+    required TResult orElse(),
+  }) {
+    if (edit != null) {
+      return edit(token, id, name, email, password, passwordConfirmation, nik,
+          phoneNumber, address, status);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchAll value) fetchAll,
+    required TResult Function(_FetchId value) fetchId,
+    required TResult Function(_Edit value) edit,
+    required TResult Function(_Delete value) delete,
+  }) {
+    return edit(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchAll value)? fetchAll,
+    TResult? Function(_FetchId value)? fetchId,
+    TResult? Function(_Edit value)? edit,
+    TResult? Function(_Delete value)? delete,
+  }) {
+    return edit?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchAll value)? fetchAll,
+    TResult Function(_FetchId value)? fetchId,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Delete value)? delete,
+    required TResult orElse(),
+  }) {
+    if (edit != null) {
+      return edit(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Edit implements UserEvent {
+  const factory _Edit(
+      {required final String token,
+      required final String id,
+      required final String name,
+      required final String email,
+      required final String password,
+      required final String passwordConfirmation,
+      required final String nik,
+      required final String phoneNumber,
+      required final String address,
+      required final String status}) = _$EditImpl;
+
+  @override
+  String get token;
+  String get id;
+  String get name;
+  String get email;
+  String get password;
+  String get passwordConfirmation;
+  String get nik;
+  String get phoneNumber;
+  String get address;
+  String get status;
+  @override
+  @JsonKey(ignore: true)
+  _$$EditImplCopyWith<_$EditImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DeleteImplCopyWith<$Res> implements $UserEventCopyWith<$Res> {
+  factory _$$DeleteImplCopyWith(
+          _$DeleteImpl value, $Res Function(_$DeleteImpl) then) =
+      __$$DeleteImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String id, String token});
+}
+
+/// @nodoc
+class __$$DeleteImplCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$DeleteImpl>
+    implements _$$DeleteImplCopyWith<$Res> {
+  __$$DeleteImplCopyWithImpl(
+      _$DeleteImpl _value, $Res Function(_$DeleteImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? token = null,
+  }) {
+    return _then(_$DeleteImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      token: null == token
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DeleteImpl implements _Delete {
+  const _$DeleteImpl({required this.id, required this.token});
+
+  @override
+  final String id;
+  @override
+  final String token;
+
+  @override
+  String toString() {
+    return 'UserEvent.delete(id: $id, token: $token)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DeleteImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.token, token) || other.token == token));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id, token);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DeleteImplCopyWith<_$DeleteImpl> get copyWith =>
+      __$$DeleteImplCopyWithImpl<_$DeleteImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String token, String? status, String? name, int? page)
+        fetch,
+    required TResult Function(String token, String? status, String? name)
+        fetchAll,
+    required TResult Function(String token, String? id) fetchId,
+    required TResult Function(
+            String token,
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)
+        edit,
+    required TResult Function(String id, String token) delete,
+  }) {
+    return delete(id, token);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String token, String? status, String? name, int? page)?
+        fetch,
+    TResult? Function(String token, String? status, String? name)? fetchAll,
+    TResult? Function(String token, String? id)? fetchId,
+    TResult? Function(
+            String token,
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)?
+        edit,
+    TResult? Function(String id, String token)? delete,
+  }) {
+    return delete?.call(id, token);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String token, String? status, String? name, int? page)?
+        fetch,
+    TResult Function(String token, String? status, String? name)? fetchAll,
+    TResult Function(String token, String? id)? fetchId,
+    TResult Function(
+            String token,
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)?
+        edit,
+    TResult Function(String id, String token)? delete,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete(id, token);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchAll value) fetchAll,
+    required TResult Function(_FetchId value) fetchId,
+    required TResult Function(_Edit value) edit,
+    required TResult Function(_Delete value) delete,
+  }) {
+    return delete(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchAll value)? fetchAll,
+    TResult? Function(_FetchId value)? fetchId,
+    TResult? Function(_Edit value)? edit,
+    TResult? Function(_Delete value)? delete,
+  }) {
+    return delete?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchAll value)? fetchAll,
+    TResult Function(_FetchId value)? fetchId,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Delete value)? delete,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Delete implements UserEvent {
+  const factory _Delete(
+      {required final String id, required final String token}) = _$DeleteImpl;
+
+  String get id;
+  @override
+  String get token;
+  @override
+  @JsonKey(ignore: true)
+  _$$DeleteImplCopyWith<_$DeleteImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$UserState {
   UserStateStatus get status => throw _privateConstructorUsedError;
   UserResponseModel? get data => throw _privateConstructorUsedError;
   List<UserModel>? get allData => throw _privateConstructorUsedError;
+  UserModel? get dataId => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -470,9 +1322,11 @@ abstract class $UserStateCopyWith<$Res> {
       {UserStateStatus status,
       UserResponseModel? data,
       List<UserModel>? allData,
+      UserModel? dataId,
       String? error});
 
   $UserResponseModelCopyWith<$Res>? get data;
+  $UserModelCopyWith<$Res>? get dataId;
 }
 
 /// @nodoc
@@ -491,6 +1345,7 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
     Object? status = null,
     Object? data = freezed,
     Object? allData = freezed,
+    Object? dataId = freezed,
     Object? error = freezed,
   }) {
     return _then(_value.copyWith(
@@ -506,6 +1361,10 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
           ? _value.allData
           : allData // ignore: cast_nullable_to_non_nullable
               as List<UserModel>?,
+      dataId: freezed == dataId
+          ? _value.dataId
+          : dataId // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -524,6 +1383,18 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
       return _then(_value.copyWith(data: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserModelCopyWith<$Res>? get dataId {
+    if (_value.dataId == null) {
+      return null;
+    }
+
+    return $UserModelCopyWith<$Res>(_value.dataId!, (value) {
+      return _then(_value.copyWith(dataId: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -538,10 +1409,13 @@ abstract class _$$UserStateImplCopyWith<$Res>
       {UserStateStatus status,
       UserResponseModel? data,
       List<UserModel>? allData,
+      UserModel? dataId,
       String? error});
 
   @override
   $UserResponseModelCopyWith<$Res>? get data;
+  @override
+  $UserModelCopyWith<$Res>? get dataId;
 }
 
 /// @nodoc
@@ -558,6 +1432,7 @@ class __$$UserStateImplCopyWithImpl<$Res>
     Object? status = null,
     Object? data = freezed,
     Object? allData = freezed,
+    Object? dataId = freezed,
     Object? error = freezed,
   }) {
     return _then(_$UserStateImpl(
@@ -573,6 +1448,10 @@ class __$$UserStateImplCopyWithImpl<$Res>
           ? _value._allData
           : allData // ignore: cast_nullable_to_non_nullable
               as List<UserModel>?,
+      dataId: freezed == dataId
+          ? _value.dataId
+          : dataId // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -588,6 +1467,7 @@ class _$UserStateImpl implements _UserState {
       {this.status = UserStateStatus.initial,
       this.data,
       final List<UserModel>? allData,
+      this.dataId,
       this.error = ''})
       : _allData = allData;
 
@@ -607,12 +1487,14 @@ class _$UserStateImpl implements _UserState {
   }
 
   @override
+  final UserModel? dataId;
+  @override
   @JsonKey()
   final String? error;
 
   @override
   String toString() {
-    return 'UserState(status: $status, data: $data, allData: $allData, error: $error)';
+    return 'UserState(status: $status, data: $data, allData: $allData, dataId: $dataId, error: $error)';
   }
 
   @override
@@ -623,12 +1505,13 @@ class _$UserStateImpl implements _UserState {
             (identical(other.status, status) || other.status == status) &&
             (identical(other.data, data) || other.data == data) &&
             const DeepCollectionEquality().equals(other._allData, _allData) &&
+            (identical(other.dataId, dataId) || other.dataId == dataId) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, status, data,
-      const DeepCollectionEquality().hash(_allData), error);
+      const DeepCollectionEquality().hash(_allData), dataId, error);
 
   @JsonKey(ignore: true)
   @override
@@ -642,6 +1525,7 @@ abstract class _UserState implements UserState {
       {final UserStateStatus status,
       final UserResponseModel? data,
       final List<UserModel>? allData,
+      final UserModel? dataId,
       final String? error}) = _$UserStateImpl;
 
   @override
@@ -650,6 +1534,8 @@ abstract class _UserState implements UserState {
   UserResponseModel? get data;
   @override
   List<UserModel>? get allData;
+  @override
+  UserModel? get dataId;
   @override
   String? get error;
   @override

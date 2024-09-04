@@ -19,6 +19,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simbiotik_web/core/blocs/blocs.dart';
+import 'package:simbiotik_web/core/blocs/waste_type/waste_type.dart';
 import 'package:simbiotik_web/models/models.dart';
 import 'package:simbiotik_web/utils/utils.dart';
 import 'package:simbiotik_web/widgets/widgets.dart';
@@ -67,7 +68,8 @@ class _WasteTypeScreenContentState extends State<WasteTypeScreenContent> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: token.isNotEmpty
-          ? BlocBuilder<WasteTypeBloc, WasteTypeState>(
+          ? BlocConsumer<WasteTypeBloc, WasteTypeState>(
+              listener: (context, state) {},
               builder: (context, state) {
                 if (state.status.isLoading) {
                   return const Center(
@@ -98,7 +100,7 @@ class _WasteTypeScreenContentState extends State<WasteTypeScreenContent> {
                         const Gap(8.0),
                         InkWell(
                           onTap: () {
-                            _handleData(token, '');
+                            _handleWasteTypeData(token, 1);
                           },
                           child: const Text(
                             'Ulangi',
@@ -160,12 +162,8 @@ class _WasteTypeScreenContentState extends State<WasteTypeScreenContent> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     )),
-                onPressed: () async {
-                  final bool? result;
-                  result = await _handleAddWasteTypeDialog(context);
-                  if (result == true) {
-                    _handleData(token, '');
-                  }
+                onPressed: () {
+                  _handleAddWasteTypeDialog(context, null);
                 },
                 child: const Row(
                   children: [
@@ -211,8 +209,12 @@ class _WasteTypeScreenContentState extends State<WasteTypeScreenContent> {
     );
   }
 
-  _handleAddWasteTypeDialog(BuildContext context) {
-    showDialog(
+  _handleAddWasteTypeDialog(
+    BuildContext context,
+    WasteTypesModel? data,
+  ) async {
+    bool? result;
+    result = await showDialog(
       context: context,
       builder: (dialogContext) {
         return BackdropFilter(
@@ -220,10 +222,15 @@ class _WasteTypeScreenContentState extends State<WasteTypeScreenContent> {
             sigmaX: 4.0,
             sigmaY: 4.0,
           ),
-          child: const AddWasteTypeDialog(),
+          child: AddWasteTypeDialog(
+            data: data,
+          ),
         );
       },
     );
+    if (result == true) {
+      _handleWasteTypeData(token, 1);
+    }
   }
 
   _buildUserTable(BuildContext context) {
@@ -274,14 +281,58 @@ class _WasteTypeScreenContentState extends State<WasteTypeScreenContent> {
                           double.parse(wasteType.price.toString())))),
                       DataCell(
                           Text(formattedDate(wasteType.createdAt.toString()))),
-                      const DataCell(Row(
+                      DataCell(Row(
                         children: [
-                          Icon(
-                            Icons.delete,
-                            color: Colors.red,
+                          InkWell(
+                            onTap: () async {
+                              bool? result;
+                              result = await showDialog(
+                                context: context,
+                                builder: (BuildContext dialogContext) {
+                                  return AlertDialog(
+                                    title: const Text('Hapus Jenis Sampah'),
+                                    content: const Text(
+                                        'Apakah anda yakin akan menghapus data?'),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(dialogContext).pop(true);
+                                        },
+                                        child: const Text('Ya, Hapus'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(dialogContext).pop();
+                                        },
+                                        child: const Text('Tidak'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+
+                              if (result == true) {
+                                _handleDeleteData(wasteType.id.toString());
+                                _handleWasteTypeData(token, 1);
+                                //TODO: Fix this
+                                _handleWasteTypeData(token, 1);
+                              }
+                            },
+                            child: const Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                            ),
                           ),
-                          Gap(8.0),
-                          Icon(Icons.edit),
+                          const Gap(8.0),
+                          InkWell(
+                            onTap: () {
+                              _handleAddWasteTypeDialog(
+                                context,
+                                wasteType,
+                              );
+                            },
+                            child: const Icon(Icons.edit),
+                          ),
                         ],
                       ))
                     ],
@@ -356,11 +407,17 @@ class _WasteTypeScreenContentState extends State<WasteTypeScreenContent> {
   }
 
   _handleWasteTypeData(String token, int? page) {
-    context.read<UserBloc>().add(
-          UserEvent.fetch(
+    context.read<WasteTypeBloc>().add(
+          WasteTypeEvent.fetch(
             token: token,
             page: page,
           ),
         );
+  }
+
+  _handleDeleteData(String id) {
+    context
+        .read<WasteTypeBloc>()
+        .add(WasteTypeEvent.delete(id: id, token: token));
   }
 }

@@ -23,6 +23,7 @@ mixin _$WithdrawalEvent {
         postWithdrawal,
     required TResult Function(String token, String? idUser, int? page) fetch,
     required TResult Function(String token, String? idUser) fetchAll,
+    required TResult Function(String id, String token) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -31,6 +32,7 @@ mixin _$WithdrawalEvent {
         postWithdrawal,
     TResult? Function(String token, String? idUser, int? page)? fetch,
     TResult? Function(String token, String? idUser)? fetchAll,
+    TResult? Function(String id, String token)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -39,6 +41,7 @@ mixin _$WithdrawalEvent {
         postWithdrawal,
     TResult Function(String token, String? idUser, int? page)? fetch,
     TResult Function(String token, String? idUser)? fetchAll,
+    TResult Function(String id, String token)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +50,7 @@ mixin _$WithdrawalEvent {
     required TResult Function(_PostWithdrawal value) postWithdrawal,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchAll value) fetchAll,
+    required TResult Function(_Delete value) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,6 +58,7 @@ mixin _$WithdrawalEvent {
     TResult? Function(_PostWithdrawal value)? postWithdrawal,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchAll value)? fetchAll,
+    TResult? Function(_Delete value)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,6 +66,7 @@ mixin _$WithdrawalEvent {
     TResult Function(_PostWithdrawal value)? postWithdrawal,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchAll value)? fetchAll,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -192,6 +198,7 @@ class _$PostWithdrawalImpl implements _PostWithdrawal {
         postWithdrawal,
     required TResult Function(String token, String? idUser, int? page) fetch,
     required TResult Function(String token, String? idUser) fetchAll,
+    required TResult Function(String id, String token) delete,
   }) {
     return postWithdrawal(request, token);
   }
@@ -203,6 +210,7 @@ class _$PostWithdrawalImpl implements _PostWithdrawal {
         postWithdrawal,
     TResult? Function(String token, String? idUser, int? page)? fetch,
     TResult? Function(String token, String? idUser)? fetchAll,
+    TResult? Function(String id, String token)? delete,
   }) {
     return postWithdrawal?.call(request, token);
   }
@@ -214,6 +222,7 @@ class _$PostWithdrawalImpl implements _PostWithdrawal {
         postWithdrawal,
     TResult Function(String token, String? idUser, int? page)? fetch,
     TResult Function(String token, String? idUser)? fetchAll,
+    TResult Function(String id, String token)? delete,
     required TResult orElse(),
   }) {
     if (postWithdrawal != null) {
@@ -228,6 +237,7 @@ class _$PostWithdrawalImpl implements _PostWithdrawal {
     required TResult Function(_PostWithdrawal value) postWithdrawal,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchAll value) fetchAll,
+    required TResult Function(_Delete value) delete,
   }) {
     return postWithdrawal(this);
   }
@@ -238,6 +248,7 @@ class _$PostWithdrawalImpl implements _PostWithdrawal {
     TResult? Function(_PostWithdrawal value)? postWithdrawal,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchAll value)? fetchAll,
+    TResult? Function(_Delete value)? delete,
   }) {
     return postWithdrawal?.call(this);
   }
@@ -248,6 +259,7 @@ class _$PostWithdrawalImpl implements _PostWithdrawal {
     TResult Function(_PostWithdrawal value)? postWithdrawal,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchAll value)? fetchAll,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (postWithdrawal != null) {
@@ -357,6 +369,7 @@ class _$FetchImpl implements _Fetch {
         postWithdrawal,
     required TResult Function(String token, String? idUser, int? page) fetch,
     required TResult Function(String token, String? idUser) fetchAll,
+    required TResult Function(String id, String token) delete,
   }) {
     return fetch(token, idUser, page);
   }
@@ -368,6 +381,7 @@ class _$FetchImpl implements _Fetch {
         postWithdrawal,
     TResult? Function(String token, String? idUser, int? page)? fetch,
     TResult? Function(String token, String? idUser)? fetchAll,
+    TResult? Function(String id, String token)? delete,
   }) {
     return fetch?.call(token, idUser, page);
   }
@@ -379,6 +393,7 @@ class _$FetchImpl implements _Fetch {
         postWithdrawal,
     TResult Function(String token, String? idUser, int? page)? fetch,
     TResult Function(String token, String? idUser)? fetchAll,
+    TResult Function(String id, String token)? delete,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -393,6 +408,7 @@ class _$FetchImpl implements _Fetch {
     required TResult Function(_PostWithdrawal value) postWithdrawal,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchAll value) fetchAll,
+    required TResult Function(_Delete value) delete,
   }) {
     return fetch(this);
   }
@@ -403,6 +419,7 @@ class _$FetchImpl implements _Fetch {
     TResult? Function(_PostWithdrawal value)? postWithdrawal,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchAll value)? fetchAll,
+    TResult? Function(_Delete value)? delete,
   }) {
     return fetch?.call(this);
   }
@@ -413,6 +430,7 @@ class _$FetchImpl implements _Fetch {
     TResult Function(_PostWithdrawal value)? postWithdrawal,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchAll value)? fetchAll,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -516,6 +534,7 @@ class _$FetchAllImpl implements _FetchAll {
         postWithdrawal,
     required TResult Function(String token, String? idUser, int? page) fetch,
     required TResult Function(String token, String? idUser) fetchAll,
+    required TResult Function(String id, String token) delete,
   }) {
     return fetchAll(token, idUser);
   }
@@ -527,6 +546,7 @@ class _$FetchAllImpl implements _FetchAll {
         postWithdrawal,
     TResult? Function(String token, String? idUser, int? page)? fetch,
     TResult? Function(String token, String? idUser)? fetchAll,
+    TResult? Function(String id, String token)? delete,
   }) {
     return fetchAll?.call(token, idUser);
   }
@@ -538,6 +558,7 @@ class _$FetchAllImpl implements _FetchAll {
         postWithdrawal,
     TResult Function(String token, String? idUser, int? page)? fetch,
     TResult Function(String token, String? idUser)? fetchAll,
+    TResult Function(String id, String token)? delete,
     required TResult orElse(),
   }) {
     if (fetchAll != null) {
@@ -552,6 +573,7 @@ class _$FetchAllImpl implements _FetchAll {
     required TResult Function(_PostWithdrawal value) postWithdrawal,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchAll value) fetchAll,
+    required TResult Function(_Delete value) delete,
   }) {
     return fetchAll(this);
   }
@@ -562,6 +584,7 @@ class _$FetchAllImpl implements _FetchAll {
     TResult? Function(_PostWithdrawal value)? postWithdrawal,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchAll value)? fetchAll,
+    TResult? Function(_Delete value)? delete,
   }) {
     return fetchAll?.call(this);
   }
@@ -572,6 +595,7 @@ class _$FetchAllImpl implements _FetchAll {
     TResult Function(_PostWithdrawal value)? postWithdrawal,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchAll value)? fetchAll,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (fetchAll != null) {
@@ -591,6 +615,168 @@ abstract class _FetchAll implements WithdrawalEvent {
   @override
   @JsonKey(ignore: true)
   _$$FetchAllImplCopyWith<_$FetchAllImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DeleteImplCopyWith<$Res>
+    implements $WithdrawalEventCopyWith<$Res> {
+  factory _$$DeleteImplCopyWith(
+          _$DeleteImpl value, $Res Function(_$DeleteImpl) then) =
+      __$$DeleteImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String id, String token});
+}
+
+/// @nodoc
+class __$$DeleteImplCopyWithImpl<$Res>
+    extends _$WithdrawalEventCopyWithImpl<$Res, _$DeleteImpl>
+    implements _$$DeleteImplCopyWith<$Res> {
+  __$$DeleteImplCopyWithImpl(
+      _$DeleteImpl _value, $Res Function(_$DeleteImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? token = null,
+  }) {
+    return _then(_$DeleteImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      token: null == token
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DeleteImpl implements _Delete {
+  const _$DeleteImpl({required this.id, required this.token});
+
+  @override
+  final String id;
+  @override
+  final String token;
+
+  @override
+  String toString() {
+    return 'WithdrawalEvent.delete(id: $id, token: $token)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DeleteImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.token, token) || other.token == token));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id, token);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DeleteImplCopyWith<_$DeleteImpl> get copyWith =>
+      __$$DeleteImplCopyWithImpl<_$DeleteImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(WithdrawalsRequestModel request, String token)
+        postWithdrawal,
+    required TResult Function(String token, String? idUser, int? page) fetch,
+    required TResult Function(String token, String? idUser) fetchAll,
+    required TResult Function(String id, String token) delete,
+  }) {
+    return delete(id, token);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(WithdrawalsRequestModel request, String token)?
+        postWithdrawal,
+    TResult? Function(String token, String? idUser, int? page)? fetch,
+    TResult? Function(String token, String? idUser)? fetchAll,
+    TResult? Function(String id, String token)? delete,
+  }) {
+    return delete?.call(id, token);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(WithdrawalsRequestModel request, String token)?
+        postWithdrawal,
+    TResult Function(String token, String? idUser, int? page)? fetch,
+    TResult Function(String token, String? idUser)? fetchAll,
+    TResult Function(String id, String token)? delete,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete(id, token);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_PostWithdrawal value) postWithdrawal,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchAll value) fetchAll,
+    required TResult Function(_Delete value) delete,
+  }) {
+    return delete(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_PostWithdrawal value)? postWithdrawal,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchAll value)? fetchAll,
+    TResult? Function(_Delete value)? delete,
+  }) {
+    return delete?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_PostWithdrawal value)? postWithdrawal,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchAll value)? fetchAll,
+    TResult Function(_Delete value)? delete,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Delete implements WithdrawalEvent {
+  const factory _Delete(
+      {required final String id, required final String token}) = _$DeleteImpl;
+
+  String get id;
+  @override
+  String get token;
+  @override
+  @JsonKey(ignore: true)
+  _$$DeleteImplCopyWith<_$DeleteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

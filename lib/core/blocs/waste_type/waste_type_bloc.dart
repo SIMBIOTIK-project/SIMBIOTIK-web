@@ -26,8 +26,11 @@ class WasteTypeBloc extends Bloc<WasteTypeEvent, WasteTypeState> {
 
   WasteTypeBloc(this._wasteTypeRepository) : super(const WasteTypeState()) {
     on<_Fetch>(_onFetch);
+    on<_FetchId>(_onFetchId);
     on<_FetchAll>(_onFetchAll);
     on<_Add>(_onAdd);
+    on<_Edit>(_onEdit);
+    on<_Delete>(_onDelete);
   }
 
   Future<void> _onFetch(_Fetch event, Emitter<WasteTypeState> emit) async {
@@ -37,6 +40,29 @@ class WasteTypeBloc extends Bloc<WasteTypeEvent, WasteTypeState> {
       final response = await _wasteTypeRepository.getWasteType(
         event.token,
         event.page,
+      );
+
+      emit(state.copyWith(
+        status: WasteTypeStateStatus.loaded,
+        data: response,
+      ));
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: WasteTypeStateStatus.error,
+          error: e.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> _onFetchId(_FetchId event, Emitter<WasteTypeState> emit) async {
+    emit(state.copyWith(status: WasteTypeStateStatus.loading, error: ''));
+
+    try {
+      final response = await _wasteTypeRepository.getWasteTypeId(
+        event.token,
+        event.id,
       );
 
       emit(state.copyWith(
@@ -92,6 +118,49 @@ class WasteTypeBloc extends Bloc<WasteTypeEvent, WasteTypeState> {
       emit(state.copyWith(
         status: WasteTypeStateStatus.loaded,
         data: response,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: WasteTypeStateStatus.error,
+        error: e.toString(),
+      ));
+    }
+  }
+
+  Future<void> _onEdit(_Edit event, Emitter<WasteTypeState> emit) async {
+    emit(state.copyWith(status: WasteTypeStateStatus.loading, error: ''));
+
+    try {
+      final response = await _wasteTypeRepository.edit(
+        event.token,
+        event.id,
+        event.type,
+        event.price,
+      );
+
+      emit(state.copyWith(
+        status: WasteTypeStateStatus.loaded,
+        data: response,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: WasteTypeStateStatus.error,
+        error: e.toString(),
+      ));
+    }
+  }
+
+  Future<void> _onDelete(_Delete event, Emitter<WasteTypeState> emit) async {
+    emit(state.copyWith(status: WasteTypeStateStatus.loading, error: ''));
+
+    try {
+      await _wasteTypeRepository.delete(
+        event.token,
+        event.id,
+      );
+
+      emit(state.copyWith(
+        status: WasteTypeStateStatus.loaded,
       ));
     } catch (e) {
       emit(state.copyWith(

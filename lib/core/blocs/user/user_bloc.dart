@@ -26,7 +26,10 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   UserBloc(this._userRepository) : super(const UserState()) {
     on<_Fetch>(_onFetch);
+    on<_FetchId>(_onFetchId);
     on<_FetchAll>(_onFetchAll);
+    on<_Edit>(_onEdit);
+    on<_Delete>(_onDelete);
   }
 
   Future<void> _onFetch(_Fetch event, Emitter<UserState> emit) async {
@@ -77,6 +80,78 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           error: e.toString(),
         ),
       );
+    }
+  }
+
+  Future<void> _onFetchId(_FetchId event, Emitter<UserState> emit) async {
+    emit(state.copyWith(status: UserStateStatus.loading, error: ''));
+
+    try {
+      final response = await _userRepository.getUserId(
+        event.token,
+        event.id,
+      );
+
+      emit(state.copyWith(
+        status: UserStateStatus.loaded,
+        data: response,
+      ));
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: UserStateStatus.error,
+          error: e.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> _onEdit(_Edit event, Emitter<UserState> emit) async {
+    emit(state.copyWith(status: UserStateStatus.loading, error: ''));
+
+    try {
+      final response = await _userRepository.edit(
+        event.token,
+        event.id,
+        event.name,
+        event.email,
+        event.password,
+        event.passwordConfirmation,
+        event.nik,
+        event.phoneNumber,
+        event.address,
+        event.status,
+      );
+
+      emit(state.copyWith(
+        status: UserStateStatus.loaded,
+        data: response,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: UserStateStatus.error,
+        error: e.toString(),
+      ));
+    }
+  }
+
+  Future<void> _onDelete(_Delete event, Emitter<UserState> emit) async {
+    emit(state.copyWith(status: UserStateStatus.loading, error: ''));
+
+    try {
+      await _userRepository.delete(
+        event.token,
+        event.id,
+      );
+
+      emit(state.copyWith(
+        status: UserStateStatus.loaded,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: UserStateStatus.error,
+        error: e.toString(),
+      ));
     }
   }
 }

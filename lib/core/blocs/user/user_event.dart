@@ -28,4 +28,27 @@ class UserEvent with _$UserEvent {
     String? status,
     String? name,
   }) = _FetchAll;
+
+  const factory UserEvent.fetchId({
+    required String token,
+    String? id,
+  }) = _FetchId;
+
+  const factory UserEvent.edit({
+    required String token,
+    required String id,
+    required String name,
+    required String email,
+    required String password,
+    required String passwordConfirmation,
+    required String nik,
+    required String phoneNumber,
+    required String address,
+    required String status,
+  }) = _Edit;
+
+  const factory UserEvent.delete({
+    required String id,
+    required String token,
+  }) = _Delete;
 }
