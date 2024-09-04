@@ -12,6 +12,4 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-export 'general_card.dart';
-export 'register_dialog.dart';
-export 'add_waste_type_dialog.dart';
+export 'waste_type_screen.dart';

@@ -21,18 +21,21 @@ mixin _$WasteTypeEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String token, int? page) fetch,
     required TResult Function(String token) fetchAll,
+    required TResult Function(String token, String type, String price) add,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String token, int? page)? fetch,
     TResult? Function(String token)? fetchAll,
+    TResult? Function(String token, String type, String price)? add,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String token, int? page)? fetch,
     TResult Function(String token)? fetchAll,
+    TResult Function(String token, String type, String price)? add,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -40,18 +43,21 @@ mixin _$WasteTypeEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchAll value) fetchAll,
+    required TResult Function(_Add value) add,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchAll value)? fetchAll,
+    TResult? Function(_Add value)? add,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchAll value)? fetchAll,
+    TResult Function(_Add value)? add,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -170,6 +176,7 @@ class _$FetchImpl implements _Fetch {
   TResult when<TResult extends Object?>({
     required TResult Function(String token, int? page) fetch,
     required TResult Function(String token) fetchAll,
+    required TResult Function(String token, String type, String price) add,
   }) {
     return fetch(token, page);
   }
@@ -179,6 +186,7 @@ class _$FetchImpl implements _Fetch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String token, int? page)? fetch,
     TResult? Function(String token)? fetchAll,
+    TResult? Function(String token, String type, String price)? add,
   }) {
     return fetch?.call(token, page);
   }
@@ -188,6 +196,7 @@ class _$FetchImpl implements _Fetch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String token, int? page)? fetch,
     TResult Function(String token)? fetchAll,
+    TResult Function(String token, String type, String price)? add,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -201,6 +210,7 @@ class _$FetchImpl implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchAll value) fetchAll,
+    required TResult Function(_Add value) add,
   }) {
     return fetch(this);
   }
@@ -210,6 +220,7 @@ class _$FetchImpl implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchAll value)? fetchAll,
+    TResult? Function(_Add value)? add,
   }) {
     return fetch?.call(this);
   }
@@ -219,6 +230,7 @@ class _$FetchImpl implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchAll value)? fetchAll,
+    TResult Function(_Add value)? add,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -309,6 +321,7 @@ class _$FetchAllImpl implements _FetchAll {
   TResult when<TResult extends Object?>({
     required TResult Function(String token, int? page) fetch,
     required TResult Function(String token) fetchAll,
+    required TResult Function(String token, String type, String price) add,
   }) {
     return fetchAll(token);
   }
@@ -318,6 +331,7 @@ class _$FetchAllImpl implements _FetchAll {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String token, int? page)? fetch,
     TResult? Function(String token)? fetchAll,
+    TResult? Function(String token, String type, String price)? add,
   }) {
     return fetchAll?.call(token);
   }
@@ -327,6 +341,7 @@ class _$FetchAllImpl implements _FetchAll {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String token, int? page)? fetch,
     TResult Function(String token)? fetchAll,
+    TResult Function(String token, String type, String price)? add,
     required TResult orElse(),
   }) {
     if (fetchAll != null) {
@@ -340,6 +355,7 @@ class _$FetchAllImpl implements _FetchAll {
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchAll value) fetchAll,
+    required TResult Function(_Add value) add,
   }) {
     return fetchAll(this);
   }
@@ -349,6 +365,7 @@ class _$FetchAllImpl implements _FetchAll {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchAll value)? fetchAll,
+    TResult? Function(_Add value)? add,
   }) {
     return fetchAll?.call(this);
   }
@@ -358,6 +375,7 @@ class _$FetchAllImpl implements _FetchAll {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchAll value)? fetchAll,
+    TResult Function(_Add value)? add,
     required TResult orElse(),
   }) {
     if (fetchAll != null) {
@@ -375,6 +393,169 @@ abstract class _FetchAll implements WasteTypeEvent {
   @override
   @JsonKey(ignore: true)
   _$$FetchAllImplCopyWith<_$FetchAllImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$AddImplCopyWith<$Res>
+    implements $WasteTypeEventCopyWith<$Res> {
+  factory _$$AddImplCopyWith(_$AddImpl value, $Res Function(_$AddImpl) then) =
+      __$$AddImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String token, String type, String price});
+}
+
+/// @nodoc
+class __$$AddImplCopyWithImpl<$Res>
+    extends _$WasteTypeEventCopyWithImpl<$Res, _$AddImpl>
+    implements _$$AddImplCopyWith<$Res> {
+  __$$AddImplCopyWithImpl(_$AddImpl _value, $Res Function(_$AddImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? token = null,
+    Object? type = null,
+    Object? price = null,
+  }) {
+    return _then(_$AddImpl(
+      token: null == token
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$AddImpl implements _Add {
+  const _$AddImpl(
+      {required this.token, required this.type, required this.price});
+
+  @override
+  final String token;
+  @override
+  final String type;
+  @override
+  final String price;
+
+  @override
+  String toString() {
+    return 'WasteTypeEvent.add(token: $token, type: $type, price: $price)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AddImpl &&
+            (identical(other.token, token) || other.token == token) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.price, price) || other.price == price));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, token, type, price);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AddImplCopyWith<_$AddImpl> get copyWith =>
+      __$$AddImplCopyWithImpl<_$AddImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String token, int? page) fetch,
+    required TResult Function(String token) fetchAll,
+    required TResult Function(String token, String type, String price) add,
+  }) {
+    return add(token, type, price);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String token, int? page)? fetch,
+    TResult? Function(String token)? fetchAll,
+    TResult? Function(String token, String type, String price)? add,
+  }) {
+    return add?.call(token, type, price);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String token, int? page)? fetch,
+    TResult Function(String token)? fetchAll,
+    TResult Function(String token, String type, String price)? add,
+    required TResult orElse(),
+  }) {
+    if (add != null) {
+      return add(token, type, price);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchAll value) fetchAll,
+    required TResult Function(_Add value) add,
+  }) {
+    return add(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchAll value)? fetchAll,
+    TResult? Function(_Add value)? add,
+  }) {
+    return add?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchAll value)? fetchAll,
+    TResult Function(_Add value)? add,
+    required TResult orElse(),
+  }) {
+    if (add != null) {
+      return add(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Add implements WasteTypeEvent {
+  const factory _Add(
+      {required final String token,
+      required final String type,
+      required final String price}) = _$AddImpl;
+
+  @override
+  String get token;
+  String get type;
+  String get price;
+  @override
+  @JsonKey(ignore: true)
+  _$$AddImplCopyWith<_$AddImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

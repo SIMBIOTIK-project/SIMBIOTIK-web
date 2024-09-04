@@ -24,4 +24,10 @@ class WasteTypeEvent with _$WasteTypeEvent {
   const factory WasteTypeEvent.fetchAll({
     required String token,
   }) = _FetchAll;
+
+  const factory WasteTypeEvent.add({
+    required String token,
+    required String type,
+    required String price,
+  }) = _Add;
 }

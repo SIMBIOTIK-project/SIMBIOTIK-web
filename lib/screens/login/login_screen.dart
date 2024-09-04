@@ -239,7 +239,7 @@ class _LoginScreenContentState extends State<LoginScreenContent> {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
                                         content: Text(
-                                            'Silahkan masuk menggunakan akun admin!'),
+                                            'Silahkan masuk menggunakan akun owner!'),
                                       ),
                                     );
                                   }

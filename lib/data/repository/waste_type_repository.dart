@@ -65,4 +65,29 @@ class WasteTypeRepository {
 
     return allWasteTypes;
   }
+
+  Future<WasteTypeResponseModel> add(
+    String token,
+    String type,
+    String price,
+  ) async {
+    final response = await _dio.post(
+      api,
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      ),
+      data: {
+        'type': type,
+        'price': price,
+      },
+    );
+
+    if (response.statusCode == 201) {
+      return WasteTypeResponseModel.fromJson(response.data);
+    } else {
+      throw Exception('Gagal registrasi');
+    }
+  }
 }

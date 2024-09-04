@@ -24,6 +24,7 @@ import 'package:simbiotik_web/core/blocs/blocs.dart';
 import 'package:simbiotik_web/data/repository/repository.dart';
 import 'package:simbiotik_web/gen/assets.gen.dart';
 import 'package:simbiotik_web/screens/screens.dart';
+import 'package:simbiotik_web/screens/waste_type/waste_type.dart';
 import 'package:simbiotik_web/utils/utils.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -49,6 +50,9 @@ class HomeScreen extends StatelessWidget {
         BlocProvider(
           create: (context) => UserBloc(UserRepository()),
         ),
+        BlocProvider(
+          create: (context) => WasteTypeBloc(WasteTypeRepository()),
+        )
       ],
       child: const HomeScreenContent(),
     );
@@ -237,6 +241,13 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
                   icon: const Icon(Icons.home),
                 ),
                 SideMenuItem(
+                  title: 'Jenis Sampah',
+                  onTap: (index, _) {
+                    sideMenu.changePage(index);
+                  },
+                  icon: const Icon(Icons.list),
+                ),
+                SideMenuItem(
                   title: 'Akun',
                   onTap: (index, _) {
                     sideMenu.changePage(index);
@@ -253,6 +264,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
                 controller: pageController,
                 children: const [
                   DashboardScreen(),
+                  WasteTypeScreen(),
                   AccountScreen(),
                 ],
               ),

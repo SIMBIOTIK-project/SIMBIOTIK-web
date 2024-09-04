@@ -19,34 +19,34 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simbiotik_web/core/blocs/blocs.dart';
+import 'package:simbiotik_web/core/blocs/waste_type/waste_type.dart';
+import 'package:simbiotik_web/core/blocs/waste_type/waste_type_bloc.dart';
 import 'package:simbiotik_web/models/models.dart';
 import 'package:simbiotik_web/utils/utils.dart';
-import 'package:simbiotik_web/widgets/register_dialog.dart';
+import 'package:simbiotik_web/widgets/widgets.dart';
 
-class AccountScreen extends StatelessWidget {
-  const AccountScreen({super.key});
+class WasteTypeScreen extends StatelessWidget {
+  const WasteTypeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const AccountScreenContent();
+    return const WasteTypeScreenContent();
   }
 }
 
-class AccountScreenContent extends StatefulWidget {
-  const AccountScreenContent({super.key});
+class WasteTypeScreenContent extends StatefulWidget {
+  const WasteTypeScreenContent({super.key});
 
   @override
-  State<AccountScreenContent> createState() => _AccountScreenContentState();
+  State<WasteTypeScreenContent> createState() => _WasteTypeScreenContentState();
 }
 
-class _AccountScreenContentState extends State<AccountScreenContent> {
+class _WasteTypeScreenContentState extends State<WasteTypeScreenContent> {
   String token = '';
-  List<UserModel> user = [];
+  List<WasteTypesModel> wasteType = [];
 
-  int currentPageUser = 1;
-  int totalPagesUser = 1;
-
-  final TextEditingController _keyword = TextEditingController();
+  int currentPageWasteType = 1;
+  int totalPagesWasteType = 1;
 
   @override
   void initState() {
@@ -70,22 +70,21 @@ class _AccountScreenContentState extends State<AccountScreenContent> {
       backgroundColor: Colors.white,
       body: MultiBlocListener(
         listeners: [
-          BlocListener<UserBloc, UserState>(
-            listener: (context, state) {
-              if (state.status.isLoading) {
-                const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state.status.isLoaded) {
-                if (state.data != null) {
-                  setState(() {
-                    user = state.data!.result!.data!;
-                    totalPagesUser = state.data!.result!.totalPages!;
-                  });
-                }
+          BlocListener<WasteTypeBloc, WasteTypeState>(
+              listener: (context, state) {
+            if (state.status.isLoading) {
+              const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state.status.isLoaded) {
+              if (state.data != null) {
+                setState(() {
+                  wasteType = state.data!.result!.data!;
+                  totalPagesWasteType = state.data!.result!.totalPages!;
+                });
               }
-            },
-          )
+            }
+          })
         ],
         child: token.isNotEmpty
             ? Padding(
@@ -97,7 +96,7 @@ class _AccountScreenContentState extends State<AccountScreenContent> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text(
-                          'Akun',
+                          'Jenis Sampah',
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.w600,
@@ -109,8 +108,12 @@ class _AccountScreenContentState extends State<AccountScreenContent> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5.0),
                               )),
-                          onPressed: () {
-                            _handleRegisterAccountDialog(context);
+                          onPressed: () async {
+                            final bool? result;
+                            result = await _handleAddWasteTypeDialog(context);
+                            if (result == true) {
+                              _handleData(token, '');
+                            }
                           },
                           child: const Row(
                             children: [
@@ -139,49 +142,13 @@ class _AccountScreenContentState extends State<AccountScreenContent> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
-                              'Data Nasabah/Admin/Owner',
+                              'Data Jenis Sampah',
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16,
                               ),
                             ),
                             const Gap(12.0),
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.black12,
-                                ),
-                                borderRadius: BorderRadius.circular(
-                                  8.0,
-                                ),
-                              ),
-                              height: 40,
-                              padding: const EdgeInsets.fromLTRB(
-                                8,
-                                4,
-                                8,
-                                4,
-                              ),
-                              child: TextField(
-                                controller: _keyword,
-                                decoration: const InputDecoration(
-                                  prefixIcon: Icon(Icons.search),
-                                  hintText: 'Cari Nasabah',
-                                  hintStyle: TextStyle(
-                                    fontWeight: FontWeight.w300,
-                                  ),
-                                  border: InputBorder.none,
-                                  contentPadding: EdgeInsets.symmetric(
-                                    vertical: 12.0,
-                                  ),
-                                ),
-                                onChanged: (value) {
-                                  setState(() {
-                                    _handleData(token, value);
-                                  });
-                                },
-                              ),
-                            ),
                             _buildUserTable(context)
                           ],
                         ),
@@ -214,13 +181,28 @@ class _AccountScreenContentState extends State<AccountScreenContent> {
     );
   }
 
+  _handleAddWasteTypeDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (dialogContext) {
+        return BackdropFilter(
+          filter: ImageFilter.blur(
+            sigmaX: 4.0,
+            sigmaY: 4.0,
+          ),
+          child: const AddWasteTypeDialog(),
+        );
+      },
+    );
+  }
+
   _buildUserTable(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         LayoutBuilder(
           builder: (context, constraints) {
-            final double columnSpacing = constraints.maxWidth * 0.1;
+            final double columnSpacing = constraints.maxWidth * 0.3;
 
             return SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -229,50 +211,34 @@ class _AccountScreenContentState extends State<AccountScreenContent> {
                 columns: const [
                   DataColumn(
                       label: Text(
-                    "ID Pengguna",
+                    "ID",
                     style: TextStyle(fontWeight: FontWeight.w900),
                   )),
                   DataColumn(
                       label: Text(
-                    'Status',
+                    'Tipe',
                     style: TextStyle(fontWeight: FontWeight.w900),
                   )),
                   DataColumn(
                       label: Text(
-                    'Nama',
+                    'Harga',
                     style: TextStyle(fontWeight: FontWeight.w900),
                   )),
                   DataColumn(
                       label: Text(
-                    'Email',
-                    style: TextStyle(fontWeight: FontWeight.w900),
-                  )),
-                  DataColumn(
-                      label: Text(
-                    'Nomor Telepon',
-                    style: TextStyle(fontWeight: FontWeight.w900),
-                  )),
-                  DataColumn(
-                      label: Text(
-                    'NIK',
-                    style: TextStyle(fontWeight: FontWeight.w900),
-                  )),
-                  DataColumn(
-                      label: Text(
-                    'Alamat',
+                    'Tanggal',
                     style: TextStyle(fontWeight: FontWeight.w900),
                   )),
                 ],
-                rows: user.map((user) {
+                rows: wasteType.map((wasteType) {
                   return DataRow(
                     cells: [
-                      DataCell(Text(user.idUser.toString())),
-                      DataCell(Text(user.status.toString())),
-                      DataCell(Text(user.name.toString())),
-                      DataCell(Text(user.email.toString())),
-                      DataCell(Text(user.phoneNumber.toString())),
-                      DataCell(Text(user.nik.toString())),
-                      DataCell(Text(user.address.toString())),
+                      DataCell(Text(wasteType.id.toString())),
+                      DataCell(Text(wasteType.type.toString())),
+                      DataCell(Text(formatCurrency(
+                          double.parse(wasteType.price.toString())))),
+                      DataCell(
+                          Text(formattedDate(wasteType.createdAt.toString()))),
                     ],
                   );
                 }).toList(),
@@ -290,11 +256,11 @@ class _AccountScreenContentState extends State<AccountScreenContent> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0),
                   )),
-              onPressed: currentPageUser > 1
+              onPressed: currentPageWasteType > 1
                   ? () {
-                      _handleUserData(token, currentPageUser - 1);
+                      _handleWasteTypeData(token, currentPageWasteType - 1);
                       setState(() {
-                        currentPageUser--;
+                        currentPageWasteType--;
                       });
                     }
                   : null,
@@ -314,11 +280,11 @@ class _AccountScreenContentState extends State<AccountScreenContent> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0),
                   )),
-              onPressed: currentPageUser < totalPagesUser
+              onPressed: currentPageWasteType < totalPagesWasteType
                   ? () {
-                      _handleUserData(token, currentPageUser + 1);
+                      _handleWasteTypeData(token, currentPageWasteType + 1);
                       setState(() {
-                        currentPageUser++;
+                        currentPageWasteType++;
                       });
                     }
                   : null,
@@ -338,29 +304,13 @@ class _AccountScreenContentState extends State<AccountScreenContent> {
     );
   }
 
-  _handleRegisterAccountDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (dialogContext) {
-        return BackdropFilter(
-          filter: ImageFilter.blur(
-            sigmaX: 4.0,
-            sigmaY: 4.0,
-          ),
-          child: const RegisterDialog(),
-        );
-      },
-    );
-  }
-
   _handleData(String token, String? keyword) {
-    context.read<UserBloc>().add(UserEvent.fetch(
+    context.read<WasteTypeBloc>().add(WasteTypeEvent.fetch(
           token: token,
-          name: keyword,
         ));
   }
 
-  _handleUserData(String token, int? page) {
+  _handleWasteTypeData(String token, int? page) {
     context.read<UserBloc>().add(
           UserEvent.fetch(
             token: token,

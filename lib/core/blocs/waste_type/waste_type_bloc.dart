@@ -27,6 +27,7 @@ class WasteTypeBloc extends Bloc<WasteTypeEvent, WasteTypeState> {
   WasteTypeBloc(this._wasteTypeRepository) : super(const WasteTypeState()) {
     on<_Fetch>(_onFetch);
     on<_FetchAll>(_onFetchAll);
+    on<_Add>(_onAdd);
   }
 
   Future<void> _onFetch(_Fetch event, Emitter<WasteTypeState> emit) async {
@@ -75,6 +76,28 @@ class WasteTypeBloc extends Bloc<WasteTypeEvent, WasteTypeState> {
           error: e.toString(),
         ),
       );
+    }
+  }
+
+  Future<void> _onAdd(_Add event, Emitter<WasteTypeState> emit) async {
+    emit(state.copyWith(status: WasteTypeStateStatus.loading, error: ''));
+
+    try {
+      final response = await _wasteTypeRepository.add(
+        event.token,
+        event.type,
+        event.price,
+      );
+
+      emit(state.copyWith(
+        status: WasteTypeStateStatus.loaded,
+        data: response,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: WasteTypeStateStatus.error,
+        error: e.toString(),
+      ));
     }
   }
 }

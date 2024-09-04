@@ -16,3 +16,4 @@ export 'login/login.dart';
 export 'dashboard/dashboard.dart';
 export 'home_screen.dart';
 export 'account/account.dart';
+export 'waste_type/waste_type.dart';
