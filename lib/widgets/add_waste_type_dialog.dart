@@ -230,7 +230,8 @@ class _AddWasteTypeDialogState extends State<AddWasteTypeDialog> {
                                         context: context,
                                         builder: (BuildContext dialogContext) {
                                           return AlertDialog(
-                                            title: const Text('Keluar'),
+                                            title: const Text(
+                                                'Tambah Jenis Sampah'),
                                             content: const Text(
                                                 'Apakah anda yakin akan menyimpan data?'),
                                             actions: <Widget>[

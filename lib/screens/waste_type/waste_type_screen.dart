@@ -19,8 +19,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simbiotik_web/core/blocs/blocs.dart';
-import 'package:simbiotik_web/core/blocs/waste_type/waste_type.dart';
-import 'package:simbiotik_web/core/blocs/waste_type/waste_type_bloc.dart';
 import 'package:simbiotik_web/models/models.dart';
 import 'package:simbiotik_web/utils/utils.dart';
 import 'package:simbiotik_web/widgets/widgets.dart';
@@ -68,115 +66,147 @@ class _WasteTypeScreenContentState extends State<WasteTypeScreenContent> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: MultiBlocListener(
-        listeners: [
-          BlocListener<WasteTypeBloc, WasteTypeState>(
-              listener: (context, state) {
-            if (state.status.isLoading) {
-              const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (state.status.isLoaded) {
-              if (state.data != null) {
-                setState(() {
-                  wasteType = state.data!.result!.data!;
-                  totalPagesWasteType = state.data!.result!.totalPages!;
-                });
-              }
-            }
-          })
-        ],
-        child: token.isNotEmpty
-            ? Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: token.isNotEmpty
+          ? BlocBuilder<WasteTypeBloc, WasteTypeState>(
+              builder: (context, state) {
+                if (state.status.isLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state.status.isLoaded) {
+                  if (state.data != null) {
+                    wasteType = state.data!.result!.data!;
+                    totalPagesWasteType = state.data!.result!.totalPages!;
+                    return _buildContent(context);
+                  } else {
+                    return const Center(
+                      child: Text(
+                        'Data Kosong',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    );
+                  }
+                } else if (state.status.isError) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const Text(
-                          'Jenis Sampah',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.teal,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5.0),
-                              )),
-                          onPressed: () async {
-                            final bool? result;
-                            result = await _handleAddWasteTypeDialog(context);
-                            if (result == true) {
-                              _handleData(token, '');
-                            }
+                        const Text('Data tidak ditemukan!'),
+                        const Gap(8.0),
+                        InkWell(
+                          onTap: () {
+                            _handleData(token, '');
                           },
-                          child: const Row(
-                            children: [
-                              Text(
-                                'Tambah',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Gap(8.0),
-                              Icon(
-                                Icons.add,
-                                color: Colors.white,
-                              )
-                            ],
+                          child: const Text(
+                            'Ulangi',
+                            style: TextStyle(
+                              color: Colors.blue,
+                            ),
                           ),
-                        ),
+                        )
                       ],
                     ),
-                    const Gap(40),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Data Jenis Sampah',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
-                              ),
-                            ),
-                            const Gap(12.0),
-                            _buildUserTable(context)
-                          ],
-                        ),
-                      ),
+                  );
+                } else {
+                  return Container();
+                }
+              },
+            )
+          : const Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'Data Kosong',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
                     ),
-                  ],
+                  ),
+                  Text(
+                    'Silahkan Login Terlebih Dahulu!',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+    );
+  }
+
+  Widget _buildContent(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Jenis Sampah',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
                 ),
-              )
-            : const Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.teal,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    )),
+                onPressed: () async {
+                  final bool? result;
+                  result = await _handleAddWasteTypeDialog(context);
+                  if (result == true) {
+                    _handleData(token, '');
+                  }
+                },
+                child: const Row(
                   children: [
                     Text(
-                      'Data Kosong',
+                      'Tambah',
                       style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
-                      'Silahkan Login Terlebih Dahulu!',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    Gap(8.0),
+                    Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    )
                   ],
                 ),
               ),
+            ],
+          ),
+          const Gap(40),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Data Jenis Sampah',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                    ),
+                  ),
+                  const Gap(12.0),
+                  _buildUserTable(context),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -229,6 +259,11 @@ class _WasteTypeScreenContentState extends State<WasteTypeScreenContent> {
                     'Tanggal',
                     style: TextStyle(fontWeight: FontWeight.w900),
                   )),
+                  DataColumn(
+                      label: Text(
+                    'Aksi',
+                    style: TextStyle(fontWeight: FontWeight.w900),
+                  )),
                 ],
                 rows: wasteType.map((wasteType) {
                   return DataRow(
@@ -239,6 +274,16 @@ class _WasteTypeScreenContentState extends State<WasteTypeScreenContent> {
                           double.parse(wasteType.price.toString())))),
                       DataCell(
                           Text(formattedDate(wasteType.createdAt.toString()))),
+                      const DataCell(Row(
+                        children: [
+                          Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                          ),
+                          Gap(8.0),
+                          Icon(Icons.edit),
+                        ],
+                      ))
                     ],
                   );
                 }).toList(),

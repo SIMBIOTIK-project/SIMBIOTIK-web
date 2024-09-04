@@ -71,20 +71,7 @@ class _AccountScreenContentState extends State<AccountScreenContent> {
       body: MultiBlocListener(
         listeners: [
           BlocListener<UserBloc, UserState>(
-            listener: (context, state) {
-              if (state.status.isLoading) {
-                const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state.status.isLoaded) {
-                if (state.data != null) {
-                  setState(() {
-                    user = state.data!.result!.data!;
-                    totalPagesUser = state.data!.result!.totalPages!;
-                  });
-                }
-              }
-            },
+            listener: (context, state) {},
           )
         ],
         child: token.isNotEmpty
@@ -215,126 +202,176 @@ class _AccountScreenContentState extends State<AccountScreenContent> {
   }
 
   _buildUserTable(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        LayoutBuilder(
-          builder: (context, constraints) {
-            final double columnSpacing = constraints.maxWidth * 0.1;
+    return BlocBuilder<UserBloc, UserState>(
+      builder: (context, state) {
+        if (state.status.isLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (state.status.isLoaded) {
+          user = state.data!.result!.data!;
+          totalPagesUser = state.data!.result!.totalPages!;
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  final double columnSpacing = constraints.maxWidth * 0.1;
 
-            return SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: DataTable(
-                columnSpacing: columnSpacing,
-                columns: const [
-                  DataColumn(
-                      label: Text(
-                    "ID Pengguna",
-                    style: TextStyle(fontWeight: FontWeight.w900),
-                  )),
-                  DataColumn(
-                      label: Text(
-                    'Status',
-                    style: TextStyle(fontWeight: FontWeight.w900),
-                  )),
-                  DataColumn(
-                      label: Text(
-                    'Nama',
-                    style: TextStyle(fontWeight: FontWeight.w900),
-                  )),
-                  DataColumn(
-                      label: Text(
-                    'Email',
-                    style: TextStyle(fontWeight: FontWeight.w900),
-                  )),
-                  DataColumn(
-                      label: Text(
-                    'Nomor Telepon',
-                    style: TextStyle(fontWeight: FontWeight.w900),
-                  )),
-                  DataColumn(
-                      label: Text(
-                    'NIK',
-                    style: TextStyle(fontWeight: FontWeight.w900),
-                  )),
-                  DataColumn(
-                      label: Text(
-                    'Alamat',
-                    style: TextStyle(fontWeight: FontWeight.w900),
-                  )),
-                ],
-                rows: user.map((user) {
-                  return DataRow(
-                    cells: [
-                      DataCell(Text(user.idUser.toString())),
-                      DataCell(Text(user.status.toString())),
-                      DataCell(Text(user.name.toString())),
-                      DataCell(Text(user.email.toString())),
-                      DataCell(Text(user.phoneNumber.toString())),
-                      DataCell(Text(user.nik.toString())),
-                      DataCell(Text(user.address.toString())),
-                    ],
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: DataTable(
+                      columnSpacing: columnSpacing,
+                      columns: const [
+                        DataColumn(
+                            label: Text(
+                          "ID Pengguna",
+                          style: TextStyle(fontWeight: FontWeight.w900),
+                        )),
+                        DataColumn(
+                            label: Text(
+                          'Status',
+                          style: TextStyle(fontWeight: FontWeight.w900),
+                        )),
+                        DataColumn(
+                            label: Text(
+                          'Nama',
+                          style: TextStyle(fontWeight: FontWeight.w900),
+                        )),
+                        DataColumn(
+                            label: Text(
+                          'Email',
+                          style: TextStyle(fontWeight: FontWeight.w900),
+                        )),
+                        DataColumn(
+                            label: Text(
+                          'Nomor Telepon',
+                          style: TextStyle(fontWeight: FontWeight.w900),
+                        )),
+                        DataColumn(
+                            label: Text(
+                          'NIK',
+                          style: TextStyle(fontWeight: FontWeight.w900),
+                        )),
+                        DataColumn(
+                            label: Text(
+                          'Alamat',
+                          style: TextStyle(fontWeight: FontWeight.w900),
+                        )),
+                        DataColumn(
+                            label: Text(
+                          'Aksi',
+                          style: TextStyle(fontWeight: FontWeight.w900),
+                        )),
+                      ],
+                      rows: user.map((user) {
+                        return DataRow(
+                          cells: [
+                            DataCell(Text(user.idUser.toString())),
+                            DataCell(Text(user.status.toString())),
+                            DataCell(Text(user.name.toString())),
+                            DataCell(Text(user.email.toString())),
+                            DataCell(Text(user.phoneNumber.toString())),
+                            DataCell(Text(user.nik.toString())),
+                            DataCell(Text(user.address.toString())),
+                            const DataCell(Row(
+                              children: [
+                                Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                ),
+                                Gap(8.0),
+                                Icon(Icons.edit),
+                              ],
+                            ))
+                          ],
+                        );
+                      }).toList(),
+                    ),
                   );
-                }).toList(),
+                },
               ),
-            );
-          },
-        ),
-        const Gap(10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.biruSimbiotik,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                  )),
-              onPressed: currentPageUser > 1
-                  ? () {
-                      _handleUserData(token, currentPageUser - 1);
-                      setState(() {
-                        currentPageUser--;
-                      });
-                    }
-                  : null,
-              child: const Text(
-                'Sebelumnya',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                ),
+              const Gap(10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.biruSimbiotik,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        )),
+                    onPressed: currentPageUser > 1
+                        ? () {
+                            _handleUserData(token, currentPageUser - 1);
+                            setState(() {
+                              currentPageUser--;
+                            });
+                          }
+                        : null,
+                    child: const Text(
+                      'Sebelumnya',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const Gap(10),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.biruSimbiotik,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        )),
+                    onPressed: currentPageUser < totalPagesUser
+                        ? () {
+                            _handleUserData(token, currentPageUser + 1);
+                            setState(() {
+                              currentPageUser++;
+                            });
+                          }
+                        : null,
+                    child: const Text(
+                      'Selanjutnya',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  )
+                ],
               ),
+              const Gap(20),
+            ],
+          );
+        } else if (state.status.isError) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text('Data tidak ditemukan!'),
+                const Gap(8.0),
+                InkWell(
+                  onTap: () {
+                    _handleData(token, '');
+                  },
+                  child: const Text(
+                    'Ulangi',
+                    style: TextStyle(
+                      color: Colors.blue,
+                    ),
+                  ),
+                )
+              ],
             ),
-            const Gap(10),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.biruSimbiotik,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                  )),
-              onPressed: currentPageUser < totalPagesUser
-                  ? () {
-                      _handleUserData(token, currentPageUser + 1);
-                      setState(() {
-                        currentPageUser++;
-                      });
-                    }
-                  : null,
-              child: const Text(
-                'Selanjutnya',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            )
-          ],
-        ),
-        const Gap(20),
-      ],
+          );
+        }
+        return Container();
+      },
     );
   }
 

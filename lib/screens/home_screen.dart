@@ -24,7 +24,6 @@ import 'package:simbiotik_web/core/blocs/blocs.dart';
 import 'package:simbiotik_web/data/repository/repository.dart';
 import 'package:simbiotik_web/gen/assets.gen.dart';
 import 'package:simbiotik_web/screens/screens.dart';
-import 'package:simbiotik_web/screens/waste_type/waste_type.dart';
 import 'package:simbiotik_web/utils/utils.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -83,6 +82,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: BlocListener<LogoutBloc, LogoutState>(
         listener: (context, state) {
           if (state.status.isLoaded) {

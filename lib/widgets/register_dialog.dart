@@ -553,7 +553,7 @@ class _RegisterDialogState extends State<RegisterDialog> {
                                         context: context,
                                         builder: (BuildContext dialogContext) {
                                           return AlertDialog(
-                                            title: const Text('Keluar'),
+                                            title: const Text('Register Akun'),
                                             content: const Text(
                                                 'Apakah anda yakin akan menyimpan data?'),
                                             actions: <Widget>[

@@ -98,43 +98,17 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
           listeners: [
             BlocListener<DepositBloc, DepositState>(
               listener: (context, state) {
-                if (state.status.isLoading) {
-                  const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state.status.isLoaded) {
-                  if (state.allData != null) {
-                    setState(() {
-                      allDeposit = state.allData!;
-                    });
-                  }
-                  if (state.data != null) {
-                    setState(() {
-                      deposit = state.data!.result!.data!;
-                      totalPagesDeposit = state.data!.result!.totalPages!;
-                    });
-                  }
-                }
+                setState(() {
+                  allDeposit = state.allData!;
+                });
               },
             ),
             BlocListener<WithdrawalBloc, WithdrawalState>(
               listener: (context, state) {
-                if (state.status.isLoading) {
-                  const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state.status.isLoaded) {
-                  if (state.allData != null) {
-                    setState(() {
-                      allWithdrawal = state.allData!;
-                    });
-                  }
-                  if (state.data != null) {
-                    setState(() {
-                      withdrawal = state.data!.result!.data!;
-                      totalPagesWithdrawal = state.data!.result!.totalPages!;
-                    });
-                  }
+                if (state.allData != null) {
+                  setState(() {
+                    allWithdrawal = state.allData!;
+                  });
                 }
               },
             )
@@ -234,226 +208,330 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
   }
 
   _buildWithdrawalTable(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        LayoutBuilder(
-          builder: (context, constraints) {
-            final double columnSpacing = constraints.maxWidth * 0.26;
+    return BlocBuilder<WithdrawalBloc, WithdrawalState>(
+      builder: (context, state) {
+        if (state.status.isLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (state.status.isLoaded) {
+          withdrawal = state.data!.result!.data!;
+          totalPagesWithdrawal = state.data!.result!.totalPages!;
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  final double columnSpacing = constraints.maxWidth * 0.26;
 
-            return SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: DataTable(
-                columnSpacing: columnSpacing,
-                columns: const [
-                  DataColumn(
-                      label: Text(
-                    "ID Pengguna",
-                    style: TextStyle(fontWeight: FontWeight.w900),
-                  )),
-                  DataColumn(
-                      label: Text(
-                    'Harga',
-                    style: TextStyle(fontWeight: FontWeight.w900),
-                  )),
-                  DataColumn(
-                      label: Text(
-                    'Status',
-                    style: TextStyle(fontWeight: FontWeight.w900),
-                  )),
-                  DataColumn(
-                      label: Text(
-                    'Tanggal',
-                    style: TextStyle(fontWeight: FontWeight.w900),
-                  )),
-                ],
-                rows: withdrawal.map((withdrawal) {
-                  return DataRow(
-                    cells: [
-                      DataCell(Text(withdrawal.idUser.toString())),
-                      DataCell(Text(formatCurrency(
-                          double.parse(withdrawal.price.toString())))),
-                      DataCell(Text(withdrawal.status.toString())),
-                      DataCell(
-                          Text(formattedDate(withdrawal.createdAt.toString()))),
-                    ],
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: DataTable(
+                      columnSpacing: columnSpacing,
+                      columns: const [
+                        DataColumn(
+                            label: Text(
+                          "ID Pengguna",
+                          style: TextStyle(fontWeight: FontWeight.w900),
+                        )),
+                        DataColumn(
+                            label: Text(
+                          'Harga',
+                          style: TextStyle(fontWeight: FontWeight.w900),
+                        )),
+                        DataColumn(
+                            label: Text(
+                          'Status',
+                          style: TextStyle(fontWeight: FontWeight.w900),
+                        )),
+                        DataColumn(
+                            label: Text(
+                          'Admin',
+                          style: TextStyle(fontWeight: FontWeight.w900),
+                        )),
+                        DataColumn(
+                            label: Text(
+                          'Tanggal',
+                          style: TextStyle(fontWeight: FontWeight.w900),
+                        )),
+                        DataColumn(
+                            label: Text(
+                          'Aksi',
+                          style: TextStyle(fontWeight: FontWeight.w900),
+                        )),
+                      ],
+                      rows: withdrawal.map((withdrawal) {
+                        return DataRow(
+                          cells: [
+                            DataCell(Text(withdrawal.idUser.toString())),
+                            DataCell(Text(formatCurrency(
+                                double.parse(withdrawal.price.toString())))),
+                            DataCell(Text(withdrawal.status.toString())),
+                            DataCell(Text(withdrawal.createdBy.toString())),
+                            DataCell(Text(formattedDate(
+                                withdrawal.createdAt.toString()))),
+                            const DataCell(Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                            ))
+                          ],
+                        );
+                      }).toList(),
+                    ),
                   );
-                }).toList(),
+                },
               ),
-            );
-          },
-        ),
-        const Gap(10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.biruSimbiotik,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                  )),
-              onPressed: currentPageDeposit > 1
-                  ? () {
-                      _handlePaginationWithdrawal(
-                          token, currentPageDeposit - 1);
-                      setState(() {
-                        currentPageDeposit--;
-                      });
-                    }
-                  : null,
-              child: const Text(
-                'Sebelumnya',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                ),
+              const Gap(10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.biruSimbiotik,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        )),
+                    onPressed: currentPageWithdrawal > 1
+                        ? () {
+                            _handlePaginationWithdrawal(
+                                token, currentPageWithdrawal - 1);
+                            setState(() {
+                              currentPageWithdrawal--;
+                            });
+                          }
+                        : null,
+                    child: const Text(
+                      'Sebelumnya',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const Gap(10),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.biruSimbiotik,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        )),
+                    onPressed: currentPageWithdrawal < totalPagesWithdrawal
+                        ? () {
+                            _handlePaginationWithdrawal(
+                                token, currentPageWithdrawal + 1);
+                            setState(() {
+                              currentPageWithdrawal++;
+                            });
+                          }
+                        : null,
+                    child: const Text(
+                      'Selanjutnya',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  )
+                ],
               ),
+              const Gap(20),
+            ],
+          );
+        } else if (state.status.isError) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text('Data tidak ditemukan!'),
+                const Gap(8.0),
+                InkWell(
+                  onTap: () {
+                    _handleWithdrawalData(token);
+                  },
+                  child: const Text(
+                    'Ulangi',
+                    style: TextStyle(
+                      color: Colors.blue,
+                    ),
+                  ),
+                )
+              ],
             ),
-            const Gap(10),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.biruSimbiotik,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                  )),
-              onPressed: currentPageDeposit < totalPagesDeposit
-                  ? () {
-                      _handlePaginationWithdrawal(
-                          token, currentPageDeposit + 1);
-                      setState(() {
-                        currentPageDeposit++;
-                      });
-                    }
-                  : null,
-              child: const Text(
-                'Selanjutnya',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            )
-          ],
-        ),
-        const Gap(20),
-      ],
+          );
+        }
+
+        return Container();
+      },
     );
   }
 
   _buildDepositTable(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        LayoutBuilder(
-          builder: (context, constraints) {
-            final double columnSpacing = constraints.maxWidth * 0.2;
+    return BlocBuilder<DepositBloc, DepositState>(
+      builder: (context, state) {
+        if (state.status.isLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (state.status.isLoaded) {
+          deposit = state.data!.result!.data!;
+          totalPagesDeposit = state.data!.result!.totalPages!;
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  final double columnSpacing = constraints.maxWidth * 0.2;
 
-            return SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: DataTable(
-                columnSpacing: columnSpacing,
-                columns: const [
-                  DataColumn(
-                      label: Text(
-                    "ID Pengguna",
-                    style: TextStyle(fontWeight: FontWeight.w900),
-                  )),
-                  DataColumn(
-                      label: Text(
-                    'Jenis Sampah',
-                    style: TextStyle(fontWeight: FontWeight.w900),
-                  )),
-                  DataColumn(
-                      label: Text(
-                    'Berat (Kg)',
-                    style: TextStyle(fontWeight: FontWeight.w900),
-                  )),
-                  DataColumn(
-                      label: Text(
-                    'Harga',
-                    style: TextStyle(fontWeight: FontWeight.w900),
-                  )),
-                  DataColumn(
-                      label: Text(
-                    'Tanggal',
-                    style: TextStyle(fontWeight: FontWeight.w900),
-                  )),
-                ],
-                rows: deposit.map((deposit) {
-                  return DataRow(
-                    cells: [
-                      DataCell(Text(deposit.idUser.toString())),
-                      DataCell(Text(deposit.wasteType!.type.toString())),
-                      DataCell(Text(deposit.weight.toString())),
-                      DataCell(Text(formatCurrency(
-                          double.parse(deposit.price.toString())))),
-                      DataCell(
-                          Text(formattedDate(deposit.createdAt.toString()))),
-                    ],
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: DataTable(
+                      columnSpacing: columnSpacing,
+                      columns: const [
+                        DataColumn(
+                            label: Text(
+                          "ID Pengguna",
+                          style: TextStyle(fontWeight: FontWeight.w900),
+                        )),
+                        DataColumn(
+                            label: Text(
+                          'Jenis Sampah',
+                          style: TextStyle(fontWeight: FontWeight.w900),
+                        )),
+                        DataColumn(
+                            label: Text(
+                          'Berat (Kg)',
+                          style: TextStyle(fontWeight: FontWeight.w900),
+                        )),
+                        DataColumn(
+                            label: Text(
+                          'Harga',
+                          style: TextStyle(fontWeight: FontWeight.w900),
+                        )),
+                        DataColumn(
+                            label: Text(
+                          'Admin',
+                          style: TextStyle(fontWeight: FontWeight.w900),
+                        )),
+                        DataColumn(
+                            label: Text(
+                          'Tanggal',
+                          style: TextStyle(fontWeight: FontWeight.w900),
+                        )),
+                        DataColumn(
+                            label: Text(
+                          'Aksi',
+                          style: TextStyle(fontWeight: FontWeight.w900),
+                        )),
+                      ],
+                      rows: deposit.map((deposit) {
+                        return DataRow(
+                          cells: [
+                            DataCell(Text(deposit.idUser.toString())),
+                            DataCell(Text(deposit.wasteType!.type.toString())),
+                            DataCell(Text(deposit.weight.toString())),
+                            DataCell(Text(formatCurrency(
+                                double.parse(deposit.price.toString())))),
+                            DataCell(Text(deposit.createdBy.toString())),
+                            DataCell(Text(
+                                formattedDate(deposit.createdAt.toString()))),
+                            const DataCell(Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                            ))
+                          ],
+                        );
+                      }).toList(),
+                    ),
                   );
-                }).toList(),
+                },
               ),
-            );
-          },
-        ),
-        const Gap(10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.biruSimbiotik,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                  )),
-              onPressed: currentPageDeposit > 1
-                  ? () {
-                      _handlePaginationDeposit(token, currentPageDeposit - 1);
-                      setState(() {
-                        currentPageDeposit--;
-                      });
-                    }
-                  : null,
-              child: const Text(
-                'Sebelumnya',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                ),
+              const Gap(10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.biruSimbiotik,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        )),
+                    onPressed: currentPageDeposit > 1
+                        ? () {
+                            _handlePaginationDeposit(
+                                token, currentPageDeposit - 1);
+                            setState(() {
+                              currentPageDeposit--;
+                            });
+                          }
+                        : null,
+                    child: const Text(
+                      'Sebelumnya',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const Gap(10),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.biruSimbiotik,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        )),
+                    onPressed: currentPageDeposit < totalPagesDeposit
+                        ? () {
+                            _handlePaginationDeposit(
+                                token, currentPageDeposit + 1);
+                            setState(() {
+                              currentPageDeposit++;
+                            });
+                          }
+                        : null,
+                    child: const Text(
+                      'Selanjutnya',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  )
+                ],
               ),
+              const Gap(20),
+            ],
+          );
+        } else if (state.status.isError) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text('Data tidak ditemukan!'),
+                const Gap(8.0),
+                InkWell(
+                  onTap: () {
+                    _handleDepositData(token);
+                  },
+                  child: const Text(
+                    'Ulangi',
+                    style: TextStyle(
+                      color: Colors.blue,
+                    ),
+                  ),
+                )
+              ],
             ),
-            const Gap(10),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.biruSimbiotik,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                  )),
-              onPressed: currentPageDeposit < totalPagesDeposit
-                  ? () {
-                      _handlePaginationDeposit(token, currentPageDeposit + 1);
-                      setState(() {
-                        currentPageDeposit++;
-                      });
-                    }
-                  : null,
-              child: const Text(
-                'Selanjutnya',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            )
-          ],
-        ),
-        const Gap(20),
-      ],
+          );
+        }
+
+        return Container();
+      },
     );
   }
 
