@@ -30,6 +30,7 @@ class WithdrawalModel with _$WithdrawalModel {
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
     @JsonKey(name: 'user') UserModel? user,
+    @JsonKey(name: 'created_by') String? createdBy,
   }) = _WithdrawalModel;
 
   factory WithdrawalModel.fromJson(Map<String, dynamic> json) =>

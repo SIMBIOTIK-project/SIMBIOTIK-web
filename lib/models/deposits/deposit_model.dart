@@ -32,6 +32,7 @@ class DepositModel with _$DepositModel {
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
     @JsonKey(name: 'user') UserModel? user,
     @JsonKey(name: 'wastetype') WasteTypesModel? wasteType,
+    @JsonKey(name: 'created_by') String? createdBy,
   }) = _DepositModel;
 
   factory DepositModel.fromJson(Map<String, dynamic> json) =>

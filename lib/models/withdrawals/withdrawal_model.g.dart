@@ -22,6 +22,7 @@ _$WithdrawalModelImpl _$$WithdrawalModelImplFromJson(
       user: json['user'] == null
           ? null
           : UserModel.fromJson(json['user'] as Map<String, dynamic>),
+      createdBy: json['created_by'] as String?,
     );
 
 Map<String, dynamic> _$$WithdrawalModelImplToJson(
@@ -34,4 +35,5 @@ Map<String, dynamic> _$$WithdrawalModelImplToJson(
       'created_at': instance.createdAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
       'user': instance.user,
+      'created_by': instance.createdBy,
     };

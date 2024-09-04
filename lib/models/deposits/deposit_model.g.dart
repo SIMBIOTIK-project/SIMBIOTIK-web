@@ -25,6 +25,7 @@ _$DepositModelImpl _$$DepositModelImplFromJson(Map<String, dynamic> json) =>
       wasteType: json['wastetype'] == null
           ? null
           : WasteTypesModel.fromJson(json['wastetype'] as Map<String, dynamic>),
+      createdBy: json['created_by'] as String?,
     );
 
 Map<String, dynamic> _$$DepositModelImplToJson(_$DepositModelImpl instance) =>
@@ -38,4 +39,5 @@ Map<String, dynamic> _$$DepositModelImplToJson(_$DepositModelImpl instance) =>
       'updated_at': instance.updatedAt?.toIso8601String(),
       'user': instance.user,
       'wastetype': instance.wasteType,
+      'created_by': instance.createdBy,
     };

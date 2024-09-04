@@ -34,6 +34,8 @@ mixin _$WithdrawalModel {
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'user')
   UserModel? get user => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_by')
+  String? get createdBy => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -54,7 +56,8 @@ abstract class $WithdrawalModelCopyWith<$Res> {
       @JsonKey(name: 'status') String? status,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
-      @JsonKey(name: 'user') UserModel? user});
+      @JsonKey(name: 'user') UserModel? user,
+      @JsonKey(name: 'created_by') String? createdBy});
 
   $UserModelCopyWith<$Res>? get user;
 }
@@ -79,6 +82,7 @@ class _$WithdrawalModelCopyWithImpl<$Res, $Val extends WithdrawalModel>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? user = freezed,
+    Object? createdBy = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -109,6 +113,10 @@ class _$WithdrawalModelCopyWithImpl<$Res, $Val extends WithdrawalModel>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserModel?,
+      createdBy: freezed == createdBy
+          ? _value.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -140,7 +148,8 @@ abstract class _$$WithdrawalModelImplCopyWith<$Res>
       @JsonKey(name: 'status') String? status,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
-      @JsonKey(name: 'user') UserModel? user});
+      @JsonKey(name: 'user') UserModel? user,
+      @JsonKey(name: 'created_by') String? createdBy});
 
   @override
   $UserModelCopyWith<$Res>? get user;
@@ -164,6 +173,7 @@ class __$$WithdrawalModelImplCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? user = freezed,
+    Object? createdBy = freezed,
   }) {
     return _then(_$WithdrawalModelImpl(
       id: freezed == id
@@ -194,6 +204,10 @@ class __$$WithdrawalModelImplCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserModel?,
+      createdBy: freezed == createdBy
+          ? _value.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -208,7 +222,8 @@ class _$WithdrawalModelImpl implements _WithdrawalModel {
       @JsonKey(name: 'status') this.status,
       @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'updated_at') this.updatedAt,
-      @JsonKey(name: 'user') this.user});
+      @JsonKey(name: 'user') this.user,
+      @JsonKey(name: 'created_by') this.createdBy});
 
   factory _$WithdrawalModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$WithdrawalModelImplFromJson(json);
@@ -234,10 +249,13 @@ class _$WithdrawalModelImpl implements _WithdrawalModel {
   @override
   @JsonKey(name: 'user')
   final UserModel? user;
+  @override
+  @JsonKey(name: 'created_by')
+  final String? createdBy;
 
   @override
   String toString() {
-    return 'WithdrawalModel(id: $id, idUser: $idUser, price: $price, status: $status, createdAt: $createdAt, updatedAt: $updatedAt, user: $user)';
+    return 'WithdrawalModel(id: $id, idUser: $idUser, price: $price, status: $status, createdAt: $createdAt, updatedAt: $updatedAt, user: $user, createdBy: $createdBy)';
   }
 
   @override
@@ -253,13 +271,15 @@ class _$WithdrawalModelImpl implements _WithdrawalModel {
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
-            (identical(other.user, user) || other.user == user));
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.createdBy, createdBy) ||
+                other.createdBy == createdBy));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, idUser, price, status, createdAt, updatedAt, user);
+  int get hashCode => Object.hash(runtimeType, id, idUser, price, status,
+      createdAt, updatedAt, user, createdBy);
 
   @JsonKey(ignore: true)
   @override
@@ -278,13 +298,15 @@ class _$WithdrawalModelImpl implements _WithdrawalModel {
 
 abstract class _WithdrawalModel implements WithdrawalModel {
   const factory _WithdrawalModel(
-      {@JsonKey(name: 'id') final int? id,
-      @JsonKey(name: 'id_user') final String? idUser,
-      @JsonKey(name: 'price') final String? price,
-      @JsonKey(name: 'status') final String? status,
-      @JsonKey(name: 'created_at') final DateTime? createdAt,
-      @JsonKey(name: 'updated_at') final DateTime? updatedAt,
-      @JsonKey(name: 'user') final UserModel? user}) = _$WithdrawalModelImpl;
+          {@JsonKey(name: 'id') final int? id,
+          @JsonKey(name: 'id_user') final String? idUser,
+          @JsonKey(name: 'price') final String? price,
+          @JsonKey(name: 'status') final String? status,
+          @JsonKey(name: 'created_at') final DateTime? createdAt,
+          @JsonKey(name: 'updated_at') final DateTime? updatedAt,
+          @JsonKey(name: 'user') final UserModel? user,
+          @JsonKey(name: 'created_by') final String? createdBy}) =
+      _$WithdrawalModelImpl;
 
   factory _WithdrawalModel.fromJson(Map<String, dynamic> json) =
       _$WithdrawalModelImpl.fromJson;
@@ -310,6 +332,9 @@ abstract class _WithdrawalModel implements WithdrawalModel {
   @override
   @JsonKey(name: 'user')
   UserModel? get user;
+  @override
+  @JsonKey(name: 'created_by')
+  String? get createdBy;
   @override
   @JsonKey(ignore: true)
   _$$WithdrawalModelImplCopyWith<_$WithdrawalModelImpl> get copyWith =>
