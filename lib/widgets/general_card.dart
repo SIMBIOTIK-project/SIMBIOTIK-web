@@ -32,6 +32,7 @@ class GeneralCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      // width: MediaQuery.of(context).size.width * .25,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.0),
         color: Colors.teal,

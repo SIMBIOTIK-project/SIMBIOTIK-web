@@ -15,6 +15,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -149,11 +150,13 @@ class _WasteTypeScreenContentState extends State<WasteTypeScreenContent> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'Jenis Sampah',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
+              const Flexible(
+                child: Text(
+                  'Jenis Sampah',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
               ElevatedButton(
@@ -360,13 +363,9 @@ class _WasteTypeScreenContentState extends State<WasteTypeScreenContent> {
                       });
                     }
                   : null,
-              child: const Text(
-                'Sebelumnya',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                ),
+              child: const Icon(
+                Icons.arrow_left_outlined,
+                color: Colors.white,
               ),
             ),
             const Gap(10),
@@ -384,13 +383,9 @@ class _WasteTypeScreenContentState extends State<WasteTypeScreenContent> {
                       });
                     }
                   : null,
-              child: const Text(
-                'Selanjutnya',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                ),
+              child: const Icon(
+                Icons.arrow_right_outlined,
+                color: Colors.white,
               ),
             )
           ],

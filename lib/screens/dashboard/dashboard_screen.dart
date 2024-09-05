@@ -341,13 +341,9 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
                             });
                           }
                         : null,
-                    child: const Text(
-                      'Sebelumnya',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    child: const Icon(
+                      Icons.arrow_left_outlined,
+                      color: Colors.white,
                     ),
                   ),
                   const Gap(10),
@@ -366,13 +362,9 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
                             });
                           }
                         : null,
-                    child: const Text(
-                      'Selanjutnya',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    child: const Icon(
+                      Icons.arrow_right_outlined,
+                      color: Colors.white,
                     ),
                   )
                 ],
@@ -548,13 +540,9 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
                             });
                           }
                         : null,
-                    child: const Text(
-                      'Sebelumnya',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    child: const Icon(
+                      Icons.arrow_left_outlined,
+                      color: Colors.white,
                     ),
                   ),
                   const Gap(10),
@@ -573,13 +561,9 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
                             });
                           }
                         : null,
-                    child: const Text(
-                      'Selanjutnya',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    child: const Icon(
+                      Icons.arrow_right_outlined,
+                      color: Colors.white,
                     ),
                   )
                 ],
@@ -626,7 +610,7 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
     });
     final totalBalance = totalDepositPrice - totalWithdrawalPrice;
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         GeneralCard(
           image: Assets.images.cash.image(
@@ -637,6 +621,7 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
           value: totalBalance,
           note: 'Jumlah saldo diakumulasi otomatis',
         ),
+        const Gap(8),
         GeneralCard(
           image: Assets.images.deposit.image(
             width: 100,
@@ -646,6 +631,7 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
           value: totalDepositPrice,
           note: 'Jumlah setoran diakumulasi otomatis',
         ),
+        const Gap(8),
         GeneralCard(
           image: Assets.images.withdrawal.image(
             width: 100,
