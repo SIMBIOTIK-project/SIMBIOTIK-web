@@ -608,41 +608,46 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
       return sum + double.parse(withdrawal.price!);
     });
     final totalBalance = totalDepositPrice - totalWithdrawalPrice;
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          GeneralCard(
-            image: Assets.images.cash.image(
-              width: 100,
-              height: 100,
+    return Container(
+      width: double.infinity,
+      alignment: Alignment.center,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Wrap(
+          spacing: 8.0,
+          runSpacing: 8.0,
+          children: [
+            GeneralCard(
+              image: Assets.images.cash.image(
+                width: 100,
+                height: 100,
+              ),
+              title: 'Total Saldo',
+              value: totalBalance,
+              note: 'Jumlah saldo diakumulasi otomatis',
             ),
-            title: 'Total Saldo',
-            value: totalBalance,
-            note: 'Jumlah saldo diakumulasi otomatis',
-          ),
-          const Gap(8),
-          GeneralCard(
-            image: Assets.images.deposit.image(
-              width: 100,
-              height: 100,
+            Gap(MediaQuery.of(context).size.width * .001),
+            GeneralCard(
+              image: Assets.images.deposit.image(
+                width: 100,
+                height: 100,
+              ),
+              title: 'Total Setoran',
+              value: totalDepositPrice,
+              note: 'Jumlah saldo diakumulasi otomatis',
             ),
-            title: 'Total Setoran',
-            value: totalDepositPrice,
-            note: 'Jumlah setoran diakumulasi otomatis',
-          ),
-          const Gap(8),
-          GeneralCard(
-            image: Assets.images.withdrawal.image(
-              width: 100,
-              height: 100,
+            Gap(MediaQuery.of(context).size.width * .001),
+            GeneralCard(
+              image: Assets.images.withdrawal.image(
+                width: 100,
+                height: 100,
+              ),
+              title: 'Total Penarikan',
+              value: totalWithdrawalPrice,
+              note: 'Jumlah saldo diakumulasi otomatis',
             ),
-            title: 'Total Penarikan',
-            value: totalWithdrawalPrice,
-            note: 'Jumlah penarikan diakumulasi otomatis',
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
