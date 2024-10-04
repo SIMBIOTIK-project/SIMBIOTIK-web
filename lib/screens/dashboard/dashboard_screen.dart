@@ -17,7 +17,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simbiotik_web/core/blocs/blocs.dart';
-import 'package:simbiotik_web/core/blocs/withdrawal/withdrawal_bloc.dart';
 import 'package:simbiotik_web/gen/assets.gen.dart';
 import 'package:simbiotik_web/models/models.dart';
 import 'package:simbiotik_web/utils/utils.dart';
@@ -609,39 +608,42 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
       return sum + double.parse(withdrawal.price!);
     });
     final totalBalance = totalDepositPrice - totalWithdrawalPrice;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        GeneralCard(
-          image: Assets.images.cash.image(
-            width: 100,
-            height: 100,
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          GeneralCard(
+            image: Assets.images.cash.image(
+              width: 100,
+              height: 100,
+            ),
+            title: 'Total Saldo',
+            value: totalBalance,
+            note: 'Jumlah saldo diakumulasi otomatis',
           ),
-          title: 'Total Saldo',
-          value: totalBalance,
-          note: 'Jumlah saldo diakumulasi otomatis',
-        ),
-        const Gap(8),
-        GeneralCard(
-          image: Assets.images.deposit.image(
-            width: 100,
-            height: 100,
+          const Gap(8),
+          GeneralCard(
+            image: Assets.images.deposit.image(
+              width: 100,
+              height: 100,
+            ),
+            title: 'Total Setoran',
+            value: totalDepositPrice,
+            note: 'Jumlah setoran diakumulasi otomatis',
           ),
-          title: 'Total Setoran',
-          value: totalDepositPrice,
-          note: 'Jumlah setoran diakumulasi otomatis',
-        ),
-        const Gap(8),
-        GeneralCard(
-          image: Assets.images.withdrawal.image(
-            width: 100,
-            height: 100,
+          const Gap(8),
+          GeneralCard(
+            image: Assets.images.withdrawal.image(
+              width: 100,
+              height: 100,
+            ),
+            title: 'Total Penarikan',
+            value: totalWithdrawalPrice,
+            note: 'Jumlah penarikan diakumulasi otomatis',
           ),
-          title: 'Total Penarikan',
-          value: totalWithdrawalPrice,
-          note: 'Jumlah penarikan diakumulasi otomatis',
-        ),
-      ],
+        ],
+      ),
     );
   }
 
