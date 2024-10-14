@@ -1,4 +1,4 @@
-// Copyright 2024 ariefsetyonugroho
+// Copyright 2024 SIMBIOTIK Developer
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,9 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-export 'login/login.dart';
-export 'dashboard/dashboard.dart';
-export 'home_screen.dart';
-export 'account/account.dart';
-export 'waste_type/waste_type.dart';
-export 'reset_password/reset_password.dart';
+part of 'reset_password_bloc.dart';
+
+enum GetResetPasswordStatus {
+  initial,
+  loading,
+  loaded,
+  error;
+
+  bool get isInitial => this == initial;
+  bool get isLoading => this == loading;
+  bool get isLoaded => this == loaded;
+  bool get isError => this == error;
+}
+
+@freezed
+class ResetPasswordState with _$ResetPasswordState {
+  const factory ResetPasswordState({
+    @Default(GetResetPasswordStatus.initial) GetResetPasswordStatus status,
+    @Default('') String? error,
+  }) = _ResetPasswordState;
+}

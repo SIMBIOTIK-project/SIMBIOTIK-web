@@ -12,14 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-class ApiConstants {
-  static const String login = '/login';
-  static const String logout = '/logout';
-  static const String register = '/register';
-  static const String user = '/user';
-  static const String wasteType = '/wastetypes';
-  static const String deposit = '/deposits';
-  static const String withdrawal = '/withdrawals';
-  static const String allUser = '/users';
-  static const String reset = '/reset-password';
+// ignore_for_file: invalid_annotation_target
+
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'reset_password_response.freezed.dart';
+part 'reset_password_response.g.dart';
+
+@freezed
+class ResetPasswordResponse with _$ResetPasswordResponse {
+  const factory ResetPasswordResponse({
+    @JsonKey(name: 'success') bool? success,
+    @JsonKey(name: 'message') String? message,
+  }) = _ResetPasswordResponse;
+
+  factory ResetPasswordResponse.fromJson(Map<String, dynamic> json) =>
+      _$ResetPasswordResponseFromJson(json);
 }

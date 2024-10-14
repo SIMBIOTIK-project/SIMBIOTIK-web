@@ -15,7 +15,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -419,8 +418,8 @@ class _AccountScreenContentState extends State<AccountScreenContent> {
     );
   }
 
-  _handleRegisterAccountDialog(BuildContext context) {
-    showDialog(
+  _handleRegisterAccountDialog(BuildContext context) async {
+    final bool? result = await showDialog(
       context: context,
       builder: (dialogContext) {
         return BackdropFilter(
@@ -432,6 +431,11 @@ class _AccountScreenContentState extends State<AccountScreenContent> {
         );
       },
     );
+
+    if (result == true) {
+      _handleData(token, '');
+      _handleUserData(token, 1);
+    }
   }
 
   _handleData(String token, String? keyword) {

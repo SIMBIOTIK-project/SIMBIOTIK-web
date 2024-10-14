@@ -20,8 +20,10 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simbiotik_web/core/blocs/auth/reset_password_bloc.dart';
 import 'package:simbiotik_web/core/blocs/blocs.dart';
 import 'package:simbiotik_web/data/repository/repository.dart';
+import 'package:simbiotik_web/data/repository/reset_password_repository.dart';
 import 'package:simbiotik_web/gen/assets.gen.dart';
 import 'package:simbiotik_web/screens/screens.dart';
 import 'package:simbiotik_web/utils/utils.dart';
@@ -51,7 +53,10 @@ class HomeScreen extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => WasteTypeBloc(WasteTypeRepository()),
-        )
+        ),
+        BlocProvider(
+          create: (context) => ResetPasswordBloc(ResetPasswordRepository()),
+        ),
       ],
       child: const HomeScreenContent(),
     );
@@ -254,6 +259,15 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
                   },
                   icon: const Icon(Icons.people),
                 ),
+                SideMenuItem(
+                  title: 'Ubah Kata Sandi',
+                  onTap: (index, _) {
+                    sideMenu.changePage(index);
+                  },
+                  icon: const Icon(
+                    Icons.restore,
+                  ),
+                )
               ],
             ),
             const VerticalDivider(
@@ -266,6 +280,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
                   DashboardScreen(),
                   WasteTypeScreen(),
                   AccountScreen(),
+                  ResetPasswordScreen()
                 ],
               ),
             )

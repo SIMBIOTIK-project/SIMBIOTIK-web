@@ -1,4 +1,4 @@
-// Copyright 2024 ariefsetyonugroho
+// Copyright 2024 SIMBIOTIK Developer
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,9 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-export 'login/login.dart';
-export 'dashboard/dashboard.dart';
-export 'home_screen.dart';
-export 'account/account.dart';
-export 'waste_type/waste_type.dart';
-export 'reset_password/reset_password.dart';
+part of 'reset_password_bloc.dart';
+
+@freezed
+class ResetPasswordEvent with _$ResetPasswordEvent {
+  const factory ResetPasswordEvent.reset({
+    required String id,
+    required String newPassword,
+    required String confirmationNewPassword,
+  }) = _Reset;
+}

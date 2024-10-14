@@ -511,8 +511,8 @@ class _RegisterDialogState extends State<RegisterDialog> {
                               child: CircularProgressIndicator(),
                             );
                           } else if (state.status.isLoaded) {
-                            Navigator.of(context).pop();
-                            Navigator.of(context).pop();
+                            Navigator.of(context).pop(true);
+                            Navigator.of(context).pop(true);
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content:
