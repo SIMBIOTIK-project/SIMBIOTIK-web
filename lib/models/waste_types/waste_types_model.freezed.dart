@@ -25,7 +25,7 @@ mixin _$WasteTypesModel {
   @JsonKey(name: 'type')
   String? get type => throw _privateConstructorUsedError;
   @JsonKey(name: 'price')
-  String? get price => throw _privateConstructorUsedError;
+  double? get price => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
@@ -46,7 +46,7 @@ abstract class $WasteTypesModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'id') int? id,
       @JsonKey(name: 'type') String? type,
-      @JsonKey(name: 'price') String? price,
+      @JsonKey(name: 'price') double? price,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 }
@@ -82,7 +82,7 @@ class _$WasteTypesModelCopyWithImpl<$Res, $Val extends WasteTypesModel>
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as double?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -106,7 +106,7 @@ abstract class _$$WasteTypesModelImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'id') int? id,
       @JsonKey(name: 'type') String? type,
-      @JsonKey(name: 'price') String? price,
+      @JsonKey(name: 'price') double? price,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 }
@@ -140,7 +140,7 @@ class __$$WasteTypesModelImplCopyWithImpl<$Res>
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as double?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -174,7 +174,7 @@ class _$WasteTypesModelImpl implements _WasteTypesModel {
   final String? type;
   @override
   @JsonKey(name: 'price')
-  final String? price;
+  final double? price;
   @override
   @JsonKey(name: 'created_at')
   final DateTime? createdAt;
@@ -225,7 +225,7 @@ abstract class _WasteTypesModel implements WasteTypesModel {
   const factory _WasteTypesModel(
           {@JsonKey(name: 'id') final int? id,
           @JsonKey(name: 'type') final String? type,
-          @JsonKey(name: 'price') final String? price,
+          @JsonKey(name: 'price') final double? price,
           @JsonKey(name: 'created_at') final DateTime? createdAt,
           @JsonKey(name: 'updated_at') final DateTime? updatedAt}) =
       _$WasteTypesModelImpl;
@@ -241,7 +241,7 @@ abstract class _WasteTypesModel implements WasteTypesModel {
   String? get type;
   @override
   @JsonKey(name: 'price')
-  String? get price;
+  double? get price;
   @override
   @JsonKey(name: 'created_at')
   DateTime? get createdAt;

@@ -15,7 +15,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -61,6 +60,7 @@ class _WasteTypeScreenContentState extends State<WasteTypeScreenContent> {
         token = prefs.getString('token') ?? '';
       });
       _handleData(token, '');
+      _handleWasteTypeData(token, 1);
     }
   }
 
@@ -69,8 +69,7 @@ class _WasteTypeScreenContentState extends State<WasteTypeScreenContent> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: token.isNotEmpty
-          ? BlocConsumer<WasteTypeBloc, WasteTypeState>(
-              listener: (context, state) {},
+          ? BlocBuilder<WasteTypeBloc, WasteTypeState>(
               builder: (context, state) {
                 if (state.status.isLoading) {
                   return const Center(

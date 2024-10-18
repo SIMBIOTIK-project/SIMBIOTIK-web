@@ -98,9 +98,11 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
           listeners: [
             BlocListener<DepositBloc, DepositState>(
               listener: (context, state) {
-                setState(() {
-                  allDeposit = state.allData!;
-                });
+                if (state.allData != null) {
+                  setState(() {
+                    allDeposit = state.allData!;
+                  });
+                }
               },
             ),
             BlocListener<WithdrawalBloc, WithdrawalState>(
@@ -215,8 +217,10 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
             child: CircularProgressIndicator(),
           );
         } else if (state.status.isLoaded) {
-          withdrawal = state.data!.result!.data!;
-          totalPagesWithdrawal = state.data!.result!.totalPages!;
+          if (state.data?.result != null) {
+            withdrawal = state.data!.result!.data!;
+            totalPagesWithdrawal = state.data!.result!.totalPages!;
+          }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -408,8 +412,10 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
             child: CircularProgressIndicator(),
           );
         } else if (state.status.isLoaded) {
-          deposit = state.data!.result!.data!;
-          totalPagesDeposit = state.data!.result!.totalPages!;
+          if (state.data?.result != null) {
+            deposit = state.data!.result!.data!;
+            totalPagesDeposit = state.data!.result!.totalPages!;
+          }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

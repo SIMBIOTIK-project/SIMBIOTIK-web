@@ -64,7 +64,7 @@ class _AddWasteTypeDialogContentState extends State<AddWasteTypeDialogContent> {
     _loadToken();
     if (widget.data != null) {
       _type.text = widget.data!.type!;
-      _price.text = widget.data!.price!;
+      _price.text = widget.data!.price!.toString();
     }
   }
 
@@ -201,7 +201,7 @@ class _AddWasteTypeDialogContentState extends State<AddWasteTypeDialogContent> {
                         4,
                       ),
                       child: TextFormField(
-                        initialValue: widget.data?.price,
+                        initialValue: widget.data?.price.toString(),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
                           FilteringTextInputFormatter.allow(
