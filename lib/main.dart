@@ -5,7 +5,7 @@ import 'package:simbiotik_web/core/routers/routers.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: "config.env");
   runApp(MyApp());
 }
 

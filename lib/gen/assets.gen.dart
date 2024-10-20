@@ -53,12 +53,12 @@ class $AssetsImagesGen {
 class Assets {
   Assets._();
 
-  static const String aEnv = '.env';
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const String config = 'config.env';
 
   /// List of all assets
-  static List<String> get values => [aEnv];
+  static List<String> get values => [config];
 }
 
 class AssetGenImage {
@@ -91,7 +91,7 @@ class AssetGenImage {
     ImageRepeat repeat = ImageRepeat.noRepeat,
     Rect? centerSlice,
     bool matchTextDirection = false,
-    bool gaplessPlayback = false,
+    bool gaplessPlayback = true,
     bool isAntiAlias = false,
     String? package,
     FilterQuality filterQuality = FilterQuality.low,
