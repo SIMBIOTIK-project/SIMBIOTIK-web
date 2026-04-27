@@ -59,6 +59,10 @@ class _RegisterDialogState extends State<RegisterDialog> {
         ),
         child: SelectionArea(
           child: Container(
+            padding: const EdgeInsets.symmetric(
+              vertical: 16,
+              horizontal: 8,
+            ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               color: Colors.white,

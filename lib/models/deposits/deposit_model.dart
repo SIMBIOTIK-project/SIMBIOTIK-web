@@ -25,7 +25,7 @@ class DepositModel with _$DepositModel {
   const factory DepositModel({
     @JsonKey(name: 'id') int? id,
     @JsonKey(name: 'id_user') String? idUser,
-    @JsonKey(name: 'id_wastetype') String? idWastetype,
+    @JsonKey(name: 'id_wastetype') int? idWastetype,
     @JsonKey(name: 'weight') String? weight,
     @JsonKey(name: 'price') String? price,
     @JsonKey(name: 'created_at') DateTime? createdAt,

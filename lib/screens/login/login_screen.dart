@@ -44,7 +44,7 @@ class LoginScreenContent extends StatefulWidget {
 }
 
 class _LoginScreenContentState extends State<LoginScreenContent> {
-  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   String token = '';
 
@@ -173,9 +173,9 @@ class _LoginScreenContentState extends State<LoginScreenContent> {
                                 4,
                               ),
                               child: TextFormField(
-                                controller: _emailController,
+                                controller: _nameController,
                                 decoration: const InputDecoration(
-                                  hintText: 'Masukkan Email',
+                                  hintText: 'Masukkan Nama Pengguna',
                                   border: InputBorder.none,
                                   contentPadding: EdgeInsets.symmetric(
                                     vertical: 12.0,
@@ -235,9 +235,8 @@ class _LoginScreenContentState extends State<LoginScreenContent> {
                                     if (state.token != null) {
                                       _savedToken(state.token!);
                                     }
-                                    GoRouter.of(context).pushReplacement(
-                                      AppRouterConstants.homeScreen,
-                                    );
+                                    context
+                                        .goNamed(AppRouterConstants.homeScreen);
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
@@ -248,9 +247,9 @@ class _LoginScreenContentState extends State<LoginScreenContent> {
                                   }
                                 } else if (state.status.isError) {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
+                                    SnackBar(
                                       content: Text(
-                                          'Gagal masuk, silahkan periksa kembali email atau password!'),
+                                          'Gagal masuk, silahkan periksa kembali name atau password! ${state.error}'),
                                     ),
                                   );
                                 }
@@ -274,7 +273,7 @@ class _LoginScreenContentState extends State<LoginScreenContent> {
                                     onPressed: () {
                                       context.read<AuthBloc>().add(
                                             AuthEvent.login(
-                                              email: _emailController.text,
+                                              name: _nameController.text,
                                               password:
                                                   _passwordController.text,
                                             ),
@@ -295,7 +294,7 @@ class _LoginScreenContentState extends State<LoginScreenContent> {
                           ],
                         ),
                       ),
-                      const Text('© 2024 All Rights Reserved')
+                      const Text('© 2026 All Rights Reserved')
                     ],
                   ),
                 ),

@@ -105,7 +105,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
               controller: sideMenu,
               style: SideMenuStyle(
                 displayMode: SideMenuDisplayMode.auto,
-                showHamburger: true,
+                showHamburger: false,
                 hoverColor: Colors.teal[100],
                 selectedHoverColor: Colors.teal[100],
                 selectedColor: Colors.teal,
@@ -276,6 +276,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
             Expanded(
               child: PageView(
                 controller: pageController,
+                physics: const NeverScrollableScrollPhysics(),
                 children: const [
                   DashboardScreen(),
                   WasteTypeScreen(),

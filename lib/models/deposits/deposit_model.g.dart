@@ -10,7 +10,7 @@ _$DepositModelImpl _$$DepositModelImplFromJson(Map<String, dynamic> json) =>
     _$DepositModelImpl(
       id: (json['id'] as num?)?.toInt(),
       idUser: json['id_user'] as String?,
-      idWastetype: json['id_wastetype'] as String?,
+      idWastetype: (json['id_wastetype'] as num?)?.toInt(),
       weight: json['weight'] as String?,
       price: json['price'] as String?,
       createdAt: json['created_at'] == null

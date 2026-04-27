@@ -270,13 +270,26 @@ class _AccountScreenContentState extends State<AccountScreenContent> {
                       rows: user.map((user) {
                         return DataRow(
                           cells: [
-                            DataCell(Text(user.idUser.toString())),
-                            DataCell(Text(user.status.toString())),
-                            DataCell(Text(user.name.toString())),
-                            DataCell(Text(user.email.toString())),
-                            DataCell(Text(user.phoneNumber.toString())),
-                            DataCell(Text(user.nik.toString())),
-                            DataCell(Text(user.address.toString())),
+                            DataCell(Text(user.idUser != null
+                                ? user.idUser.toString()
+                                : '-')),
+                            DataCell(Text(user.status != null
+                                ? user.status.toString()
+                                : '-')),
+                            DataCell(Text(user.name != null
+                                ? user.name.toString()
+                                : '-')),
+                            DataCell(Text(user.email != null
+                                ? user.email.toString()
+                                : '-')),
+                            DataCell(Text(user.phoneNumber != null
+                                ? user.phoneNumber.toString()
+                                : '-')),
+                            DataCell(Text(
+                                user.nik != null ? user.nik.toString() : '-')),
+                            DataCell(Text(user.address != null
+                                ? user.address.toString()
+                                : '-')),
                             DataCell(Row(
                               children: [
                                 InkWell(

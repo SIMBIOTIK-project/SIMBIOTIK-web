@@ -14,6 +14,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simbiotik_web/core/routers/routers.dart';
 import 'package:simbiotik_web/screens/screens.dart';
 
@@ -22,6 +23,22 @@ class AppRouterConfig {
 
   AppRouterConfig()
       : _router = GoRouter(
+          redirect: (context, state) async {
+            final prefers = await SharedPreferences.getInstance();
+            final token = prefers.getString('token');
+
+            final isLogin = state.uri.path == '/';
+
+            if (token == null && !isLogin) {
+              return '/';
+            }
+
+            if (token != null && isLogin) {
+              return AppRouterConstants.homeScreen;
+            }
+
+            return null;
+          },
           routes: [
             GoRoute(
               name: '/',

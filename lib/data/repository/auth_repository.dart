@@ -20,11 +20,11 @@ import 'package:simbiotik_web/models/models.dart';
 class AuthRepository {
   final Dio _dio = Dio();
   final String api = dotenv.get('URL') + ApiConstants.login;
-  Future<AuthResponse> login(String email, String password) async {
+  Future<AuthResponse> login(String name, String password) async {
     final response = await _dio.post(
       api,
       data: {
-        'email': email,
+        'name': name,
         'password': password,
       },
     );

@@ -18,6 +18,8 @@ Note: For API URL you can contact Developer/Owner this project
 - Run pub get in Terminal
 ```
 flutter pub get
+
+flutter packages pub run build_runner build --delete-conflicting-outputs
 ```
 
 - Run Project

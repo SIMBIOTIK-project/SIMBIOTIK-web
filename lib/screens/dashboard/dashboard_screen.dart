@@ -131,6 +131,7 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
                       const Gap(40),
                       Expanded(
                         child: SingleChildScrollView(
+                          physics: const NeverScrollableScrollPhysics(),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -307,9 +308,10 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
                                   if (result == true) {
                                     _handleDeleteWithdrawalData(
                                         withdrawal.id.toString());
-                                    _handlePaginationWithdrawal(token, 1);
-                                    //TODO: Fix this
-                                    _handlePaginationWithdrawal(token, 1);
+                                    Future.delayed(
+                                        const Duration(milliseconds: 500), () {
+                                      _handlePaginationWithdrawal(token, 1);
+                                    });
                                   }
                                 },
                                 child: const Icon(
@@ -381,7 +383,7 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text('Data tidak ditemukan!'),
+                Text('Data tidak ditemukan! ${state.error}'),
                 const Gap(8.0),
                 InkWell(
                   onTap: () {
@@ -582,7 +584,7 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text('Data tidak ditemukan!'),
+                Text('Data tidak ditemukan! ${state.error}'),
                 const Gap(8.0),
                 InkWell(
                   onTap: () {

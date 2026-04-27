@@ -16,21 +16,21 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AuthEvent {
-  String get email => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) login,
+    required TResult Function(String name, String password) login,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? login,
+    TResult? Function(String name, String password)? login,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? login,
+    TResult Function(String name, String password)? login,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -61,7 +61,7 @@ abstract class $AuthEventCopyWith<$Res> {
   factory $AuthEventCopyWith(AuthEvent value, $Res Function(AuthEvent) then) =
       _$AuthEventCopyWithImpl<$Res, AuthEvent>;
   @useResult
-  $Res call({String email, String password});
+  $Res call({String name, String password});
 }
 
 /// @nodoc
@@ -77,13 +77,13 @@ class _$AuthEventCopyWithImpl<$Res, $Val extends AuthEvent>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = null,
+    Object? name = null,
     Object? password = null,
   }) {
     return _then(_value.copyWith(
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
       password: null == password
           ? _value.password
@@ -100,7 +100,7 @@ abstract class _$$LoginImplCopyWith<$Res> implements $AuthEventCopyWith<$Res> {
       __$$LoginImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String email, String password});
+  $Res call({String name, String password});
 }
 
 /// @nodoc
@@ -114,13 +114,13 @@ class __$$LoginImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = null,
+    Object? name = null,
     Object? password = null,
   }) {
     return _then(_$LoginImpl(
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
       password: null == password
           ? _value.password
@@ -133,16 +133,16 @@ class __$$LoginImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoginImpl implements _Login {
-  const _$LoginImpl({required this.email, required this.password});
+  const _$LoginImpl({required this.name, required this.password});
 
   @override
-  final String email;
+  final String name;
   @override
   final String password;
 
   @override
   String toString() {
-    return 'AuthEvent.login(email: $email, password: $password)';
+    return 'AuthEvent.login(name: $name, password: $password)';
   }
 
   @override
@@ -150,13 +150,13 @@ class _$LoginImpl implements _Login {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoginImpl &&
-            (identical(other.email, email) || other.email == email) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.password, password) ||
                 other.password == password));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email, password);
+  int get hashCode => Object.hash(runtimeType, name, password);
 
   @JsonKey(ignore: true)
   @override
@@ -167,27 +167,27 @@ class _$LoginImpl implements _Login {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) login,
+    required TResult Function(String name, String password) login,
   }) {
-    return login(email, password);
+    return login(name, password);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? login,
+    TResult? Function(String name, String password)? login,
   }) {
-    return login?.call(email, password);
+    return login?.call(name, password);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? login,
+    TResult Function(String name, String password)? login,
     required TResult orElse(),
   }) {
     if (login != null) {
-      return login(email, password);
+      return login(name, password);
     }
     return orElse();
   }
@@ -223,11 +223,11 @@ class _$LoginImpl implements _Login {
 
 abstract class _Login implements AuthEvent {
   const factory _Login(
-      {required final String email,
+      {required final String name,
       required final String password}) = _$LoginImpl;
 
   @override
-  String get email;
+  String get name;
   @override
   String get password;
   @override
