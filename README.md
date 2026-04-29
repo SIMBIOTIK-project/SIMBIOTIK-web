@@ -8,7 +8,7 @@ git clone https://github.com/SIMBIOTIK-project/SIMBIOTIK-web.git
 
 Note: You can use [Project IDX](https://idx.dev) to clone this project.
 
-- Create the ```.env``` in the root project with value
+- Create the ```config.env``` in the root project with value
 ```
 URL = "https://'name-site-API'"
 ``` 

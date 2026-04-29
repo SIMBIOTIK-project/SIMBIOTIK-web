@@ -259,11 +259,11 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
                           'Tanggal',
                           style: TextStyle(fontWeight: FontWeight.w900),
                         )),
-                        DataColumn(
-                            label: Text(
-                          'Aksi',
-                          style: TextStyle(fontWeight: FontWeight.w900),
-                        )),
+                        // DataColumn(
+                        //     label: Text(
+                        //   'Aksi',
+                        //   style: TextStyle(fontWeight: FontWeight.w900),
+                        // )),
                       ],
                       rows: withdrawal.map((withdrawal) {
                         return DataRow(
@@ -275,51 +275,51 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
                             DataCell(Text(withdrawal.createdBy.toString())),
                             DataCell(Text(formattedDate(
                                 withdrawal.createdAt.toString()))),
-                            DataCell(
-                              InkWell(
-                                onTap: () async {
-                                  bool? result;
-                                  result = await showDialog(
-                                    context: context,
-                                    builder: (BuildContext dialogContext) {
-                                      return AlertDialog(
-                                        title: const Text('Hapus Penarikan'),
-                                        content: const Text(
-                                            'Apakah anda yakin akan menghapus data?'),
-                                        actions: <Widget>[
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.of(dialogContext)
-                                                  .pop(true);
-                                            },
-                                            child: const Text('Ya, Hapus'),
-                                          ),
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.of(dialogContext).pop();
-                                            },
-                                            child: const Text('Tidak'),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
+                            // DataCell(
+                            //   InkWell(
+                            //     onTap: () async {
+                            //       bool? result;
+                            //       result = await showDialog(
+                            //         context: context,
+                            //         builder: (BuildContext dialogContext) {
+                            //           return AlertDialog(
+                            //             title: const Text('Hapus Penarikan'),
+                            //             content: const Text(
+                            //                 'Apakah anda yakin akan menghapus data?'),
+                            //             actions: <Widget>[
+                            //               TextButton(
+                            //                 onPressed: () {
+                            //                   Navigator.of(dialogContext)
+                            //                       .pop(true);
+                            //                 },
+                            //                 child: const Text('Ya, Hapus'),
+                            //               ),
+                            //               TextButton(
+                            //                 onPressed: () {
+                            //                   Navigator.of(dialogContext).pop();
+                            //                 },
+                            //                 child: const Text('Tidak'),
+                            //               ),
+                            //             ],
+                            //           );
+                            //         },
+                            //       );
 
-                                  if (result == true) {
-                                    _handleDeleteWithdrawalData(
-                                        withdrawal.id.toString());
-                                    Future.delayed(
-                                        const Duration(milliseconds: 500), () {
-                                      _handlePaginationWithdrawal(token, 1);
-                                    });
-                                  }
-                                },
-                                child: const Icon(
-                                  Icons.delete,
-                                  color: Colors.red,
-                                ),
-                              ),
-                            )
+                            //       if (result == true) {
+                            //         _handleDeleteWithdrawalData(
+                            //             withdrawal.id.toString());
+                            //         Future.delayed(
+                            //             const Duration(milliseconds: 500), () {
+                            //           _handlePaginationWithdrawal(token, 1);
+                            //         });
+                            //       }
+                            //     },
+                            //     child: const Icon(
+                            //       Icons.delete,
+                            //       color: Colors.red,
+                            //     ),
+                            //   ),
+                            // )
                           ],
                         );
                       }).toList(),
@@ -460,11 +460,11 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
                           'Tanggal',
                           style: TextStyle(fontWeight: FontWeight.w900),
                         )),
-                        DataColumn(
-                            label: Text(
-                          'Aksi',
-                          style: TextStyle(fontWeight: FontWeight.w900),
-                        )),
+                        // DataColumn(
+                        //     label: Text(
+                        //   'Aksi',
+                        //   style: TextStyle(fontWeight: FontWeight.w900),
+                        // )),
                       ],
                       rows: deposit.map((deposit) {
                         return DataRow(
@@ -477,50 +477,50 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
                             DataCell(Text(deposit.createdBy.toString())),
                             DataCell(Text(
                                 formattedDate(deposit.createdAt.toString()))),
-                            DataCell(
-                              InkWell(
-                                onTap: () async {
-                                  bool? result;
-                                  result = await showDialog(
-                                    context: context,
-                                    builder: (BuildContext dialogContext) {
-                                      return AlertDialog(
-                                        title: const Text('Hapus Setoran'),
-                                        content: const Text(
-                                            'Apakah anda yakin akan menghapus data?'),
-                                        actions: <Widget>[
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.of(dialogContext)
-                                                  .pop(true);
-                                            },
-                                            child: const Text('Ya, Hapus'),
-                                          ),
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.of(dialogContext).pop();
-                                            },
-                                            child: const Text('Tidak'),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
+                            // DataCell(
+                            //   InkWell(
+                            //     onTap: () async {
+                            //       bool? result;
+                            //       result = await showDialog(
+                            //         context: context,
+                            //         builder: (BuildContext dialogContext) {
+                            //           return AlertDialog(
+                            //             title: const Text('Hapus Setoran'),
+                            //             content: const Text(
+                            //                 'Apakah anda yakin akan menghapus data?'),
+                            //             actions: <Widget>[
+                            //               TextButton(
+                            //                 onPressed: () {
+                            //                   Navigator.of(dialogContext)
+                            //                       .pop(true);
+                            //                 },
+                            //                 child: const Text('Ya, Hapus'),
+                            //               ),
+                            //               TextButton(
+                            //                 onPressed: () {
+                            //                   Navigator.of(dialogContext).pop();
+                            //                 },
+                            //                 child: const Text('Tidak'),
+                            //               ),
+                            //             ],
+                            //           );
+                            //         },
+                            //       );
 
-                                  if (result == true) {
-                                    _handleDeleteDepositData(
-                                        deposit.id.toString());
-                                    _handlePaginationDeposit(token, 1);
-                                    //TODO: Fix this
-                                    _handlePaginationDeposit(token, 1);
-                                  }
-                                },
-                                child: const Icon(
-                                  Icons.delete,
-                                  color: Colors.red,
-                                ),
-                              ),
-                            )
+                            //       if (result == true) {
+                            //         _handleDeleteDepositData(
+                            //             deposit.id.toString());
+                            //         _handlePaginationDeposit(token, 1);
+                            //         //TODO: Fix this
+                            //         _handlePaginationDeposit(token, 1);
+                            //       }
+                            //     },
+                            //     child: const Icon(
+                            //       Icons.delete,
+                            //       color: Colors.red,
+                            //     ),
+                            //   ),
+                            // )
                           ],
                         );
                       }).toList(),

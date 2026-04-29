@@ -36,6 +36,17 @@ mixin _$RegisterEvent {
             String address,
             String status)
         register,
+    required TResult Function(
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)
+        update,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +61,17 @@ mixin _$RegisterEvent {
             String address,
             String status)?
         register,
+    TResult? Function(
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)?
+        update,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -64,22 +86,36 @@ mixin _$RegisterEvent {
             String address,
             String status)?
         register,
+    TResult Function(
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)?
+        update,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Register value) register,
+    required TResult Function(_Update value) update,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Register value)? register,
+    TResult? Function(_Update value)? update,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Register value)? register,
+    TResult Function(_Update value)? update,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -317,6 +353,17 @@ class _$RegisterImpl implements _Register {
             String address,
             String status)
         register,
+    required TResult Function(
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)
+        update,
   }) {
     return register(name, email, password, passwordConfirmation, nik,
         phoneNumber, address, status);
@@ -335,6 +382,17 @@ class _$RegisterImpl implements _Register {
             String address,
             String status)?
         register,
+    TResult? Function(
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)?
+        update,
   }) {
     return register?.call(name, email, password, passwordConfirmation, nik,
         phoneNumber, address, status);
@@ -353,6 +411,17 @@ class _$RegisterImpl implements _Register {
             String address,
             String status)?
         register,
+    TResult Function(
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)?
+        update,
     required TResult orElse(),
   }) {
     if (register != null) {
@@ -366,6 +435,7 @@ class _$RegisterImpl implements _Register {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Register value) register,
+    required TResult Function(_Update value) update,
   }) {
     return register(this);
   }
@@ -374,6 +444,7 @@ class _$RegisterImpl implements _Register {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Register value)? register,
+    TResult? Function(_Update value)? update,
   }) {
     return register?.call(this);
   }
@@ -382,6 +453,7 @@ class _$RegisterImpl implements _Register {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Register value)? register,
+    TResult Function(_Update value)? update,
     required TResult orElse(),
   }) {
     if (register != null) {
@@ -421,6 +493,313 @@ abstract class _Register implements RegisterEvent {
   @override
   @JsonKey(ignore: true)
   _$$RegisterImplCopyWith<_$RegisterImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateImplCopyWith<$Res>
+    implements $RegisterEventCopyWith<$Res> {
+  factory _$$UpdateImplCopyWith(
+          _$UpdateImpl value, $Res Function(_$UpdateImpl) then) =
+      __$$UpdateImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String name,
+      String email,
+      String password,
+      String passwordConfirmation,
+      String nik,
+      String phoneNumber,
+      String address,
+      String status});
+}
+
+/// @nodoc
+class __$$UpdateImplCopyWithImpl<$Res>
+    extends _$RegisterEventCopyWithImpl<$Res, _$UpdateImpl>
+    implements _$$UpdateImplCopyWith<$Res> {
+  __$$UpdateImplCopyWithImpl(
+      _$UpdateImpl _value, $Res Function(_$UpdateImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? email = null,
+    Object? password = null,
+    Object? passwordConfirmation = null,
+    Object? nik = null,
+    Object? phoneNumber = null,
+    Object? address = null,
+    Object? status = null,
+  }) {
+    return _then(_$UpdateImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      passwordConfirmation: null == passwordConfirmation
+          ? _value.passwordConfirmation
+          : passwordConfirmation // ignore: cast_nullable_to_non_nullable
+              as String,
+      nik: null == nik
+          ? _value.nik
+          : nik // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneNumber: null == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      address: null == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateImpl implements _Update {
+  const _$UpdateImpl(
+      {required this.id,
+      required this.name,
+      required this.email,
+      required this.password,
+      required this.passwordConfirmation,
+      required this.nik,
+      required this.phoneNumber,
+      required this.address,
+      required this.status});
+
+  @override
+  final String id;
+  @override
+  final String name;
+  @override
+  final String email;
+  @override
+  final String password;
+  @override
+  final String passwordConfirmation;
+  @override
+  final String nik;
+  @override
+  final String phoneNumber;
+  @override
+  final String address;
+  @override
+  final String status;
+
+  @override
+  String toString() {
+    return 'RegisterEvent.update(id: $id, name: $name, email: $email, password: $password, passwordConfirmation: $passwordConfirmation, nik: $nik, phoneNumber: $phoneNumber, address: $address, status: $status)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
+            (identical(other.passwordConfirmation, passwordConfirmation) ||
+                other.passwordConfirmation == passwordConfirmation) &&
+            (identical(other.nik, nik) || other.nik == nik) &&
+            (identical(other.phoneNumber, phoneNumber) ||
+                other.phoneNumber == phoneNumber) &&
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.status, status) || other.status == status));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name, email, password,
+      passwordConfirmation, nik, phoneNumber, address, status);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateImplCopyWith<_$UpdateImpl> get copyWith =>
+      __$$UpdateImplCopyWithImpl<_$UpdateImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)
+        register,
+    required TResult Function(
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)
+        update,
+  }) {
+    return update(id, name, email, password, passwordConfirmation, nik,
+        phoneNumber, address, status);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)?
+        register,
+    TResult? Function(
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)?
+        update,
+  }) {
+    return update?.call(id, name, email, password, passwordConfirmation, nik,
+        phoneNumber, address, status);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)?
+        register,
+    TResult Function(
+            String id,
+            String name,
+            String email,
+            String password,
+            String passwordConfirmation,
+            String nik,
+            String phoneNumber,
+            String address,
+            String status)?
+        update,
+    required TResult orElse(),
+  }) {
+    if (update != null) {
+      return update(id, name, email, password, passwordConfirmation, nik,
+          phoneNumber, address, status);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Register value) register,
+    required TResult Function(_Update value) update,
+  }) {
+    return update(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Register value)? register,
+    TResult? Function(_Update value)? update,
+  }) {
+    return update?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Register value)? register,
+    TResult Function(_Update value)? update,
+    required TResult orElse(),
+  }) {
+    if (update != null) {
+      return update(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Update implements RegisterEvent {
+  const factory _Update(
+      {required final String id,
+      required final String name,
+      required final String email,
+      required final String password,
+      required final String passwordConfirmation,
+      required final String nik,
+      required final String phoneNumber,
+      required final String address,
+      required final String status}) = _$UpdateImpl;
+
+  String get id;
+  @override
+  String get name;
+  @override
+  String get email;
+  @override
+  String get password;
+  @override
+  String get passwordConfirmation;
+  @override
+  String get nik;
+  @override
+  String get phoneNumber;
+  @override
+  String get address;
+  @override
+  String get status;
+  @override
+  @JsonKey(ignore: true)
+  _$$UpdateImplCopyWith<_$UpdateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

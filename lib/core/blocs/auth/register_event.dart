@@ -26,4 +26,16 @@ class RegisterEvent with _$RegisterEvent {
     required String address,
     required String status,
   }) = _Register;
+
+  const factory RegisterEvent.update({
+    required String id,
+    required String name,
+    required String email,
+    required String password,
+    required String passwordConfirmation,
+    required String nik,
+    required String phoneNumber,
+    required String address,
+    required String status,
+  }) = _Update;
 }

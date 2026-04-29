@@ -129,7 +129,7 @@ class _AccountScreenContentState extends State<AccountScreenContent> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
-                              'Data Nasabah/Admin/Owner',
+                              'Data Pengguna',
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16,
@@ -334,18 +334,18 @@ class _AccountScreenContentState extends State<AccountScreenContent> {
                                     color: Colors.red,
                                   ),
                                 ),
-                                const Gap(8.0),
-                                InkWell(
-                                  onTap: () {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text(
-                                            'Fitur masih dalam tahap pengembangan!'),
-                                      ),
-                                    );
-                                  },
-                                  child: const Icon(Icons.edit),
-                                ),
+                                // const Gap(8.0),
+                                // InkWell(
+                                //   onTap: () async {
+                                //     final result  = await _handleEditAccountDialog(context, user);
+
+                                //     if (result == true) {
+                                //       _handleData(token, '');
+                                //       _handleUserData(token, currentPageUser);
+                                //     }
+                                //   },
+                                //   child: const Icon(Icons.edit),
+                                // ),
                               ],
                             ))
                           ],
@@ -469,5 +469,25 @@ class _AccountScreenContentState extends State<AccountScreenContent> {
 
   _handleDeleteData(String id) {
     context.read<UserBloc>().add(UserEvent.delete(id: id, token: token));
+  }
+
+  _handleEditAccountDialog(BuildContext context, UserModel user) async {
+    final bool? result = await showDialog(
+      context: context, 
+      builder: (dialogContext) {
+        return BackdropFilter(
+          filter: ImageFilter.blur(
+            sigmaX: 4.0, 
+            sigmaY: 4.0,
+          ),
+          child: RegisterDialog(
+            user: user,
+            isEdit: true,
+          ),
+        );
+      },
+    );
+
+    return result;
   }
 }

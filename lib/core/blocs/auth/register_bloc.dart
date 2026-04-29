@@ -26,6 +26,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
   RegisterBloc(this._registerRepository) : super(const RegisterState()) {
     on<_Register>(_onRegister);
+    on<_Update>(_onUpdate);
   }
 
   Future<void> _onRegister(_Register event, Emitter<RegisterState> emit) async {
@@ -54,4 +55,32 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       ));
     }
   }
+  Future<void> _onUpdate(_Update event, Emitter<RegisterState> emit) async {
+    emit(state.copyWith(status: RegisterStateStatus.loading, error: ''));
+
+    try {
+      final response = await _registerRepository.update(
+        event.id,
+        event.name,
+        event.email,
+        event.password,
+        event.passwordConfirmation,
+        event.nik,
+        event.phoneNumber,
+        event.address,
+        event.status,
+      );
+
+      emit(state.copyWith(
+        status: RegisterStateStatus.loaded,
+        data: response.user,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: RegisterStateStatus.error,
+        error: e.toString(),
+      ));
+    }
+  }
+
 }

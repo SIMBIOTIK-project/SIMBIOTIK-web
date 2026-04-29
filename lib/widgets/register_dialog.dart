@@ -19,9 +19,16 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simbiotik_web/core/blocs/auth/register_bloc.dart';
 import 'package:simbiotik_web/data/repository/register_repository.dart';
+import 'package:simbiotik_web/models/users/user_model.dart';
 
 class RegisterDialog extends StatefulWidget {
-  const RegisterDialog({super.key});
+  final UserModel? user;
+  final bool isEdit;
+  const RegisterDialog({
+    super.key,
+    this.user,
+    this.isEdit = false,
+  });
 
   @override
   State<RegisterDialog> createState() => _RegisterDialogState();
@@ -46,6 +53,20 @@ class _RegisterDialogState extends State<RegisterDialog> {
   bool _obsecurePasswordConfirmation = true;
 
   String? selectStatusItem;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.user != null) {
+      _name.text = widget.user!.name ?? '';
+      _email.text = widget.user!.email ?? '';
+      _nik.text = widget.user!.nik ?? '';
+      _phoneNumber.text = widget.user!.phoneNumber ?? '';
+      _address.text = widget.user!.address ?? '';
+      selectStatusItem = widget.user!.status;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -563,7 +584,22 @@ class _RegisterDialogState extends State<RegisterDialog> {
                                             actions: <Widget>[
                                               TextButton(
                                                 onPressed: () {
-                                                  context
+                                                  if (widget.isEdit) {
+                                                    context.read<RegisterBloc>().add(
+                                                      RegisterEvent.update(
+                                                        id: widget.user!.id.toString(),
+                                                        name: _name.text,
+                                                        email: _email.text,
+                                                        password: _password.text,
+                                                        passwordConfirmation: _passwordConfirmation.text,
+                                                        nik: _nik.text,
+                                                        phoneNumber: _phoneNumber.text,
+                                                        address: _address.text,
+                                                        status: selectStatusItem!,
+                                                      ),
+                                                    );
+                                                  } else {
+                                                    context
                                                       .read<RegisterBloc>()
                                                       .add(RegisterEvent
                                                           .register(
@@ -580,7 +616,9 @@ class _RegisterDialogState extends State<RegisterDialog> {
                                                         address: _address.text,
                                                         status:
                                                             selectStatusItem!,
-                                                      ));
+                                                      ),
+                                                    );
+                                                  }
                                                 },
                                                 child: const Text('Ya, Simpan'),
                                               ),
@@ -597,9 +635,9 @@ class _RegisterDialogState extends State<RegisterDialog> {
                                       );
                                     }
                                   : null,
-                              child: const Text(
-                                'Daftar',
-                                style: TextStyle(
+                              child:  Text(
+                                widget.isEdit ? 'Perbarui' : 'Daftar',
+                                style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.bold,

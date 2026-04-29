@@ -58,4 +58,36 @@ class RegisterRepository {
       throw Exception('Gagal registrasi');
     }
   }
+
+  Future<RegisterResponse> update(
+    String id,
+    String name,
+    String email,
+    String password,
+    String passwordConfirmation,
+    String nik,
+    String phoneNumber,
+    String address,
+    String status,
+  ) async {
+    final response = await _dio.put(
+      '${dotenv.get('URL')}/user/$id', // endpoint edit
+      data: {
+        'name': name,
+        'email': email,
+        'password': password,
+        'password_confirmation': passwordConfirmation,
+        'nik': nik,
+        'phone_number': phoneNumber,
+        'address': address,
+        'status': status,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return RegisterResponse.fromJson(response.data);
+    } else {
+      throw Exception('Gagal update');
+    }
+  }
 }
