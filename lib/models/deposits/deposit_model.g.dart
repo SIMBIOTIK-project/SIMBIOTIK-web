@@ -11,8 +11,8 @@ _$DepositModelImpl _$$DepositModelImplFromJson(Map<String, dynamic> json) =>
       id: (json['id'] as num?)?.toInt(),
       idUser: json['id_user'] as String?,
       idWastetype: json['id_wastetype'] as String?,
-      weight: json['weight'] as String?,
-      price: json['price'] as String?,
+      weight: (json['weight'] as num?)?.toDouble(),
+      price: (json['price'] as num?)?.toDouble(),
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),

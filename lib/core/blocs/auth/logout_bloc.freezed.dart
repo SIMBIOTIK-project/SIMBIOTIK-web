@@ -66,6 +66,9 @@ class _$LogoutEventCopyWithImpl<$Res, $Val extends LogoutEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of LogoutEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -82,6 +85,9 @@ class __$$LogoutImplCopyWithImpl<$Res>
   __$$LogoutImplCopyWithImpl(
       _$LogoutImpl _value, $Res Function(_$LogoutImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of LogoutEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -169,7 +175,9 @@ mixin _$LogoutState {
   GetLogoutStateStatus get status => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LogoutState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $LogoutStateCopyWith<LogoutState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -193,6 +201,8 @@ class _$LogoutStateCopyWithImpl<$Res, $Val extends LogoutState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of LogoutState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -231,6 +241,8 @@ class __$$LogoutStateImplCopyWithImpl<$Res>
       _$LogoutStateImpl _value, $Res Function(_$LogoutStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of LogoutState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -280,7 +292,9 @@ class _$LogoutStateImpl implements _LogoutState {
   @override
   int get hashCode => Object.hash(runtimeType, status, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LogoutState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LogoutStateImplCopyWith<_$LogoutStateImpl> get copyWith =>
@@ -296,8 +310,11 @@ abstract class _LogoutState implements LogoutState {
   GetLogoutStateStatus get status;
   @override
   String? get error;
+
+  /// Create a copy of LogoutState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LogoutStateImplCopyWith<_$LogoutStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -28,8 +28,12 @@ mixin _$WithdrawalResponseModel {
   @JsonKey(name: 'result')
   WithdrawalPageModel? get result => throw _privateConstructorUsedError;
 
+  /// Serializes this WithdrawalResponseModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of WithdrawalResponseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WithdrawalResponseModelCopyWith<WithdrawalResponseModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -59,6 +63,8 @@ class _$WithdrawalResponseModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WithdrawalResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -82,6 +88,8 @@ class _$WithdrawalResponseModelCopyWithImpl<$Res,
     ) as $Val);
   }
 
+  /// Create a copy of WithdrawalResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $WithdrawalPageModelCopyWith<$Res>? get result {
@@ -123,6 +131,8 @@ class __$$WithdrawalResponseModelImplCopyWithImpl<$Res>
       $Res Function(_$WithdrawalResponseModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WithdrawalResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -183,11 +193,13 @@ class _$WithdrawalResponseModelImpl implements _WithdrawalResponseModel {
             (identical(other.result, result) || other.result == result));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, success, message, result);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WithdrawalResponseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WithdrawalResponseModelImplCopyWith<_$WithdrawalResponseModelImpl>
@@ -221,8 +233,11 @@ abstract class _WithdrawalResponseModel implements WithdrawalResponseModel {
   @override
   @JsonKey(name: 'result')
   WithdrawalPageModel? get result;
+
+  /// Create a copy of WithdrawalResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WithdrawalResponseModelImplCopyWith<_$WithdrawalResponseModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

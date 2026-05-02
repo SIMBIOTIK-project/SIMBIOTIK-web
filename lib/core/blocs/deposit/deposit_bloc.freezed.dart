@@ -69,7 +69,9 @@ mixin _$DepositEvent {
   }) =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DepositEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DepositEventCopyWith<DepositEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -93,6 +95,8 @@ class _$DepositEventCopyWithImpl<$Res, $Val extends DepositEvent>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DepositEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -128,6 +132,8 @@ class __$$PostDepositImplCopyWithImpl<$Res>
       _$PostDepositImpl _value, $Res Function(_$PostDepositImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DepositEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -146,6 +152,8 @@ class __$$PostDepositImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of DepositEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DepositRequestModelCopyWith<$Res> get request {
@@ -182,7 +190,9 @@ class _$PostDepositImpl implements _PostDeposit {
   @override
   int get hashCode => Object.hash(runtimeType, request, token);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DepositEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PostDepositImplCopyWith<_$PostDepositImpl> get copyWith =>
@@ -272,8 +282,11 @@ abstract class _PostDeposit implements DepositEvent {
   DepositRequestModel get request;
   @override
   String get token;
+
+  /// Create a copy of DepositEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PostDepositImplCopyWith<_$PostDepositImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -297,6 +310,8 @@ class __$$FetchImplCopyWithImpl<$Res>
       _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DepositEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -351,7 +366,9 @@ class _$FetchImpl implements _Fetch {
   @override
   int get hashCode => Object.hash(runtimeType, token, idUser, page);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DepositEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
@@ -443,8 +460,11 @@ abstract class _Fetch implements DepositEvent {
   String get token;
   String? get idUser;
   int? get page;
+
+  /// Create a copy of DepositEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -468,6 +488,8 @@ class __$$FetchAllImplCopyWithImpl<$Res>
       _$FetchAllImpl _value, $Res Function(_$FetchAllImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DepositEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -514,7 +536,9 @@ class _$FetchAllImpl implements _FetchAll {
   @override
   int get hashCode => Object.hash(runtimeType, token, idUser);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DepositEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FetchAllImplCopyWith<_$FetchAllImpl> get copyWith =>
@@ -603,8 +627,11 @@ abstract class _FetchAll implements DepositEvent {
   @override
   String get token;
   String? get idUser;
+
+  /// Create a copy of DepositEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FetchAllImplCopyWith<_$FetchAllImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -628,6 +655,8 @@ class __$$DeleteImplCopyWithImpl<$Res>
       _$DeleteImpl _value, $Res Function(_$DeleteImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DepositEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -674,7 +703,9 @@ class _$DeleteImpl implements _Delete {
   @override
   int get hashCode => Object.hash(runtimeType, id, token);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DepositEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DeleteImplCopyWith<_$DeleteImpl> get copyWith =>
@@ -763,8 +794,11 @@ abstract class _Delete implements DepositEvent {
   String get id;
   @override
   String get token;
+
+  /// Create a copy of DepositEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeleteImplCopyWith<_$DeleteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -776,7 +810,9 @@ mixin _$DepositState {
   List<DepositModel>? get allData => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DepositState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DepositStateCopyWith<DepositState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -806,6 +842,8 @@ class _$DepositStateCopyWithImpl<$Res, $Val extends DepositState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DepositState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -834,6 +872,8 @@ class _$DepositStateCopyWithImpl<$Res, $Val extends DepositState>
     ) as $Val);
   }
 
+  /// Create a copy of DepositState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DepositResponseModelCopyWith<$Res>? get data {
@@ -873,6 +913,8 @@ class __$$DepositStateImplCopyWithImpl<$Res>
       _$DepositStateImpl _value, $Res Function(_$DepositStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DepositState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -951,7 +993,9 @@ class _$DepositStateImpl implements _DepositState {
   int get hashCode => Object.hash(runtimeType, status, data,
       const DeepCollectionEquality().hash(_allData), error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DepositState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DepositStateImplCopyWith<_$DepositStateImpl> get copyWith =>
@@ -973,8 +1017,11 @@ abstract class _DepositState implements DepositState {
   List<DepositModel>? get allData;
   @override
   String? get error;
+
+  /// Create a copy of DepositState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DepositStateImplCopyWith<_$DepositStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -31,8 +31,12 @@ mixin _$UserPageModel {
   @JsonKey(name: 'data')
   List<UserModel>? get data => throw _privateConstructorUsedError;
 
+  /// Serializes this UserPageModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserPageModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserPageModelCopyWith<UserPageModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -61,6 +65,8 @@ class _$UserPageModelCopyWithImpl<$Res, $Val extends UserPageModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UserPageModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -119,6 +125,8 @@ class __$$UserPageModelImplCopyWithImpl<$Res>
       _$UserPageModelImpl _value, $Res Function(_$UserPageModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserPageModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -210,12 +218,14 @@ class _$UserPageModelImpl implements _UserPageModel {
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, totalData, currentPage, perPage,
       totalPages, const DeepCollectionEquality().hash(_data));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserPageModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserPageModelImplCopyWith<_$UserPageModelImpl> get copyWith =>
@@ -256,8 +266,11 @@ abstract class _UserPageModel implements UserPageModel {
   @override
   @JsonKey(name: 'data')
   List<UserModel>? get data;
+
+  /// Create a copy of UserPageModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserPageModelImplCopyWith<_$UserPageModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

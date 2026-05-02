@@ -31,8 +31,12 @@ mixin _$WasteTypePageModel {
   @JsonKey(name: 'data')
   List<WasteTypesModel>? get data => throw _privateConstructorUsedError;
 
+  /// Serializes this WasteTypePageModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of WasteTypePageModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WasteTypePageModelCopyWith<WasteTypePageModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -61,6 +65,8 @@ class _$WasteTypePageModelCopyWithImpl<$Res, $Val extends WasteTypePageModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WasteTypePageModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -119,6 +125,8 @@ class __$$WasteTypePageModelImplCopyWithImpl<$Res>
       $Res Function(_$WasteTypePageModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WasteTypePageModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -210,12 +218,14 @@ class _$WasteTypePageModelImpl implements _WasteTypePageModel {
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, totalData, currentPage, perPage,
       totalPages, const DeepCollectionEquality().hash(_data));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WasteTypePageModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WasteTypePageModelImplCopyWith<_$WasteTypePageModelImpl> get copyWith =>
@@ -257,8 +267,11 @@ abstract class _WasteTypePageModel implements WasteTypePageModel {
   @override
   @JsonKey(name: 'data')
   List<WasteTypesModel>? get data;
+
+  /// Create a copy of WasteTypePageModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WasteTypePageModelImplCopyWith<_$WasteTypePageModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

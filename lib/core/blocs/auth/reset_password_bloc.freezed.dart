@@ -58,7 +58,9 @@ mixin _$ResetPasswordEvent {
   }) =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ResetPasswordEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ResetPasswordEventCopyWith<ResetPasswordEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -82,6 +84,8 @@ class _$ResetPasswordEventCopyWithImpl<$Res, $Val extends ResetPasswordEvent>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ResetPasswordEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -125,6 +129,8 @@ class __$$ResetImplCopyWithImpl<$Res>
       _$ResetImpl _value, $Res Function(_$ResetImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ResetPasswordEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -186,7 +192,9 @@ class _$ResetImpl implements _Reset {
   int get hashCode =>
       Object.hash(runtimeType, id, newPassword, confirmationNewPassword);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ResetPasswordEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ResetImplCopyWith<_$ResetImpl> get copyWith =>
@@ -267,8 +275,11 @@ abstract class _Reset implements ResetPasswordEvent {
   String get newPassword;
   @override
   String get confirmationNewPassword;
+
+  /// Create a copy of ResetPasswordEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ResetImplCopyWith<_$ResetImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -278,7 +289,9 @@ mixin _$ResetPasswordState {
   GetResetPasswordStatus get status => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ResetPasswordState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ResetPasswordStateCopyWith<ResetPasswordState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -302,6 +315,8 @@ class _$ResetPasswordStateCopyWithImpl<$Res, $Val extends ResetPasswordState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ResetPasswordState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -340,6 +355,8 @@ class __$$ResetPasswordStateImplCopyWithImpl<$Res>
       $Res Function(_$ResetPasswordStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ResetPasswordState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -389,7 +406,9 @@ class _$ResetPasswordStateImpl implements _ResetPasswordState {
   @override
   int get hashCode => Object.hash(runtimeType, status, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ResetPasswordState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ResetPasswordStateImplCopyWith<_$ResetPasswordStateImpl> get copyWith =>
@@ -406,8 +425,11 @@ abstract class _ResetPasswordState implements ResetPasswordState {
   GetResetPasswordStatus get status;
   @override
   String? get error;
+
+  /// Create a copy of ResetPasswordState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ResetPasswordStateImplCopyWith<_$ResetPasswordStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

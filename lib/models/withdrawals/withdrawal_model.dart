@@ -25,7 +25,7 @@ class WithdrawalModel with _$WithdrawalModel {
   const factory WithdrawalModel({
     @JsonKey(name: 'id') int? id,
     @JsonKey(name: 'id_user') String? idUser,
-    @JsonKey(name: 'price') String? price,
+    @JsonKey(name: 'price') double? price,
     @JsonKey(name: 'status') String? status,
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,

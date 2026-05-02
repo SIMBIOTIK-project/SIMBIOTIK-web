@@ -29,8 +29,12 @@ mixin _$DepositRequestModel {
   @JsonKey(name: 'price')
   String? get price => throw _privateConstructorUsedError;
 
+  /// Serializes this DepositRequestModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DepositRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DepositRequestModelCopyWith<DepositRequestModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -58,6 +62,8 @@ class _$DepositRequestModelCopyWithImpl<$Res, $Val extends DepositRequestModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DepositRequestModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -110,6 +116,8 @@ class __$$DepositRequestModelImplCopyWithImpl<$Res>
       $Res Function(_$DepositRequestModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DepositRequestModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -181,12 +189,14 @@ class _$DepositRequestModelImpl implements _DepositRequestModel {
             (identical(other.price, price) || other.price == price));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, idUser, idWasteType, weight, price);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DepositRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DepositRequestModelImplCopyWith<_$DepositRequestModelImpl> get copyWith =>
@@ -223,8 +233,11 @@ abstract class _DepositRequestModel implements DepositRequestModel {
   @override
   @JsonKey(name: 'price')
   String? get price;
+
+  /// Create a copy of DepositRequestModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DepositRequestModelImplCopyWith<_$DepositRequestModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

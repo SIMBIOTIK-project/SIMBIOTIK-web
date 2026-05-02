@@ -16,7 +16,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simbiotik_web/core/blocs/balance/balance_bloc.dart';
 import 'package:simbiotik_web/core/blocs/blocs.dart';
+import 'package:simbiotik_web/core/blocs/sodako/sodako_bloc.dart';
+import 'package:simbiotik_web/data/repository/balance_repository.dart';
+import 'package:simbiotik_web/data/repository/deposit_repository.dart';
+import 'package:simbiotik_web/data/repository/sodako_repository.dart';
+import 'package:simbiotik_web/data/repository/withdrawal_repository.dart';
 import 'package:simbiotik_web/gen/assets.gen.dart';
 import 'package:simbiotik_web/models/models.dart';
 import 'package:simbiotik_web/utils/utils.dart';
@@ -29,7 +35,31 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const DashboardScreenContent();
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<BalanceBloc>(
+          create: (context) => BalanceBloc(
+            BalanceRepository(),
+          ),
+        ),
+        BlocProvider<DepositBloc>(
+          create: (context) => DepositBloc(
+            DepositRepository(),
+          ),
+        ),
+        BlocProvider<WithdrawalBloc>(
+          create: (context) => WithdrawalBloc(
+            WithdrawalRepository(),
+          ),
+        ),
+        BlocProvider<SodakoBloc>(
+          create: (context) => SodakoBloc(
+            SodakoRepository(),
+          ),
+        )
+      ],
+      child: const DashboardScreenContent(),
+    );
   }
 }
 
@@ -59,18 +89,23 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
     const Tab(
       text: 'Penarikan',
     ),
+    const Tab(
+      text: 'Sodakoh',
+    ),
   ];
 
   int currentPageDeposit = 1;
   int totalPagesDeposit = 1;
   int currentPageWithdrawal = 1;
   int totalPagesWithdrawal = 1;
+  int currentPageSodako = 1;
+  int totalPagesSodako = 1;
 
   @override
   void initState() {
     super.initState();
     _loadToken();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
   }
 
   @override
@@ -87,6 +122,8 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
       });
       _handleDepositData(token);
       _handleWithdrawalData(token);
+      _handleBalanceData(token);
+      _handleSodakoData(token);
     }
   }
 
@@ -131,16 +168,28 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
                       const Gap(40),
                       Expanded(
                         child: SingleChildScrollView(
-                          physics: const NeverScrollableScrollPhysics(),
+                          // physics: const NeverScrollableScrollPhysics(),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                'Detail Transaksi',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16,
-                                ),
+                              const Row(
+                                children: [
+                                  Text(
+                                    'Detail Transaksi',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  Gap(8.0),
+                                  Text(
+                                    "* Geser ke kanan untuk melihat detail transaksi",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontStyle: FontStyle.italic,
+                                    ),
+                                  ),
+                                ],
                               ),
                               const Gap(12.0),
                               _buildGeneralCard(context),
@@ -179,7 +228,9 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
                               const Gap(12),
                               _selectedTabBarIndex == 0
                                   ? _buildDepositTable(context)
-                                  : _buildWithdrawalTable(context),
+                                  : _selectedTabBarIndex == 1
+                                      ? _buildWithdrawalTable(context)
+                                      : _buildSodakoTable(context),
                             ],
                           ),
                         ),
@@ -608,55 +659,212 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
   }
 
   _buildGeneralCard(BuildContext context) {
-    final totalDepositPrice = allDeposit.fold<double>(0, (sum, deposit) {
-      return sum + double.parse(deposit.price!);
-    });
-    final totalWithdrawalPrice =
-        allWithdrawal.fold<double>(0, (sum, withdrawal) {
-      return sum + double.parse(withdrawal.price!);
-    });
-    final totalBalance = totalDepositPrice - totalWithdrawalPrice;
-    return Container(
-      width: double.infinity,
-      alignment: Alignment.center,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Wrap(
-          spacing: 8.0,
-          runSpacing: 8.0,
-          children: [
-            GeneralCard(
-              image: Assets.images.cash.image(
-                width: 100,
-                height: 100,
-              ),
-              title: 'Total Saldo',
-              value: totalBalance,
-              note: 'Jumlah saldo diakumulasi otomatis',
+    return BlocBuilder<BalanceBloc, BalanceState>(
+      builder: (context, state) {
+        if (state.status.isLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (state.status.isError) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text('Data tidak ditemukan! ${state.error}'),
+                const Gap(8.0),
+                InkWell(
+                  onTap: () {
+                    _handleBalanceData(token);
+                  },
+                  child: const Text(
+                    'Ulangi',
+                    style: TextStyle(
+                      color: Colors.blue,
+                    ),
+                  ),
+                )
+              ],
             ),
-            Gap(MediaQuery.of(context).size.width * .001),
-            GeneralCard(
-              image: Assets.images.deposit.image(
-                width: 100,
-                height: 100,
-              ),
-              title: 'Total Setoran',
-              value: totalDepositPrice,
-              note: 'Jumlah saldo diakumulasi otomatis',
+          );
+        }
+        return Container(
+          width: double.infinity,
+          alignment: Alignment.center,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Wrap(
+              spacing: 8.0,
+              runSpacing: 8.0,
+              children: [
+                GeneralCard(
+                  image: Assets.images.cash.image(
+                    width: 100,
+                    height: 100,
+                  ),
+                  title: 'Total Saldo',
+                  value: state.data?.result != null
+                      ? (state.data!.result!.saldo!)
+                      : 0,
+                  note: 'Jumlah saldo diakumulasi otomatis',
+                ),
+                Gap(MediaQuery.of(context).size.width * .001),
+                GeneralCard(
+                  image: Assets.images.deposit.image(
+                    width: 100,
+                    height: 100,
+                  ),
+                  title: 'Total Setoran',
+                  value: state.data?.result != null
+                      ? (state.data!.result!.totalDeposit!)
+                      : 0,
+                  note: 'Jumlah saldo diakumulasi otomatis',
+                ),
+                Gap(MediaQuery.of(context).size.width * .001),
+                GeneralCard(
+                  image: Assets.images.withdrawal.image(
+                    width: 100,
+                    height: 100,
+                  ),
+                  title: 'Total Penarikan',
+                  value: state.data?.result != null
+                      ? (state.data!.result!.totalWithdrawal!)
+                      : 0,
+                  note: 'Jumlah saldo diakumulasi otomatis',
+                ),
+                Gap(MediaQuery.of(context).size.width * .001),
+                GeneralCard(
+                  image: Assets.images.withdrawal.image(
+                    width: 100,
+                    height: 100,
+                  ),
+                  title: 'Total Sodakoh',
+                  value: state.data?.result != null
+                      ? (state.data!.result!.totalSodako!)
+                      : 0,
+                  note: 'Jumlah saldo diakumulasi otomatis',
+                ),
+              ],
             ),
-            Gap(MediaQuery.of(context).size.width * .001),
-            GeneralCard(
-              image: Assets.images.withdrawal.image(
-                width: 100,
-                height: 100,
+          ),
+        );
+      },
+    );
+  }
+
+  _buildSodakoTable(BuildContext context) {
+    return BlocBuilder<SodakoBloc, SodakoState>(
+      builder: (context, state) {
+        if (state.status.isLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state.status.isLoaded) {
+          final sodako = state.data?.result?.data ?? [];
+
+          totalPagesSodako = state.data?.result?.totalPages ?? 1;
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  return LayoutBuilder(builder: (context, constraints) {
+                    final double columnSpacing = constraints.maxWidth * 0.25;
+                    return SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: DataTable(
+                        columnSpacing: columnSpacing,
+                        columns: const [
+                          DataColumn(
+                            label: Text("ID Pengguna",
+                                style: TextStyle(fontWeight: FontWeight.w900)),
+                          ),
+                          DataColumn(
+                            label: Text("Nama",
+                                style: TextStyle(fontWeight: FontWeight.w900)),
+                          ),
+                          DataColumn(
+                            label: Text("Harga",
+                                style: TextStyle(fontWeight: FontWeight.w900)),
+                          ),
+                          DataColumn(
+                            label: Text("Admin",
+                                style: TextStyle(fontWeight: FontWeight.w900)),
+                          ),
+                          DataColumn(
+                            label: Text("Tanggal",
+                                style: TextStyle(fontWeight: FontWeight.w900)),
+                          ),
+                        ],
+                        rows: sodako.map<DataRow>((item) {
+                          return DataRow(cells: [
+                            DataCell(Text(item.idUser ?? '-')),
+                            DataCell(Text(item.user?.name ?? '-')),
+                            DataCell(Text(formatCurrency(
+                                double.parse(item.price.toString())))),
+                            DataCell(Text(item.user?.name ?? '-')),
+                            DataCell(
+                              Text(formattedDate(item.createdAt.toString())),
+                            ),
+                          ]);
+                        }).toList(),
+                      ),
+                    );
+                  });
+                },
               ),
-              title: 'Total Penarikan',
-              value: totalWithdrawalPrice,
-              note: 'Jumlah saldo diakumulasi otomatis',
-            ),
-          ],
-        ),
-      ),
+              const Gap(10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.biruSimbiotik,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                      iconColor: Colors.white,
+                    ),
+                    onPressed: currentPageSodako > 1
+                        ? () {
+                            setState(() {
+                              currentPageSodako--;
+                            });
+                            _handlePaginationSodako(token, currentPageSodako);
+                          }
+                        : null,
+                    child: const Icon(Icons.arrow_left),
+                  ),
+                  const Gap(10),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.biruSimbiotik,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                      iconColor: Colors.white,
+                    ),
+                    onPressed: currentPageSodako < totalPagesSodako
+                        ? () {
+                            setState(() {
+                              currentPageSodako++;
+                            });
+                            _handlePaginationSodako(token, currentPageSodako);
+                          }
+                        : null,
+                    child: const Icon(Icons.arrow_right),
+                  ),
+                ],
+              ),
+            ],
+          );
+        } else if (state.status.isError) {
+          return Center(
+            child: Text('Error: ${state.error}'),
+          );
+        }
+
+        return Container();
+      },
     );
   }
 
@@ -700,5 +908,27 @@ class _DashboardScreenContentState extends State<DashboardScreenContent>
 
   _handleDeleteDepositData(String id) {
     context.read<DepositBloc>().add(DepositEvent.delete(id: id, token: token));
+  }
+
+  void _handleBalanceData(String token) {
+    context.read<BalanceBloc>().add(BalanceEvent.fetch(token: token));
+  }
+
+  void _handleSodakoData(String token) {
+    context.read<SodakoBloc>().add(SodakoEvent.fetch(
+          token: token,
+          idUser: '',
+          page: 1,
+        ));
+  }
+
+  void _handlePaginationSodako(String token, int page) {
+    context.read<SodakoBloc>().add(
+          SodakoEvent.fetch(
+            token: token,
+            idUser: '',
+            page: page,
+          ),
+        );
   }
 }

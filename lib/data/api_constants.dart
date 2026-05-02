@@ -22,4 +22,6 @@ class ApiConstants {
   static const String withdrawal = '/withdrawals';
   static const String allUser = '/users';
   static const String reset = '/auth/reset-password';
+  static const String sodako = '/sodakos';
+  static const String balance = '/balances';
 }

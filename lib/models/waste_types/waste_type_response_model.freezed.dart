@@ -28,8 +28,12 @@ mixin _$WasteTypeResponseModel {
   @JsonKey(name: 'result')
   WasteTypePageModel? get result => throw _privateConstructorUsedError;
 
+  /// Serializes this WasteTypeResponseModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of WasteTypeResponseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WasteTypeResponseModelCopyWith<WasteTypeResponseModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -59,6 +63,8 @@ class _$WasteTypeResponseModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WasteTypeResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -82,6 +88,8 @@ class _$WasteTypeResponseModelCopyWithImpl<$Res,
     ) as $Val);
   }
 
+  /// Create a copy of WasteTypeResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $WasteTypePageModelCopyWith<$Res>? get result {
@@ -123,6 +131,8 @@ class __$$WasteTypeResponseModelImplCopyWithImpl<$Res>
       $Res Function(_$WasteTypeResponseModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WasteTypeResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -183,11 +193,13 @@ class _$WasteTypeResponseModelImpl implements _WasteTypeResponseModel {
             (identical(other.result, result) || other.result == result));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, success, message, result);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WasteTypeResponseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WasteTypeResponseModelImplCopyWith<_$WasteTypeResponseModelImpl>
@@ -221,8 +233,11 @@ abstract class _WasteTypeResponseModel implements WasteTypeResponseModel {
   @override
   @JsonKey(name: 'result')
   WasteTypePageModel? get result;
+
+  /// Create a copy of WasteTypeResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WasteTypeResponseModelImplCopyWith<_$WasteTypeResponseModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

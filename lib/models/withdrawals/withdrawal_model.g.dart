@@ -11,7 +11,7 @@ _$WithdrawalModelImpl _$$WithdrawalModelImplFromJson(
     _$WithdrawalModelImpl(
       id: (json['id'] as num?)?.toInt(),
       idUser: json['id_user'] as String?,
-      price: json['price'] as String?,
+      price: (json['price'] as num?)?.toDouble(),
       status: json['status'] as String?,
       createdAt: json['created_at'] == null
           ? null

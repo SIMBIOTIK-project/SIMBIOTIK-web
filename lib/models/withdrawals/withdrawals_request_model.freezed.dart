@@ -28,8 +28,12 @@ mixin _$WithdrawalsRequestModel {
   @JsonKey(name: 'status')
   String? get status => throw _privateConstructorUsedError;
 
+  /// Serializes this WithdrawalsRequestModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of WithdrawalsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WithdrawalsRequestModelCopyWith<WithdrawalsRequestModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -57,6 +61,8 @@ class _$WithdrawalsRequestModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WithdrawalsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -106,6 +112,8 @@ class __$$WithdrawalsRequestModelImplCopyWithImpl<$Res>
       $Res Function(_$WithdrawalsRequestModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WithdrawalsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -166,11 +174,13 @@ class _$WithdrawalsRequestModelImpl implements _WithdrawalsRequestModel {
             (identical(other.status, status) || other.status == status));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, idUser, price, status);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WithdrawalsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WithdrawalsRequestModelImplCopyWith<_$WithdrawalsRequestModelImpl>
@@ -204,8 +214,11 @@ abstract class _WithdrawalsRequestModel implements WithdrawalsRequestModel {
   @override
   @JsonKey(name: 'status')
   String? get status;
+
+  /// Create a copy of WithdrawalsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WithdrawalsRequestModelImplCopyWith<_$WithdrawalsRequestModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

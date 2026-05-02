@@ -25,7 +25,7 @@ mixin _$WithdrawalModel {
   @JsonKey(name: 'id_user')
   String? get idUser => throw _privateConstructorUsedError;
   @JsonKey(name: 'price')
-  String? get price => throw _privateConstructorUsedError;
+  double? get price => throw _privateConstructorUsedError;
   @JsonKey(name: 'status')
   String? get status => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
@@ -37,8 +37,12 @@ mixin _$WithdrawalModel {
   @JsonKey(name: 'created_by')
   String? get createdBy => throw _privateConstructorUsedError;
 
+  /// Serializes this WithdrawalModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of WithdrawalModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WithdrawalModelCopyWith<WithdrawalModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,7 +56,7 @@ abstract class $WithdrawalModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'id') int? id,
       @JsonKey(name: 'id_user') String? idUser,
-      @JsonKey(name: 'price') String? price,
+      @JsonKey(name: 'price') double? price,
       @JsonKey(name: 'status') String? status,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
@@ -72,6 +76,8 @@ class _$WithdrawalModelCopyWithImpl<$Res, $Val extends WithdrawalModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WithdrawalModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -96,7 +102,7 @@ class _$WithdrawalModelCopyWithImpl<$Res, $Val extends WithdrawalModel>
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as double?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -120,6 +126,8 @@ class _$WithdrawalModelCopyWithImpl<$Res, $Val extends WithdrawalModel>
     ) as $Val);
   }
 
+  /// Create a copy of WithdrawalModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserModelCopyWith<$Res>? get user {
@@ -144,7 +152,7 @@ abstract class _$$WithdrawalModelImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'id') int? id,
       @JsonKey(name: 'id_user') String? idUser,
-      @JsonKey(name: 'price') String? price,
+      @JsonKey(name: 'price') double? price,
       @JsonKey(name: 'status') String? status,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
@@ -163,6 +171,8 @@ class __$$WithdrawalModelImplCopyWithImpl<$Res>
       _$WithdrawalModelImpl _value, $Res Function(_$WithdrawalModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WithdrawalModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -187,7 +197,7 @@ class __$$WithdrawalModelImplCopyWithImpl<$Res>
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as double?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -236,7 +246,7 @@ class _$WithdrawalModelImpl implements _WithdrawalModel {
   final String? idUser;
   @override
   @JsonKey(name: 'price')
-  final String? price;
+  final double? price;
   @override
   @JsonKey(name: 'status')
   final String? status;
@@ -276,12 +286,14 @@ class _$WithdrawalModelImpl implements _WithdrawalModel {
                 other.createdBy == createdBy));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, idUser, price, status,
       createdAt, updatedAt, user, createdBy);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WithdrawalModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WithdrawalModelImplCopyWith<_$WithdrawalModelImpl> get copyWith =>
@@ -300,7 +312,7 @@ abstract class _WithdrawalModel implements WithdrawalModel {
   const factory _WithdrawalModel(
           {@JsonKey(name: 'id') final int? id,
           @JsonKey(name: 'id_user') final String? idUser,
-          @JsonKey(name: 'price') final String? price,
+          @JsonKey(name: 'price') final double? price,
           @JsonKey(name: 'status') final String? status,
           @JsonKey(name: 'created_at') final DateTime? createdAt,
           @JsonKey(name: 'updated_at') final DateTime? updatedAt,
@@ -319,7 +331,7 @@ abstract class _WithdrawalModel implements WithdrawalModel {
   String? get idUser;
   @override
   @JsonKey(name: 'price')
-  String? get price;
+  double? get price;
   @override
   @JsonKey(name: 'status')
   String? get status;
@@ -335,8 +347,11 @@ abstract class _WithdrawalModel implements WithdrawalModel {
   @override
   @JsonKey(name: 'created_by')
   String? get createdBy;
+
+  /// Create a copy of WithdrawalModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WithdrawalModelImplCopyWith<_$WithdrawalModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

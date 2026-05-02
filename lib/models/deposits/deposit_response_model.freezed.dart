@@ -27,8 +27,12 @@ mixin _$DepositResponseModel {
   @JsonKey(name: 'result')
   DepositPageModel? get result => throw _privateConstructorUsedError;
 
+  /// Serializes this DepositResponseModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DepositResponseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DepositResponseModelCopyWith<DepositResponseModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -58,6 +62,8 @@ class _$DepositResponseModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DepositResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,6 +87,8 @@ class _$DepositResponseModelCopyWithImpl<$Res,
     ) as $Val);
   }
 
+  /// Create a copy of DepositResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DepositPageModelCopyWith<$Res>? get result {
@@ -119,6 +127,8 @@ class __$$DepositResponseModelImplCopyWithImpl<$Res>
       $Res Function(_$DepositResponseModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DepositResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -179,11 +189,13 @@ class _$DepositResponseModelImpl implements _DepositResponseModel {
             (identical(other.result, result) || other.result == result));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, success, message, result);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DepositResponseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DepositResponseModelImplCopyWith<_$DepositResponseModelImpl>
@@ -218,8 +230,11 @@ abstract class _DepositResponseModel implements DepositResponseModel {
   @override
   @JsonKey(name: 'result')
   DepositPageModel? get result;
+
+  /// Create a copy of DepositResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DepositResponseModelImplCopyWith<_$DepositResponseModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

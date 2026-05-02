@@ -31,8 +31,12 @@ mixin _$DepositPageModel {
   @JsonKey(name: 'data')
   List<DepositModel>? get data => throw _privateConstructorUsedError;
 
+  /// Serializes this DepositPageModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DepositPageModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DepositPageModelCopyWith<DepositPageModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -61,6 +65,8 @@ class _$DepositPageModelCopyWithImpl<$Res, $Val extends DepositPageModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DepositPageModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -119,6 +125,8 @@ class __$$DepositPageModelImplCopyWithImpl<$Res>
       $Res Function(_$DepositPageModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DepositPageModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -210,12 +218,14 @@ class _$DepositPageModelImpl implements _DepositPageModel {
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, totalData, currentPage, perPage,
       totalPages, const DeepCollectionEquality().hash(_data));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DepositPageModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DepositPageModelImplCopyWith<_$DepositPageModelImpl> get copyWith =>
@@ -257,8 +267,11 @@ abstract class _DepositPageModel implements DepositPageModel {
   @override
   @JsonKey(name: 'data')
   List<DepositModel>? get data;
+
+  /// Create a copy of DepositPageModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DepositPageModelImplCopyWith<_$DepositPageModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

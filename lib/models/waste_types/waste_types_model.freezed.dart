@@ -25,14 +25,18 @@ mixin _$WasteTypesModel {
   @JsonKey(name: 'type')
   String? get type => throw _privateConstructorUsedError;
   @JsonKey(name: 'price')
-  String? get price => throw _privateConstructorUsedError;
+  double? get price => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
+  /// Serializes this WasteTypesModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of WasteTypesModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WasteTypesModelCopyWith<WasteTypesModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -46,7 +50,7 @@ abstract class $WasteTypesModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'id') int? id,
       @JsonKey(name: 'type') String? type,
-      @JsonKey(name: 'price') String? price,
+      @JsonKey(name: 'price') double? price,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 }
@@ -61,6 +65,8 @@ class _$WasteTypesModelCopyWithImpl<$Res, $Val extends WasteTypesModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WasteTypesModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -82,7 +88,7 @@ class _$WasteTypesModelCopyWithImpl<$Res, $Val extends WasteTypesModel>
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as double?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -106,7 +112,7 @@ abstract class _$$WasteTypesModelImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'id') int? id,
       @JsonKey(name: 'type') String? type,
-      @JsonKey(name: 'price') String? price,
+      @JsonKey(name: 'price') double? price,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 }
@@ -119,6 +125,8 @@ class __$$WasteTypesModelImplCopyWithImpl<$Res>
       _$WasteTypesModelImpl _value, $Res Function(_$WasteTypesModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WasteTypesModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -140,7 +148,7 @@ class __$$WasteTypesModelImplCopyWithImpl<$Res>
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as double?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -174,7 +182,7 @@ class _$WasteTypesModelImpl implements _WasteTypesModel {
   final String? type;
   @override
   @JsonKey(name: 'price')
-  final String? price;
+  final double? price;
   @override
   @JsonKey(name: 'created_at')
   final DateTime? createdAt;
@@ -201,12 +209,14 @@ class _$WasteTypesModelImpl implements _WasteTypesModel {
                 other.updatedAt == updatedAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, type, price, createdAt, updatedAt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WasteTypesModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WasteTypesModelImplCopyWith<_$WasteTypesModelImpl> get copyWith =>
@@ -225,7 +235,7 @@ abstract class _WasteTypesModel implements WasteTypesModel {
   const factory _WasteTypesModel(
           {@JsonKey(name: 'id') final int? id,
           @JsonKey(name: 'type') final String? type,
-          @JsonKey(name: 'price') final String? price,
+          @JsonKey(name: 'price') final double? price,
           @JsonKey(name: 'created_at') final DateTime? createdAt,
           @JsonKey(name: 'updated_at') final DateTime? updatedAt}) =
       _$WasteTypesModelImpl;
@@ -241,15 +251,18 @@ abstract class _WasteTypesModel implements WasteTypesModel {
   String? get type;
   @override
   @JsonKey(name: 'price')
-  String? get price;
+  double? get price;
   @override
   @JsonKey(name: 'created_at')
   DateTime? get createdAt;
   @override
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt;
+
+  /// Create a copy of WasteTypesModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WasteTypesModelImplCopyWith<_$WasteTypesModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

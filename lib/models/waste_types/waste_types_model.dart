@@ -24,7 +24,7 @@ class WasteTypesModel with _$WasteTypesModel {
   const factory WasteTypesModel({
     @JsonKey(name: 'id') int? id,
     @JsonKey(name: 'type') String? type,
-    @JsonKey(name: 'price') String? price,
+    @JsonKey(name: 'price') double? price,
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
   }) = _WasteTypesModel;

@@ -31,8 +31,12 @@ mixin _$WithdrawalPageModel {
   @JsonKey(name: 'data')
   List<WithdrawalModel>? get data => throw _privateConstructorUsedError;
 
+  /// Serializes this WithdrawalPageModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of WithdrawalPageModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WithdrawalPageModelCopyWith<WithdrawalPageModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -61,6 +65,8 @@ class _$WithdrawalPageModelCopyWithImpl<$Res, $Val extends WithdrawalPageModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WithdrawalPageModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -119,6 +125,8 @@ class __$$WithdrawalPageModelImplCopyWithImpl<$Res>
       $Res Function(_$WithdrawalPageModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WithdrawalPageModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -210,12 +218,14 @@ class _$WithdrawalPageModelImpl implements _WithdrawalPageModel {
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, totalData, currentPage, perPage,
       totalPages, const DeepCollectionEquality().hash(_data));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WithdrawalPageModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WithdrawalPageModelImplCopyWith<_$WithdrawalPageModelImpl> get copyWith =>
@@ -257,8 +267,11 @@ abstract class _WithdrawalPageModel implements WithdrawalPageModel {
   @override
   @JsonKey(name: 'data')
   List<WithdrawalModel>? get data;
+
+  /// Create a copy of WithdrawalPageModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WithdrawalPageModelImplCopyWith<_$WithdrawalPageModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

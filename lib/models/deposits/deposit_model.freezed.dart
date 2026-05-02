@@ -27,9 +27,9 @@ mixin _$DepositModel {
   @JsonKey(name: 'id_wastetype')
   String? get idWastetype => throw _privateConstructorUsedError;
   @JsonKey(name: 'weight')
-  String? get weight => throw _privateConstructorUsedError;
+  double? get weight => throw _privateConstructorUsedError;
   @JsonKey(name: 'price')
-  String? get price => throw _privateConstructorUsedError;
+  double? get price => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
@@ -41,8 +41,12 @@ mixin _$DepositModel {
   @JsonKey(name: 'created_by')
   String? get createdBy => throw _privateConstructorUsedError;
 
+  /// Serializes this DepositModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DepositModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DepositModelCopyWith<DepositModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -57,8 +61,8 @@ abstract class $DepositModelCopyWith<$Res> {
       {@JsonKey(name: 'id') int? id,
       @JsonKey(name: 'id_user') String? idUser,
       @JsonKey(name: 'id_wastetype') String? idWastetype,
-      @JsonKey(name: 'weight') String? weight,
-      @JsonKey(name: 'price') String? price,
+      @JsonKey(name: 'weight') double? weight,
+      @JsonKey(name: 'price') double? price,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       @JsonKey(name: 'user') UserModel? user,
@@ -79,6 +83,8 @@ class _$DepositModelCopyWithImpl<$Res, $Val extends DepositModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DepositModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -109,11 +115,11 @@ class _$DepositModelCopyWithImpl<$Res, $Val extends DepositModel>
       weight: freezed == weight
           ? _value.weight
           : weight // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as double?,
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as double?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -137,6 +143,8 @@ class _$DepositModelCopyWithImpl<$Res, $Val extends DepositModel>
     ) as $Val);
   }
 
+  /// Create a copy of DepositModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserModelCopyWith<$Res>? get user {
@@ -149,6 +157,8 @@ class _$DepositModelCopyWithImpl<$Res, $Val extends DepositModel>
     });
   }
 
+  /// Create a copy of DepositModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $WasteTypesModelCopyWith<$Res>? get wasteType {
@@ -174,8 +184,8 @@ abstract class _$$DepositModelImplCopyWith<$Res>
       {@JsonKey(name: 'id') int? id,
       @JsonKey(name: 'id_user') String? idUser,
       @JsonKey(name: 'id_wastetype') String? idWastetype,
-      @JsonKey(name: 'weight') String? weight,
-      @JsonKey(name: 'price') String? price,
+      @JsonKey(name: 'weight') double? weight,
+      @JsonKey(name: 'price') double? price,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       @JsonKey(name: 'user') UserModel? user,
@@ -196,6 +206,8 @@ class __$$DepositModelImplCopyWithImpl<$Res>
       _$DepositModelImpl _value, $Res Function(_$DepositModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DepositModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -226,11 +238,11 @@ class __$$DepositModelImplCopyWithImpl<$Res>
       weight: freezed == weight
           ? _value.weight
           : weight // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as double?,
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as double?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -284,10 +296,10 @@ class _$DepositModelImpl implements _DepositModel {
   final String? idWastetype;
   @override
   @JsonKey(name: 'weight')
-  final String? weight;
+  final double? weight;
   @override
   @JsonKey(name: 'price')
-  final String? price;
+  final double? price;
   @override
   @JsonKey(name: 'created_at')
   final DateTime? createdAt;
@@ -331,12 +343,14 @@ class _$DepositModelImpl implements _DepositModel {
                 other.createdBy == createdBy));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, idUser, idWastetype, weight,
       price, createdAt, updatedAt, user, wasteType, createdBy);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DepositModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DepositModelImplCopyWith<_$DepositModelImpl> get copyWith =>
@@ -355,8 +369,8 @@ abstract class _DepositModel implements DepositModel {
           {@JsonKey(name: 'id') final int? id,
           @JsonKey(name: 'id_user') final String? idUser,
           @JsonKey(name: 'id_wastetype') final String? idWastetype,
-          @JsonKey(name: 'weight') final String? weight,
-          @JsonKey(name: 'price') final String? price,
+          @JsonKey(name: 'weight') final double? weight,
+          @JsonKey(name: 'price') final double? price,
           @JsonKey(name: 'created_at') final DateTime? createdAt,
           @JsonKey(name: 'updated_at') final DateTime? updatedAt,
           @JsonKey(name: 'user') final UserModel? user,
@@ -378,10 +392,10 @@ abstract class _DepositModel implements DepositModel {
   String? get idWastetype;
   @override
   @JsonKey(name: 'weight')
-  String? get weight;
+  double? get weight;
   @override
   @JsonKey(name: 'price')
-  String? get price;
+  double? get price;
   @override
   @JsonKey(name: 'created_at')
   DateTime? get createdAt;
@@ -397,8 +411,11 @@ abstract class _DepositModel implements DepositModel {
   @override
   @JsonKey(name: 'created_by')
   String? get createdBy;
+
+  /// Create a copy of DepositModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DepositModelImplCopyWith<_$DepositModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
