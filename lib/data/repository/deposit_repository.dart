@@ -14,11 +14,18 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:simbiotik_web/core/networks/networks.dart';
+import 'package:simbiotik_web/core/storages/storage.dart';
 import 'package:simbiotik_web/data/data.dart';
 import 'package:simbiotik_web/models/models.dart';
 
 class DepositRepository {
   final Dio _dio = Dio()
+    ..interceptors.add(
+      AuthInterceptor(
+        AuthStorage(),
+      ),
+    )
     ..interceptors.add(LogInterceptor(
       request: true,
       requestBody: true,
@@ -32,16 +39,10 @@ class DepositRepository {
 
   Future<DepositRequestModel> postDeposit(
     DepositRequestModel request,
-    String token,
   ) async {
     final response = await _dio.post(
       api,
       data: request.toJson(),
-      options: Options(
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      ),
     );
 
     if (response.statusCode == 201) {
@@ -51,39 +52,64 @@ class DepositRepository {
     }
   }
 
-  Future<DepositResponseModel> getDeposit(
-    String token,
+  Future<DepositResponseModel> getDeposit({
     String? idUser,
-    int? page,
-  ) async {
+    int page = 1,
+    String? wasteTypeId,
+    String? date,
+    String? startDate,
+    String? endDate,
+  }) async {
+    final queryParameters = <String, dynamic>{
+      'page': page,
+    };
+
+    if (idUser != null && idUser.isNotEmpty) {
+      queryParameters['user_id'] = idUser;
+    }
+
+    if (wasteTypeId != null && wasteTypeId.isNotEmpty) {
+      queryParameters['waste_type_id'] = wasteTypeId;
+    }
+
+    if (date != null && date.isNotEmpty) {
+      queryParameters['date'] = date;
+    }
+
+    if (startDate != null && startDate.isNotEmpty) {
+      queryParameters['start_date'] = startDate;
+    }
+
+    if (endDate != null && endDate.isNotEmpty) {
+      queryParameters['end_date'] = endDate;
+    }
+
     final response = await _dio.get(
       api,
-      options: Options(
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      ),
-      queryParameters: {
-        'id_user': idUser,
-        'page': page,
-      },
+      queryParameters: queryParameters,
     );
 
     if (response.statusCode == 200) {
-      return DepositResponseModel.fromJson(response.data['data']);
-    } else {
-      throw Exception('Gagal memuat data');
+      return DepositResponseModel.fromJson(
+        response.data['data'],
+      );
     }
+
+    throw Exception('Gagal memuat data');
   }
 
   Future<List<DepositModel>> getAllDeposits(
-      String token, String? idUser) async {
+    String? idUser,
+  ) async {
     List<DepositModel> allDeposits = [];
     int? currentPage = 1;
     int? totalPages;
 
     do {
-      final response = await getDeposit(token, idUser, currentPage);
+      final response = await getDeposit(
+        idUser: idUser,
+        page: currentPage ?? 1,
+      );
       allDeposits.addAll(response.result?.data ?? []);
       totalPages = response.result?.totalPages;
       currentPage = (currentPage ?? 1) + 1;
@@ -93,16 +119,10 @@ class DepositRepository {
   }
 
   Future<void> delete(
-    String token,
     String id,
   ) async {
     final response = await _dio.delete(
       '$api/$id',
-      options: Options(
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      ),
     );
 
     if (response.statusCode != 200) {

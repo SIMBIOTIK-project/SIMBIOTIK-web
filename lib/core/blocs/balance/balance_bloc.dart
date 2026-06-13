@@ -36,9 +36,7 @@ class BalanceBloc extends Bloc<BalanceEvent, BalanceState> {
     ));
 
     try {
-      final response = await _balanceRepository.getBalance(
-        event.token,
-      );
+      final response = await _balanceRepository.getBalance();
       emit(
         state.copyWith(
           status: BalanceStatus.loaded,

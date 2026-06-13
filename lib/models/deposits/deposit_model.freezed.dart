@@ -25,7 +25,7 @@ mixin _$DepositModel {
   @JsonKey(name: 'id_user')
   String? get idUser => throw _privateConstructorUsedError;
   @JsonKey(name: 'id_wastetype')
-  String? get idWastetype => throw _privateConstructorUsedError;
+  String? get idWastetype => throw _privateConstructorUsedError; // dev=int
   @JsonKey(name: 'weight')
   double? get weight => throw _privateConstructorUsedError;
   @JsonKey(name: 'price')
@@ -294,6 +294,7 @@ class _$DepositModelImpl implements _DepositModel {
   @override
   @JsonKey(name: 'id_wastetype')
   final String? idWastetype;
+// dev=int
   @override
   @JsonKey(name: 'weight')
   final double? weight;
@@ -389,7 +390,7 @@ abstract class _DepositModel implements DepositModel {
   String? get idUser;
   @override
   @JsonKey(name: 'id_wastetype')
-  String? get idWastetype;
+  String? get idWastetype; // dev=int
   @override
   @JsonKey(name: 'weight')
   double? get weight;

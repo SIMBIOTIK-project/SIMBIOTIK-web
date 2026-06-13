@@ -17,25 +17,21 @@ part of 'user_bloc.dart';
 @freezed
 class UserEvent with _$UserEvent {
   const factory UserEvent.fetch({
-    required String token,
     String? status,
     String? name,
     int? page,
   }) = _Fetch;
 
   const factory UserEvent.fetchAll({
-    required String token,
     String? status,
     String? name,
   }) = _FetchAll;
 
   const factory UserEvent.fetchId({
-    required String token,
     String? id,
   }) = _FetchId;
 
   const factory UserEvent.edit({
-    required String token,
     required String id,
     required String name,
     required String email,
@@ -49,6 +45,5 @@ class UserEvent with _$UserEvent {
 
   const factory UserEvent.delete({
     required String id,
-    required String token,
   }) = _Delete;
 }

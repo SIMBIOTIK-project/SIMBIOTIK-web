@@ -37,7 +37,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
     try {
       final response = await _userRepository.getUser(
-        event.token,
         event.status,
         event.name,
         event.page,
@@ -62,7 +61,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
     try {
       final List<UserModel> users = await _userRepository.getAllUsers(
-        event.token,
         event.status,
         event.name,
       );
@@ -88,7 +86,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
     try {
       final response = await _userRepository.getUserId(
-        event.token,
         event.id,
       );
 
@@ -111,7 +108,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
     try {
       final response = await _userRepository.edit(
-        event.token,
         event.id,
         event.name,
         event.email,
@@ -135,23 +131,36 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     }
   }
 
-  Future<void> _onDelete(_Delete event, Emitter<UserState> emit) async {
-    emit(state.copyWith(status: UserStateStatus.loading, error: ''));
+  Future<void> _onDelete(
+    _Delete event,
+    Emitter<UserState> emit,
+  ) async {
+    emit(state.copyWith(
+      status: UserStateStatus.loading,
+    ));
 
     try {
-      await _userRepository.delete(
-        event.token,
-        event.id,
+      await _userRepository.delete(event.id);
+
+      final response = await _userRepository.getUser(
+        null,
+        null,
+        1,
       );
 
-      emit(state.copyWith(
-        status: UserStateStatus.loaded,
-      ));
+      emit(
+        state.copyWith(
+          status: UserStateStatus.loaded,
+          data: response,
+        ),
+      );
     } catch (e) {
-      emit(state.copyWith(
-        status: UserStateStatus.error,
-        error: e.toString(),
-      ));
+      emit(
+        state.copyWith(
+          status: UserStateStatus.error,
+          error: e.toString(),
+        ),
+      );
     }
   }
 }

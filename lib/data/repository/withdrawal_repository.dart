@@ -14,11 +14,18 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:simbiotik_web/core/networks/auth_interceptor.dart';
+import 'package:simbiotik_web/core/storages/storage.dart';
 import 'package:simbiotik_web/data/data.dart';
 import 'package:simbiotik_web/models/models.dart';
 
 class WithdrawalRepository {
   final Dio _dio = Dio()
+    ..interceptors.add(
+      AuthInterceptor(
+        AuthStorage(),
+      ),
+    )
     ..interceptors.add(LogInterceptor(
       request: true,
       requestBody: true,
@@ -31,16 +38,10 @@ class WithdrawalRepository {
 
   Future<WithdrawalsRequestModel> postWithdrawal(
     WithdrawalsRequestModel request,
-    String token,
   ) async {
     final response = await _dio.post(
       api,
       data: request.toJson(),
-      options: Options(
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      ),
     );
 
     if (response.statusCode == 201) {
@@ -50,39 +51,59 @@ class WithdrawalRepository {
     }
   }
 
-  Future<WithdrawalResponseModel> getWithdrawal(
-    String token,
+  Future<WithdrawalResponseModel> getWithdrawal({
     String? idUser,
     int? page,
-  ) async {
+    String? date,
+    String? startDate,
+    String? endDate,
+  }) async {
+    final queryParameters = <String, dynamic>{
+      'page': page,
+    };
+
+    if (idUser != null && idUser.isNotEmpty) {
+      queryParameters['user_id'] = idUser;
+    }
+
+    if (date != null && date.isNotEmpty) {
+      queryParameters['date'] = date;
+    }
+
+    if (startDate != null && startDate.isNotEmpty) {
+      queryParameters['start_date'] = startDate;
+    }
+
+    if (endDate != null && endDate.isNotEmpty) {
+      queryParameters['end_date'] = endDate;
+    }
+
     final response = await _dio.get(
       api,
-      options: Options(
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      ),
-      queryParameters: {
-        'id_user': idUser,
-        'page': page,
-      },
+      queryParameters: queryParameters,
     );
 
     if (response.statusCode == 200) {
-      return WithdrawalResponseModel.fromJson(response.data['data']);
-    } else {
-      throw Exception('Gagal memuat data');
+      return WithdrawalResponseModel.fromJson(
+        response.data['data'],
+      );
     }
+
+    throw Exception('Gagal memuat data');
   }
 
   Future<List<WithdrawalModel>> getAllWithdrawal(
-      String token, String? idUser) async {
+    String? idUser,
+  ) async {
     List<WithdrawalModel> allWithdrawals = [];
     int? currentPage = 1;
     int? totalPages;
 
     do {
-      final response = await getWithdrawal(token, idUser, currentPage);
+      final response = await getWithdrawal(
+        idUser: idUser,
+        page: currentPage ?? 1,
+      );
       allWithdrawals.addAll(response.result?.data ?? []);
       totalPages = response.result?.totalPages;
       currentPage = (currentPage ?? 1) + 1;
@@ -92,16 +113,10 @@ class WithdrawalRepository {
   }
 
   Future<void> delete(
-    String token,
     String id,
   ) async {
     final response = await _dio.delete(
       '$api/$id',
-      options: Options(
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      ),
     );
 
     if (response.statusCode != 200) {

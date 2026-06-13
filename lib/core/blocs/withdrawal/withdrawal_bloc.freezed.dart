@@ -16,32 +16,34 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$WithdrawalEvent {
-  String get token => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(WithdrawalsRequestModel request, String token)
-        postWithdrawal,
-    required TResult Function(String token, String? idUser, int? page) fetch,
-    required TResult Function(String token, String? idUser) fetchAll,
-    required TResult Function(String id, String token) delete,
+    required TResult Function(WithdrawalsRequestModel request) postWithdrawal,
+    required TResult Function(String? idUser, int? page, String? date,
+            String? startDate, String? endDate)
+        fetch,
+    required TResult Function(String? idUser) fetchAll,
+    required TResult Function(String id) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(WithdrawalsRequestModel request, String token)?
-        postWithdrawal,
-    TResult? Function(String token, String? idUser, int? page)? fetch,
-    TResult? Function(String token, String? idUser)? fetchAll,
-    TResult? Function(String id, String token)? delete,
+    TResult? Function(WithdrawalsRequestModel request)? postWithdrawal,
+    TResult? Function(String? idUser, int? page, String? date,
+            String? startDate, String? endDate)?
+        fetch,
+    TResult? Function(String? idUser)? fetchAll,
+    TResult? Function(String id)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(WithdrawalsRequestModel request, String token)?
-        postWithdrawal,
-    TResult Function(String token, String? idUser, int? page)? fetch,
-    TResult Function(String token, String? idUser)? fetchAll,
-    TResult Function(String id, String token)? delete,
+    TResult Function(WithdrawalsRequestModel request)? postWithdrawal,
+    TResult Function(String? idUser, int? page, String? date, String? startDate,
+            String? endDate)?
+        fetch,
+    TResult Function(String? idUser)? fetchAll,
+    TResult Function(String id)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -70,12 +72,6 @@ mixin _$WithdrawalEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
-  /// Create a copy of WithdrawalEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $WithdrawalEventCopyWith<WithdrawalEvent> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -83,8 +79,6 @@ abstract class $WithdrawalEventCopyWith<$Res> {
   factory $WithdrawalEventCopyWith(
           WithdrawalEvent value, $Res Function(WithdrawalEvent) then) =
       _$WithdrawalEventCopyWithImpl<$Res, WithdrawalEvent>;
-  @useResult
-  $Res call({String token});
 }
 
 /// @nodoc
@@ -99,29 +93,15 @@ class _$WithdrawalEventCopyWithImpl<$Res, $Val extends WithdrawalEvent>
 
   /// Create a copy of WithdrawalEvent
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? token = null,
-  }) {
-    return _then(_value.copyWith(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$PostWithdrawalImplCopyWith<$Res>
-    implements $WithdrawalEventCopyWith<$Res> {
+abstract class _$$PostWithdrawalImplCopyWith<$Res> {
   factory _$$PostWithdrawalImplCopyWith(_$PostWithdrawalImpl value,
           $Res Function(_$PostWithdrawalImpl) then) =
       __$$PostWithdrawalImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({WithdrawalsRequestModel request, String token});
+  $Res call({WithdrawalsRequestModel request});
 
   $WithdrawalsRequestModelCopyWith<$Res> get request;
 }
@@ -140,17 +120,12 @@ class __$$PostWithdrawalImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? request = null,
-    Object? token = null,
   }) {
     return _then(_$PostWithdrawalImpl(
       request: null == request
           ? _value.request
           : request // ignore: cast_nullable_to_non_nullable
               as WithdrawalsRequestModel,
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 
@@ -168,16 +143,14 @@ class __$$PostWithdrawalImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$PostWithdrawalImpl implements _PostWithdrawal {
-  const _$PostWithdrawalImpl({required this.request, required this.token});
+  const _$PostWithdrawalImpl({required this.request});
 
   @override
   final WithdrawalsRequestModel request;
-  @override
-  final String token;
 
   @override
   String toString() {
-    return 'WithdrawalEvent.postWithdrawal(request: $request, token: $token)';
+    return 'WithdrawalEvent.postWithdrawal(request: $request)';
   }
 
   @override
@@ -185,12 +158,11 @@ class _$PostWithdrawalImpl implements _PostWithdrawal {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PostWithdrawalImpl &&
-            (identical(other.request, request) || other.request == request) &&
-            (identical(other.token, token) || other.token == token));
+            (identical(other.request, request) || other.request == request));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, request, token);
+  int get hashCode => Object.hash(runtimeType, request);
 
   /// Create a copy of WithdrawalEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -204,39 +176,42 @@ class _$PostWithdrawalImpl implements _PostWithdrawal {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(WithdrawalsRequestModel request, String token)
-        postWithdrawal,
-    required TResult Function(String token, String? idUser, int? page) fetch,
-    required TResult Function(String token, String? idUser) fetchAll,
-    required TResult Function(String id, String token) delete,
+    required TResult Function(WithdrawalsRequestModel request) postWithdrawal,
+    required TResult Function(String? idUser, int? page, String? date,
+            String? startDate, String? endDate)
+        fetch,
+    required TResult Function(String? idUser) fetchAll,
+    required TResult Function(String id) delete,
   }) {
-    return postWithdrawal(request, token);
+    return postWithdrawal(request);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(WithdrawalsRequestModel request, String token)?
-        postWithdrawal,
-    TResult? Function(String token, String? idUser, int? page)? fetch,
-    TResult? Function(String token, String? idUser)? fetchAll,
-    TResult? Function(String id, String token)? delete,
+    TResult? Function(WithdrawalsRequestModel request)? postWithdrawal,
+    TResult? Function(String? idUser, int? page, String? date,
+            String? startDate, String? endDate)?
+        fetch,
+    TResult? Function(String? idUser)? fetchAll,
+    TResult? Function(String id)? delete,
   }) {
-    return postWithdrawal?.call(request, token);
+    return postWithdrawal?.call(request);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(WithdrawalsRequestModel request, String token)?
-        postWithdrawal,
-    TResult Function(String token, String? idUser, int? page)? fetch,
-    TResult Function(String token, String? idUser)? fetchAll,
-    TResult Function(String id, String token)? delete,
+    TResult Function(WithdrawalsRequestModel request)? postWithdrawal,
+    TResult Function(String? idUser, int? page, String? date, String? startDate,
+            String? endDate)?
+        fetch,
+    TResult Function(String? idUser)? fetchAll,
+    TResult Function(String id)? delete,
     required TResult orElse(),
   }) {
     if (postWithdrawal != null) {
-      return postWithdrawal(request, token);
+      return postWithdrawal(request);
     }
     return orElse();
   }
@@ -281,30 +256,29 @@ class _$PostWithdrawalImpl implements _PostWithdrawal {
 
 abstract class _PostWithdrawal implements WithdrawalEvent {
   const factory _PostWithdrawal(
-      {required final WithdrawalsRequestModel request,
-      required final String token}) = _$PostWithdrawalImpl;
+      {required final WithdrawalsRequestModel request}) = _$PostWithdrawalImpl;
 
   WithdrawalsRequestModel get request;
-  @override
-  String get token;
 
   /// Create a copy of WithdrawalEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PostWithdrawalImplCopyWith<_$PostWithdrawalImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FetchImplCopyWith<$Res>
-    implements $WithdrawalEventCopyWith<$Res> {
+abstract class _$$FetchImplCopyWith<$Res> {
   factory _$$FetchImplCopyWith(
           _$FetchImpl value, $Res Function(_$FetchImpl) then) =
       __$$FetchImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({String token, String? idUser, int? page});
+  $Res call(
+      {String? idUser,
+      int? page,
+      String? date,
+      String? startDate,
+      String? endDate});
 }
 
 /// @nodoc
@@ -320,15 +294,13 @@ class __$$FetchImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = null,
     Object? idUser = freezed,
     Object? page = freezed,
+    Object? date = freezed,
+    Object? startDate = freezed,
+    Object? endDate = freezed,
   }) {
     return _then(_$FetchImpl(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
       idUser: freezed == idUser
           ? _value.idUser
           : idUser // ignore: cast_nullable_to_non_nullable
@@ -337,6 +309,18 @@ class __$$FetchImplCopyWithImpl<$Res>
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as int?,
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String?,
+      startDate: freezed == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      endDate: freezed == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -344,18 +328,23 @@ class __$$FetchImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FetchImpl implements _Fetch {
-  const _$FetchImpl({required this.token, this.idUser, this.page});
+  const _$FetchImpl(
+      {this.idUser, this.page, this.date, this.startDate, this.endDate});
 
-  @override
-  final String token;
   @override
   final String? idUser;
   @override
   final int? page;
+  @override
+  final String? date;
+  @override
+  final String? startDate;
+  @override
+  final String? endDate;
 
   @override
   String toString() {
-    return 'WithdrawalEvent.fetch(token: $token, idUser: $idUser, page: $page)';
+    return 'WithdrawalEvent.fetch(idUser: $idUser, page: $page, date: $date, startDate: $startDate, endDate: $endDate)';
   }
 
   @override
@@ -363,13 +352,17 @@ class _$FetchImpl implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FetchImpl &&
-            (identical(other.token, token) || other.token == token) &&
             (identical(other.idUser, idUser) || other.idUser == idUser) &&
-            (identical(other.page, page) || other.page == page));
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.date, date) || other.date == date) &&
+            (identical(other.startDate, startDate) ||
+                other.startDate == startDate) &&
+            (identical(other.endDate, endDate) || other.endDate == endDate));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, token, idUser, page);
+  int get hashCode =>
+      Object.hash(runtimeType, idUser, page, date, startDate, endDate);
 
   /// Create a copy of WithdrawalEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -382,39 +375,42 @@ class _$FetchImpl implements _Fetch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(WithdrawalsRequestModel request, String token)
-        postWithdrawal,
-    required TResult Function(String token, String? idUser, int? page) fetch,
-    required TResult Function(String token, String? idUser) fetchAll,
-    required TResult Function(String id, String token) delete,
+    required TResult Function(WithdrawalsRequestModel request) postWithdrawal,
+    required TResult Function(String? idUser, int? page, String? date,
+            String? startDate, String? endDate)
+        fetch,
+    required TResult Function(String? idUser) fetchAll,
+    required TResult Function(String id) delete,
   }) {
-    return fetch(token, idUser, page);
+    return fetch(idUser, page, date, startDate, endDate);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(WithdrawalsRequestModel request, String token)?
-        postWithdrawal,
-    TResult? Function(String token, String? idUser, int? page)? fetch,
-    TResult? Function(String token, String? idUser)? fetchAll,
-    TResult? Function(String id, String token)? delete,
+    TResult? Function(WithdrawalsRequestModel request)? postWithdrawal,
+    TResult? Function(String? idUser, int? page, String? date,
+            String? startDate, String? endDate)?
+        fetch,
+    TResult? Function(String? idUser)? fetchAll,
+    TResult? Function(String id)? delete,
   }) {
-    return fetch?.call(token, idUser, page);
+    return fetch?.call(idUser, page, date, startDate, endDate);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(WithdrawalsRequestModel request, String token)?
-        postWithdrawal,
-    TResult Function(String token, String? idUser, int? page)? fetch,
-    TResult Function(String token, String? idUser)? fetchAll,
-    TResult Function(String id, String token)? delete,
+    TResult Function(WithdrawalsRequestModel request)? postWithdrawal,
+    TResult Function(String? idUser, int? page, String? date, String? startDate,
+            String? endDate)?
+        fetch,
+    TResult Function(String? idUser)? fetchAll,
+    TResult Function(String id)? delete,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(token, idUser, page);
+      return fetch(idUser, page, date, startDate, endDate);
     }
     return orElse();
   }
@@ -459,32 +455,32 @@ class _$FetchImpl implements _Fetch {
 
 abstract class _Fetch implements WithdrawalEvent {
   const factory _Fetch(
-      {required final String token,
-      final String? idUser,
-      final int? page}) = _$FetchImpl;
+      {final String? idUser,
+      final int? page,
+      final String? date,
+      final String? startDate,
+      final String? endDate}) = _$FetchImpl;
 
-  @override
-  String get token;
   String? get idUser;
   int? get page;
+  String? get date;
+  String? get startDate;
+  String? get endDate;
 
   /// Create a copy of WithdrawalEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FetchAllImplCopyWith<$Res>
-    implements $WithdrawalEventCopyWith<$Res> {
+abstract class _$$FetchAllImplCopyWith<$Res> {
   factory _$$FetchAllImplCopyWith(
           _$FetchAllImpl value, $Res Function(_$FetchAllImpl) then) =
       __$$FetchAllImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({String token, String? idUser});
+  $Res call({String? idUser});
 }
 
 /// @nodoc
@@ -500,14 +496,9 @@ class __$$FetchAllImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = null,
     Object? idUser = freezed,
   }) {
     return _then(_$FetchAllImpl(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
       idUser: freezed == idUser
           ? _value.idUser
           : idUser // ignore: cast_nullable_to_non_nullable
@@ -519,16 +510,14 @@ class __$$FetchAllImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FetchAllImpl implements _FetchAll {
-  const _$FetchAllImpl({required this.token, this.idUser});
+  const _$FetchAllImpl({this.idUser});
 
-  @override
-  final String token;
   @override
   final String? idUser;
 
   @override
   String toString() {
-    return 'WithdrawalEvent.fetchAll(token: $token, idUser: $idUser)';
+    return 'WithdrawalEvent.fetchAll(idUser: $idUser)';
   }
 
   @override
@@ -536,12 +525,11 @@ class _$FetchAllImpl implements _FetchAll {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FetchAllImpl &&
-            (identical(other.token, token) || other.token == token) &&
             (identical(other.idUser, idUser) || other.idUser == idUser));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, token, idUser);
+  int get hashCode => Object.hash(runtimeType, idUser);
 
   /// Create a copy of WithdrawalEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -554,39 +542,42 @@ class _$FetchAllImpl implements _FetchAll {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(WithdrawalsRequestModel request, String token)
-        postWithdrawal,
-    required TResult Function(String token, String? idUser, int? page) fetch,
-    required TResult Function(String token, String? idUser) fetchAll,
-    required TResult Function(String id, String token) delete,
+    required TResult Function(WithdrawalsRequestModel request) postWithdrawal,
+    required TResult Function(String? idUser, int? page, String? date,
+            String? startDate, String? endDate)
+        fetch,
+    required TResult Function(String? idUser) fetchAll,
+    required TResult Function(String id) delete,
   }) {
-    return fetchAll(token, idUser);
+    return fetchAll(idUser);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(WithdrawalsRequestModel request, String token)?
-        postWithdrawal,
-    TResult? Function(String token, String? idUser, int? page)? fetch,
-    TResult? Function(String token, String? idUser)? fetchAll,
-    TResult? Function(String id, String token)? delete,
+    TResult? Function(WithdrawalsRequestModel request)? postWithdrawal,
+    TResult? Function(String? idUser, int? page, String? date,
+            String? startDate, String? endDate)?
+        fetch,
+    TResult? Function(String? idUser)? fetchAll,
+    TResult? Function(String id)? delete,
   }) {
-    return fetchAll?.call(token, idUser);
+    return fetchAll?.call(idUser);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(WithdrawalsRequestModel request, String token)?
-        postWithdrawal,
-    TResult Function(String token, String? idUser, int? page)? fetch,
-    TResult Function(String token, String? idUser)? fetchAll,
-    TResult Function(String id, String token)? delete,
+    TResult Function(WithdrawalsRequestModel request)? postWithdrawal,
+    TResult Function(String? idUser, int? page, String? date, String? startDate,
+            String? endDate)?
+        fetch,
+    TResult Function(String? idUser)? fetchAll,
+    TResult Function(String id)? delete,
     required TResult orElse(),
   }) {
     if (fetchAll != null) {
-      return fetchAll(token, idUser);
+      return fetchAll(idUser);
     }
     return orElse();
   }
@@ -630,30 +621,24 @@ class _$FetchAllImpl implements _FetchAll {
 }
 
 abstract class _FetchAll implements WithdrawalEvent {
-  const factory _FetchAll({required final String token, final String? idUser}) =
-      _$FetchAllImpl;
+  const factory _FetchAll({final String? idUser}) = _$FetchAllImpl;
 
-  @override
-  String get token;
   String? get idUser;
 
   /// Create a copy of WithdrawalEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FetchAllImplCopyWith<_$FetchAllImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$DeleteImplCopyWith<$Res>
-    implements $WithdrawalEventCopyWith<$Res> {
+abstract class _$$DeleteImplCopyWith<$Res> {
   factory _$$DeleteImplCopyWith(
           _$DeleteImpl value, $Res Function(_$DeleteImpl) then) =
       __$$DeleteImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({String id, String token});
+  $Res call({String id});
 }
 
 /// @nodoc
@@ -670,16 +655,11 @@ class __$$DeleteImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? token = null,
   }) {
     return _then(_$DeleteImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -688,16 +668,14 @@ class __$$DeleteImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DeleteImpl implements _Delete {
-  const _$DeleteImpl({required this.id, required this.token});
+  const _$DeleteImpl({required this.id});
 
   @override
   final String id;
-  @override
-  final String token;
 
   @override
   String toString() {
-    return 'WithdrawalEvent.delete(id: $id, token: $token)';
+    return 'WithdrawalEvent.delete(id: $id)';
   }
 
   @override
@@ -705,12 +683,11 @@ class _$DeleteImpl implements _Delete {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeleteImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.token, token) || other.token == token));
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, token);
+  int get hashCode => Object.hash(runtimeType, id);
 
   /// Create a copy of WithdrawalEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -723,39 +700,42 @@ class _$DeleteImpl implements _Delete {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(WithdrawalsRequestModel request, String token)
-        postWithdrawal,
-    required TResult Function(String token, String? idUser, int? page) fetch,
-    required TResult Function(String token, String? idUser) fetchAll,
-    required TResult Function(String id, String token) delete,
+    required TResult Function(WithdrawalsRequestModel request) postWithdrawal,
+    required TResult Function(String? idUser, int? page, String? date,
+            String? startDate, String? endDate)
+        fetch,
+    required TResult Function(String? idUser) fetchAll,
+    required TResult Function(String id) delete,
   }) {
-    return delete(id, token);
+    return delete(id);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(WithdrawalsRequestModel request, String token)?
-        postWithdrawal,
-    TResult? Function(String token, String? idUser, int? page)? fetch,
-    TResult? Function(String token, String? idUser)? fetchAll,
-    TResult? Function(String id, String token)? delete,
+    TResult? Function(WithdrawalsRequestModel request)? postWithdrawal,
+    TResult? Function(String? idUser, int? page, String? date,
+            String? startDate, String? endDate)?
+        fetch,
+    TResult? Function(String? idUser)? fetchAll,
+    TResult? Function(String id)? delete,
   }) {
-    return delete?.call(id, token);
+    return delete?.call(id);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(WithdrawalsRequestModel request, String token)?
-        postWithdrawal,
-    TResult Function(String token, String? idUser, int? page)? fetch,
-    TResult Function(String token, String? idUser)? fetchAll,
-    TResult Function(String id, String token)? delete,
+    TResult Function(WithdrawalsRequestModel request)? postWithdrawal,
+    TResult Function(String? idUser, int? page, String? date, String? startDate,
+            String? endDate)?
+        fetch,
+    TResult Function(String? idUser)? fetchAll,
+    TResult Function(String id)? delete,
     required TResult orElse(),
   }) {
     if (delete != null) {
-      return delete(id, token);
+      return delete(id);
     }
     return orElse();
   }
@@ -799,16 +779,12 @@ class _$DeleteImpl implements _Delete {
 }
 
 abstract class _Delete implements WithdrawalEvent {
-  const factory _Delete(
-      {required final String id, required final String token}) = _$DeleteImpl;
+  const factory _Delete({required final String id}) = _$DeleteImpl;
 
   String get id;
-  @override
-  String get token;
 
   /// Create a copy of WithdrawalEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeleteImplCopyWith<_$DeleteImpl> get copyWith =>
       throw _privateConstructorUsedError;

@@ -14,11 +14,18 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:simbiotik_web/core/networks/auth_interceptor.dart';
+import 'package:simbiotik_web/core/storages/storage.dart';
 import 'package:simbiotik_web/data/data.dart';
 import 'package:simbiotik_web/models/models.dart';
 
 class UserRepository {
   final Dio _dio = Dio()
+    ..interceptors.add(
+      AuthInterceptor(
+        AuthStorage(),
+      ),
+    )
     ..interceptors.add(LogInterceptor(
       request: true,
       requestBody: true,
@@ -29,22 +36,15 @@ class UserRepository {
     ));
   final String api = dotenv.get('URL') + ApiConstants.allUser;
   Future<UserResponseModel> getUser(
-    String token,
     String? status,
     String? name,
     int? page,
   ) async {
-    final response = await _dio.get(api,
-        options: Options(
-          headers: {
-            'Authorization': 'Bearer $token',
-          },
-        ),
-        queryParameters: {
-          'status': status,
-          'page': page,
-          'name': name,
-        });
+    final response = await _dio.get(api, queryParameters: {
+      'status': status,
+      'page': page,
+      'keyword': name,
+    });
 
     if (response.statusCode == 200) {
       return UserResponseModel.fromJson(response.data['data']);
@@ -54,16 +54,10 @@ class UserRepository {
   }
 
   Future<UserResponseModel> getUserId(
-    String token,
     String? id,
   ) async {
     final response = await _dio.get(
       '$api/$id',
-      options: Options(
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      ),
     );
 
     if (response.statusCode == 200) {
@@ -74,7 +68,6 @@ class UserRepository {
   }
 
   Future<List<UserModel>> getAllUsers(
-    String token,
     String? status,
     String? name,
   ) async {
@@ -83,7 +76,7 @@ class UserRepository {
     int? totalPages;
 
     do {
-      final response = await getUser(token, status, name, currentPage);
+      final response = await getUser(status, name, currentPage);
       allUsers.addAll(response.result?.data ?? []);
       totalPages = response.result?.totalPages;
       currentPage = (currentPage ?? 1) + 1;
@@ -93,7 +86,6 @@ class UserRepository {
   }
 
   Future<UserResponseModel> edit(
-    String token,
     String id,
     String name,
     String email,
@@ -106,11 +98,6 @@ class UserRepository {
   ) async {
     final response = await _dio.put(
       '$api/$id',
-      options: Options(
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      ),
       data: {
         'name': name,
         'email': email,
@@ -131,16 +118,10 @@ class UserRepository {
   }
 
   Future<void> delete(
-    String token,
     String id,
   ) async {
     final response = await _dio.delete(
       '$api/$id',
-      options: Options(
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      ),
     );
 
     if (response.statusCode != 200) {

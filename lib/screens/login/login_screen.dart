@@ -19,7 +19,6 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/web.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simbiotik_web/core/blocs/auth/auth.dart';
 import 'package:simbiotik_web/core/routers/routers.dart';
 import 'package:simbiotik_web/data/repository/auth_repository.dart';
@@ -49,11 +48,6 @@ class _LoginScreenContentState extends State<LoginScreenContent> {
   String token = '';
 
   bool _obsecurePassword = true;
-
-  _savedToken(String token) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('token', token);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -232,9 +226,6 @@ class _LoginScreenContentState extends State<LoginScreenContent> {
                                 if (state.status.isLoaded) {
                                   if (state.data?.status ==
                                       StatusUser.owner.value) {
-                                    if (state.token != null) {
-                                      _savedToken(state.token!);
-                                    }
                                     context
                                         .goNamed(AppRouterConstants.homeScreen);
                                   } else {
@@ -247,9 +238,9 @@ class _LoginScreenContentState extends State<LoginScreenContent> {
                                   }
                                 } else if (state.status.isError) {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
+                                    const SnackBar(
                                       content: Text(
-                                          'Gagal masuk, silahkan periksa kembali name atau password! ${state.error}'),
+                                          'Gagal masuk, silahkan periksa kembali name atau password!'),
                                     ),
                                   );
                                 }
@@ -294,7 +285,7 @@ class _LoginScreenContentState extends State<LoginScreenContent> {
                           ],
                         ),
                       ),
-                      const Text('© 2026 All Rights Reserved')
+                      Text('© ${DateTime.now().year} All Rights Reserved')
                     ],
                   ),
                 ),

@@ -17,13 +17,14 @@ part of 'sodako_bloc.dart';
 @freezed
 class SodakoEvent with _$SodakoEvent {
   const factory SodakoEvent.fetch({
-    required String token,
     String? idUser,
     int? page,
+    String? date,
+    String? startDate,
+    String? endDate,
   }) = _Fetch;
 
   const factory SodakoEvent.create({
-    required String token,
     required SodakoRequestModel request,
   }) = _Create;
 }

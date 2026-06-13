@@ -34,12 +34,15 @@ class WasteTypeBloc extends Bloc<WasteTypeEvent, WasteTypeState> {
   }
 
   Future<void> _onFetch(_Fetch event, Emitter<WasteTypeState> emit) async {
-    emit(state.copyWith(status: WasteTypeStateStatus.loading, error: ''));
+    emit(state.copyWith(
+      status: WasteTypeStateStatus.loading,
+      error: '',
+    ));
 
     try {
       final response = await _wasteTypeRepository.getWasteType(
-        event.token,
         event.page,
+        event.keyword,
       );
 
       emit(state.copyWith(
@@ -57,11 +60,13 @@ class WasteTypeBloc extends Bloc<WasteTypeEvent, WasteTypeState> {
   }
 
   Future<void> _onFetchId(_FetchId event, Emitter<WasteTypeState> emit) async {
-    emit(state.copyWith(status: WasteTypeStateStatus.loading, error: ''));
+    emit(state.copyWith(
+      status: WasteTypeStateStatus.loading,
+      error: '',
+    ));
 
     try {
       final response = await _wasteTypeRepository.getWasteTypeId(
-        event.token,
         event.id,
       );
 
@@ -81,13 +86,14 @@ class WasteTypeBloc extends Bloc<WasteTypeEvent, WasteTypeState> {
 
   Future<void> _onFetchAll(
       _FetchAll event, Emitter<WasteTypeState> emit) async {
-    emit(state.copyWith(status: WasteTypeStateStatus.loading, error: ''));
+    emit(state.copyWith(
+      status: WasteTypeStateStatus.loading,
+      error: '',
+    ));
 
     try {
       final List<WasteTypesModel> wasteTypes =
-          await _wasteTypeRepository.getAllWasteType(
-        event.token,
-      );
+          await _wasteTypeRepository.getAllWasteType();
 
       emit(
         state.copyWith(
@@ -105,12 +111,14 @@ class WasteTypeBloc extends Bloc<WasteTypeEvent, WasteTypeState> {
     }
   }
 
-  Future<void> _onAdd(_Add event, Emitter<WasteTypeState> emit) async {
+  Future<void> _onAdd(
+    _Add event,
+    Emitter<WasteTypeState> emit,
+  ) async {
     emit(state.copyWith(status: WasteTypeStateStatus.loading, error: ''));
 
     try {
       final response = await _wasteTypeRepository.add(
-        event.token,
         event.type,
         event.price,
       );
@@ -128,11 +136,13 @@ class WasteTypeBloc extends Bloc<WasteTypeEvent, WasteTypeState> {
   }
 
   Future<void> _onEdit(_Edit event, Emitter<WasteTypeState> emit) async {
-    emit(state.copyWith(status: WasteTypeStateStatus.loading, error: ''));
+    emit(state.copyWith(
+      status: WasteTypeStateStatus.loading,
+      error: '',
+    ));
 
     try {
       final response = await _wasteTypeRepository.edit(
-        event.token,
         event.id,
         event.type,
         event.price,
@@ -151,11 +161,13 @@ class WasteTypeBloc extends Bloc<WasteTypeEvent, WasteTypeState> {
   }
 
   Future<void> _onDelete(_Delete event, Emitter<WasteTypeState> emit) async {
-    emit(state.copyWith(status: WasteTypeStateStatus.loading, error: ''));
+    emit(state.copyWith(
+      status: WasteTypeStateStatus.loading,
+      error: '',
+    ));
 
     try {
       await _wasteTypeRepository.delete(
-        event.token,
         event.id,
       );
 

@@ -38,9 +38,11 @@ class SodakoBloc extends Bloc<SodakoEvent, SodakoState> {
 
     try {
       final response = await _sodakoRepository.getSodakos(
-        event.token,
-        event.idUser,
-        event.page,
+        idUser: event.idUser,
+        page: event.page,
+        date: event.date,
+        startDate: event.startDate,
+        endDate: event.endDate,
       );
 
       emit(state.copyWith(
@@ -66,7 +68,6 @@ class SodakoBloc extends Bloc<SodakoEvent, SodakoState> {
 
     try {
       await _sodakoRepository.createSodako(
-        event.token,
         event.request,
       );
 
@@ -79,7 +80,6 @@ class SodakoBloc extends Bloc<SodakoEvent, SodakoState> {
       ));
 
       add(SodakoEvent.fetch(
-        token: event.token,
         idUser: event.request.idUser!,
       ));
     } catch (e) {

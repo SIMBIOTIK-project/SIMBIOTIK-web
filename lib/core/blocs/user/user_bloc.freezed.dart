@@ -16,17 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$UserEvent {
-  String get token => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String? status, String? name, int? page) fetch,
+    required TResult Function(String? status, String? name) fetchAll,
+    required TResult Function(String? id) fetchId,
     required TResult Function(
-            String token, String? status, String? name, int? page)
-        fetch,
-    required TResult Function(String token, String? status, String? name)
-        fetchAll,
-    required TResult Function(String token, String? id) fetchId,
-    required TResult Function(
-            String token,
             String id,
             String name,
             String email,
@@ -37,17 +32,15 @@ mixin _$UserEvent {
             String address,
             String status)
         edit,
-    required TResult Function(String id, String token) delete,
+    required TResult Function(String id) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String token, String? status, String? name, int? page)?
-        fetch,
-    TResult? Function(String token, String? status, String? name)? fetchAll,
-    TResult? Function(String token, String? id)? fetchId,
+    TResult? Function(String? status, String? name, int? page)? fetch,
+    TResult? Function(String? status, String? name)? fetchAll,
+    TResult? Function(String? id)? fetchId,
     TResult? Function(
-            String token,
             String id,
             String name,
             String email,
@@ -58,17 +51,15 @@ mixin _$UserEvent {
             String address,
             String status)?
         edit,
-    TResult? Function(String id, String token)? delete,
+    TResult? Function(String id)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String token, String? status, String? name, int? page)?
-        fetch,
-    TResult Function(String token, String? status, String? name)? fetchAll,
-    TResult Function(String token, String? id)? fetchId,
+    TResult Function(String? status, String? name, int? page)? fetch,
+    TResult Function(String? status, String? name)? fetchAll,
+    TResult Function(String? id)? fetchId,
     TResult Function(
-            String token,
             String id,
             String name,
             String email,
@@ -79,7 +70,7 @@ mixin _$UserEvent {
             String address,
             String status)?
         edit,
-    TResult Function(String id, String token)? delete,
+    TResult Function(String id)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -111,20 +102,12 @@ mixin _$UserEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
-  /// Create a copy of UserEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $UserEventCopyWith<UserEvent> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $UserEventCopyWith<$Res> {
   factory $UserEventCopyWith(UserEvent value, $Res Function(UserEvent) then) =
       _$UserEventCopyWithImpl<$Res, UserEvent>;
-  @useResult
-  $Res call({String token});
 }
 
 /// @nodoc
@@ -139,28 +122,15 @@ class _$UserEventCopyWithImpl<$Res, $Val extends UserEvent>
 
   /// Create a copy of UserEvent
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? token = null,
-  }) {
-    return _then(_value.copyWith(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$FetchImplCopyWith<$Res> implements $UserEventCopyWith<$Res> {
+abstract class _$$FetchImplCopyWith<$Res> {
   factory _$$FetchImplCopyWith(
           _$FetchImpl value, $Res Function(_$FetchImpl) then) =
       __$$FetchImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({String token, String? status, String? name, int? page});
+  $Res call({String? status, String? name, int? page});
 }
 
 /// @nodoc
@@ -176,16 +146,11 @@ class __$$FetchImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = null,
     Object? status = freezed,
     Object? name = freezed,
     Object? page = freezed,
   }) {
     return _then(_$FetchImpl(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -205,10 +170,8 @@ class __$$FetchImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FetchImpl implements _Fetch {
-  const _$FetchImpl({required this.token, this.status, this.name, this.page});
+  const _$FetchImpl({this.status, this.name, this.page});
 
-  @override
-  final String token;
   @override
   final String? status;
   @override
@@ -218,7 +181,7 @@ class _$FetchImpl implements _Fetch {
 
   @override
   String toString() {
-    return 'UserEvent.fetch(token: $token, status: $status, name: $name, page: $page)';
+    return 'UserEvent.fetch(status: $status, name: $name, page: $page)';
   }
 
   @override
@@ -226,14 +189,13 @@ class _$FetchImpl implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FetchImpl &&
-            (identical(other.token, token) || other.token == token) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.page, page) || other.page == page));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, token, status, name, page);
+  int get hashCode => Object.hash(runtimeType, status, name, page);
 
   /// Create a copy of UserEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -246,14 +208,10 @@ class _$FetchImpl implements _Fetch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String? status, String? name, int? page) fetch,
+    required TResult Function(String? status, String? name) fetchAll,
+    required TResult Function(String? id) fetchId,
     required TResult Function(
-            String token, String? status, String? name, int? page)
-        fetch,
-    required TResult Function(String token, String? status, String? name)
-        fetchAll,
-    required TResult Function(String token, String? id) fetchId,
-    required TResult Function(
-            String token,
             String id,
             String name,
             String email,
@@ -264,20 +222,18 @@ class _$FetchImpl implements _Fetch {
             String address,
             String status)
         edit,
-    required TResult Function(String id, String token) delete,
+    required TResult Function(String id) delete,
   }) {
-    return fetch(token, status, name, page);
+    return fetch(status, name, page);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String token, String? status, String? name, int? page)?
-        fetch,
-    TResult? Function(String token, String? status, String? name)? fetchAll,
-    TResult? Function(String token, String? id)? fetchId,
+    TResult? Function(String? status, String? name, int? page)? fetch,
+    TResult? Function(String? status, String? name)? fetchAll,
+    TResult? Function(String? id)? fetchId,
     TResult? Function(
-            String token,
             String id,
             String name,
             String email,
@@ -288,20 +244,18 @@ class _$FetchImpl implements _Fetch {
             String address,
             String status)?
         edit,
-    TResult? Function(String id, String token)? delete,
+    TResult? Function(String id)? delete,
   }) {
-    return fetch?.call(token, status, name, page);
+    return fetch?.call(status, name, page);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String token, String? status, String? name, int? page)?
-        fetch,
-    TResult Function(String token, String? status, String? name)? fetchAll,
-    TResult Function(String token, String? id)? fetchId,
+    TResult Function(String? status, String? name, int? page)? fetch,
+    TResult Function(String? status, String? name)? fetchAll,
+    TResult Function(String? id)? fetchId,
     TResult Function(
-            String token,
             String id,
             String name,
             String email,
@@ -312,11 +266,11 @@ class _$FetchImpl implements _Fetch {
             String address,
             String status)?
         edit,
-    TResult Function(String id, String token)? delete,
+    TResult Function(String id)? delete,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(token, status, name, page);
+      return fetch(status, name, page);
     }
     return orElse();
   }
@@ -364,34 +318,28 @@ class _$FetchImpl implements _Fetch {
 
 abstract class _Fetch implements UserEvent {
   const factory _Fetch(
-      {required final String token,
-      final String? status,
+      {final String? status,
       final String? name,
       final int? page}) = _$FetchImpl;
 
-  @override
-  String get token;
   String? get status;
   String? get name;
   int? get page;
 
   /// Create a copy of UserEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FetchAllImplCopyWith<$Res>
-    implements $UserEventCopyWith<$Res> {
+abstract class _$$FetchAllImplCopyWith<$Res> {
   factory _$$FetchAllImplCopyWith(
           _$FetchAllImpl value, $Res Function(_$FetchAllImpl) then) =
       __$$FetchAllImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({String token, String? status, String? name});
+  $Res call({String? status, String? name});
 }
 
 /// @nodoc
@@ -407,15 +355,10 @@ class __$$FetchAllImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = null,
     Object? status = freezed,
     Object? name = freezed,
   }) {
     return _then(_$FetchAllImpl(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -431,10 +374,8 @@ class __$$FetchAllImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FetchAllImpl implements _FetchAll {
-  const _$FetchAllImpl({required this.token, this.status, this.name});
+  const _$FetchAllImpl({this.status, this.name});
 
-  @override
-  final String token;
   @override
   final String? status;
   @override
@@ -442,7 +383,7 @@ class _$FetchAllImpl implements _FetchAll {
 
   @override
   String toString() {
-    return 'UserEvent.fetchAll(token: $token, status: $status, name: $name)';
+    return 'UserEvent.fetchAll(status: $status, name: $name)';
   }
 
   @override
@@ -450,13 +391,12 @@ class _$FetchAllImpl implements _FetchAll {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FetchAllImpl &&
-            (identical(other.token, token) || other.token == token) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.name, name) || other.name == name));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, token, status, name);
+  int get hashCode => Object.hash(runtimeType, status, name);
 
   /// Create a copy of UserEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -469,14 +409,10 @@ class _$FetchAllImpl implements _FetchAll {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String? status, String? name, int? page) fetch,
+    required TResult Function(String? status, String? name) fetchAll,
+    required TResult Function(String? id) fetchId,
     required TResult Function(
-            String token, String? status, String? name, int? page)
-        fetch,
-    required TResult Function(String token, String? status, String? name)
-        fetchAll,
-    required TResult Function(String token, String? id) fetchId,
-    required TResult Function(
-            String token,
             String id,
             String name,
             String email,
@@ -487,20 +423,18 @@ class _$FetchAllImpl implements _FetchAll {
             String address,
             String status)
         edit,
-    required TResult Function(String id, String token) delete,
+    required TResult Function(String id) delete,
   }) {
-    return fetchAll(token, status, name);
+    return fetchAll(status, name);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String token, String? status, String? name, int? page)?
-        fetch,
-    TResult? Function(String token, String? status, String? name)? fetchAll,
-    TResult? Function(String token, String? id)? fetchId,
+    TResult? Function(String? status, String? name, int? page)? fetch,
+    TResult? Function(String? status, String? name)? fetchAll,
+    TResult? Function(String? id)? fetchId,
     TResult? Function(
-            String token,
             String id,
             String name,
             String email,
@@ -511,20 +445,18 @@ class _$FetchAllImpl implements _FetchAll {
             String address,
             String status)?
         edit,
-    TResult? Function(String id, String token)? delete,
+    TResult? Function(String id)? delete,
   }) {
-    return fetchAll?.call(token, status, name);
+    return fetchAll?.call(status, name);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String token, String? status, String? name, int? page)?
-        fetch,
-    TResult Function(String token, String? status, String? name)? fetchAll,
-    TResult Function(String token, String? id)? fetchId,
+    TResult Function(String? status, String? name, int? page)? fetch,
+    TResult Function(String? status, String? name)? fetchAll,
+    TResult Function(String? id)? fetchId,
     TResult Function(
-            String token,
             String id,
             String name,
             String email,
@@ -535,11 +467,11 @@ class _$FetchAllImpl implements _FetchAll {
             String address,
             String status)?
         edit,
-    TResult Function(String id, String token)? delete,
+    TResult Function(String id)? delete,
     required TResult orElse(),
   }) {
     if (fetchAll != null) {
-      return fetchAll(token, status, name);
+      return fetchAll(status, name);
     }
     return orElse();
   }
@@ -586,33 +518,26 @@ class _$FetchAllImpl implements _FetchAll {
 }
 
 abstract class _FetchAll implements UserEvent {
-  const factory _FetchAll(
-      {required final String token,
-      final String? status,
-      final String? name}) = _$FetchAllImpl;
+  const factory _FetchAll({final String? status, final String? name}) =
+      _$FetchAllImpl;
 
-  @override
-  String get token;
   String? get status;
   String? get name;
 
   /// Create a copy of UserEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FetchAllImplCopyWith<_$FetchAllImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FetchIdImplCopyWith<$Res>
-    implements $UserEventCopyWith<$Res> {
+abstract class _$$FetchIdImplCopyWith<$Res> {
   factory _$$FetchIdImplCopyWith(
           _$FetchIdImpl value, $Res Function(_$FetchIdImpl) then) =
       __$$FetchIdImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({String token, String? id});
+  $Res call({String? id});
 }
 
 /// @nodoc
@@ -628,14 +553,9 @@ class __$$FetchIdImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = null,
     Object? id = freezed,
   }) {
     return _then(_$FetchIdImpl(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -647,16 +567,14 @@ class __$$FetchIdImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FetchIdImpl implements _FetchId {
-  const _$FetchIdImpl({required this.token, this.id});
+  const _$FetchIdImpl({this.id});
 
-  @override
-  final String token;
   @override
   final String? id;
 
   @override
   String toString() {
-    return 'UserEvent.fetchId(token: $token, id: $id)';
+    return 'UserEvent.fetchId(id: $id)';
   }
 
   @override
@@ -664,12 +582,11 @@ class _$FetchIdImpl implements _FetchId {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FetchIdImpl &&
-            (identical(other.token, token) || other.token == token) &&
             (identical(other.id, id) || other.id == id));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, token, id);
+  int get hashCode => Object.hash(runtimeType, id);
 
   /// Create a copy of UserEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -682,14 +599,10 @@ class _$FetchIdImpl implements _FetchId {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String? status, String? name, int? page) fetch,
+    required TResult Function(String? status, String? name) fetchAll,
+    required TResult Function(String? id) fetchId,
     required TResult Function(
-            String token, String? status, String? name, int? page)
-        fetch,
-    required TResult Function(String token, String? status, String? name)
-        fetchAll,
-    required TResult Function(String token, String? id) fetchId,
-    required TResult Function(
-            String token,
             String id,
             String name,
             String email,
@@ -700,20 +613,18 @@ class _$FetchIdImpl implements _FetchId {
             String address,
             String status)
         edit,
-    required TResult Function(String id, String token) delete,
+    required TResult Function(String id) delete,
   }) {
-    return fetchId(token, id);
+    return fetchId(id);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String token, String? status, String? name, int? page)?
-        fetch,
-    TResult? Function(String token, String? status, String? name)? fetchAll,
-    TResult? Function(String token, String? id)? fetchId,
+    TResult? Function(String? status, String? name, int? page)? fetch,
+    TResult? Function(String? status, String? name)? fetchAll,
+    TResult? Function(String? id)? fetchId,
     TResult? Function(
-            String token,
             String id,
             String name,
             String email,
@@ -724,20 +635,18 @@ class _$FetchIdImpl implements _FetchId {
             String address,
             String status)?
         edit,
-    TResult? Function(String id, String token)? delete,
+    TResult? Function(String id)? delete,
   }) {
-    return fetchId?.call(token, id);
+    return fetchId?.call(id);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String token, String? status, String? name, int? page)?
-        fetch,
-    TResult Function(String token, String? status, String? name)? fetchAll,
-    TResult Function(String token, String? id)? fetchId,
+    TResult Function(String? status, String? name, int? page)? fetch,
+    TResult Function(String? status, String? name)? fetchAll,
+    TResult Function(String? id)? fetchId,
     TResult Function(
-            String token,
             String id,
             String name,
             String email,
@@ -748,11 +657,11 @@ class _$FetchIdImpl implements _FetchId {
             String address,
             String status)?
         edit,
-    TResult Function(String id, String token)? delete,
+    TResult Function(String id)? delete,
     required TResult orElse(),
   }) {
     if (fetchId != null) {
-      return fetchId(token, id);
+      return fetchId(id);
     }
     return orElse();
   }
@@ -799,31 +708,25 @@ class _$FetchIdImpl implements _FetchId {
 }
 
 abstract class _FetchId implements UserEvent {
-  const factory _FetchId({required final String token, final String? id}) =
-      _$FetchIdImpl;
+  const factory _FetchId({final String? id}) = _$FetchIdImpl;
 
-  @override
-  String get token;
   String? get id;
 
   /// Create a copy of UserEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FetchIdImplCopyWith<_$FetchIdImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$EditImplCopyWith<$Res> implements $UserEventCopyWith<$Res> {
+abstract class _$$EditImplCopyWith<$Res> {
   factory _$$EditImplCopyWith(
           _$EditImpl value, $Res Function(_$EditImpl) then) =
       __$$EditImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call(
-      {String token,
-      String id,
+      {String id,
       String name,
       String email,
       String password,
@@ -846,7 +749,6 @@ class __$$EditImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = null,
     Object? id = null,
     Object? name = null,
     Object? email = null,
@@ -858,10 +760,6 @@ class __$$EditImplCopyWithImpl<$Res>
     Object? status = null,
   }) {
     return _then(_$EditImpl(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -906,8 +804,7 @@ class __$$EditImplCopyWithImpl<$Res>
 
 class _$EditImpl implements _Edit {
   const _$EditImpl(
-      {required this.token,
-      required this.id,
+      {required this.id,
       required this.name,
       required this.email,
       required this.password,
@@ -917,8 +814,6 @@ class _$EditImpl implements _Edit {
       required this.address,
       required this.status});
 
-  @override
-  final String token;
   @override
   final String id;
   @override
@@ -940,7 +835,7 @@ class _$EditImpl implements _Edit {
 
   @override
   String toString() {
-    return 'UserEvent.edit(token: $token, id: $id, name: $name, email: $email, password: $password, passwordConfirmation: $passwordConfirmation, nik: $nik, phoneNumber: $phoneNumber, address: $address, status: $status)';
+    return 'UserEvent.edit(id: $id, name: $name, email: $email, password: $password, passwordConfirmation: $passwordConfirmation, nik: $nik, phoneNumber: $phoneNumber, address: $address, status: $status)';
   }
 
   @override
@@ -948,7 +843,6 @@ class _$EditImpl implements _Edit {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$EditImpl &&
-            (identical(other.token, token) || other.token == token) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
@@ -964,7 +858,7 @@ class _$EditImpl implements _Edit {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, token, id, name, email, password,
+  int get hashCode => Object.hash(runtimeType, id, name, email, password,
       passwordConfirmation, nik, phoneNumber, address, status);
 
   /// Create a copy of UserEvent
@@ -978,14 +872,10 @@ class _$EditImpl implements _Edit {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String? status, String? name, int? page) fetch,
+    required TResult Function(String? status, String? name) fetchAll,
+    required TResult Function(String? id) fetchId,
     required TResult Function(
-            String token, String? status, String? name, int? page)
-        fetch,
-    required TResult Function(String token, String? status, String? name)
-        fetchAll,
-    required TResult Function(String token, String? id) fetchId,
-    required TResult Function(
-            String token,
             String id,
             String name,
             String email,
@@ -996,21 +886,19 @@ class _$EditImpl implements _Edit {
             String address,
             String status)
         edit,
-    required TResult Function(String id, String token) delete,
+    required TResult Function(String id) delete,
   }) {
-    return edit(token, id, name, email, password, passwordConfirmation, nik,
+    return edit(id, name, email, password, passwordConfirmation, nik,
         phoneNumber, address, status);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String token, String? status, String? name, int? page)?
-        fetch,
-    TResult? Function(String token, String? status, String? name)? fetchAll,
-    TResult? Function(String token, String? id)? fetchId,
+    TResult? Function(String? status, String? name, int? page)? fetch,
+    TResult? Function(String? status, String? name)? fetchAll,
+    TResult? Function(String? id)? fetchId,
     TResult? Function(
-            String token,
             String id,
             String name,
             String email,
@@ -1021,21 +909,19 @@ class _$EditImpl implements _Edit {
             String address,
             String status)?
         edit,
-    TResult? Function(String id, String token)? delete,
+    TResult? Function(String id)? delete,
   }) {
-    return edit?.call(token, id, name, email, password, passwordConfirmation,
-        nik, phoneNumber, address, status);
+    return edit?.call(id, name, email, password, passwordConfirmation, nik,
+        phoneNumber, address, status);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String token, String? status, String? name, int? page)?
-        fetch,
-    TResult Function(String token, String? status, String? name)? fetchAll,
-    TResult Function(String token, String? id)? fetchId,
+    TResult Function(String? status, String? name, int? page)? fetch,
+    TResult Function(String? status, String? name)? fetchAll,
+    TResult Function(String? id)? fetchId,
     TResult Function(
-            String token,
             String id,
             String name,
             String email,
@@ -1046,11 +932,11 @@ class _$EditImpl implements _Edit {
             String address,
             String status)?
         edit,
-    TResult Function(String id, String token)? delete,
+    TResult Function(String id)? delete,
     required TResult orElse(),
   }) {
     if (edit != null) {
-      return edit(token, id, name, email, password, passwordConfirmation, nik,
+      return edit(id, name, email, password, passwordConfirmation, nik,
           phoneNumber, address, status);
     }
     return orElse();
@@ -1099,8 +985,7 @@ class _$EditImpl implements _Edit {
 
 abstract class _Edit implements UserEvent {
   const factory _Edit(
-      {required final String token,
-      required final String id,
+      {required final String id,
       required final String name,
       required final String email,
       required final String password,
@@ -1110,8 +995,6 @@ abstract class _Edit implements UserEvent {
       required final String address,
       required final String status}) = _$EditImpl;
 
-  @override
-  String get token;
   String get id;
   String get name;
   String get email;
@@ -1124,20 +1007,18 @@ abstract class _Edit implements UserEvent {
 
   /// Create a copy of UserEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$EditImplCopyWith<_$EditImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$DeleteImplCopyWith<$Res> implements $UserEventCopyWith<$Res> {
+abstract class _$$DeleteImplCopyWith<$Res> {
   factory _$$DeleteImplCopyWith(
           _$DeleteImpl value, $Res Function(_$DeleteImpl) then) =
       __$$DeleteImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({String id, String token});
+  $Res call({String id});
 }
 
 /// @nodoc
@@ -1154,16 +1035,11 @@ class __$$DeleteImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? token = null,
   }) {
     return _then(_$DeleteImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -1172,16 +1048,14 @@ class __$$DeleteImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DeleteImpl implements _Delete {
-  const _$DeleteImpl({required this.id, required this.token});
+  const _$DeleteImpl({required this.id});
 
   @override
   final String id;
-  @override
-  final String token;
 
   @override
   String toString() {
-    return 'UserEvent.delete(id: $id, token: $token)';
+    return 'UserEvent.delete(id: $id)';
   }
 
   @override
@@ -1189,12 +1063,11 @@ class _$DeleteImpl implements _Delete {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeleteImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.token, token) || other.token == token));
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, token);
+  int get hashCode => Object.hash(runtimeType, id);
 
   /// Create a copy of UserEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -1207,14 +1080,10 @@ class _$DeleteImpl implements _Delete {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String? status, String? name, int? page) fetch,
+    required TResult Function(String? status, String? name) fetchAll,
+    required TResult Function(String? id) fetchId,
     required TResult Function(
-            String token, String? status, String? name, int? page)
-        fetch,
-    required TResult Function(String token, String? status, String? name)
-        fetchAll,
-    required TResult Function(String token, String? id) fetchId,
-    required TResult Function(
-            String token,
             String id,
             String name,
             String email,
@@ -1225,20 +1094,18 @@ class _$DeleteImpl implements _Delete {
             String address,
             String status)
         edit,
-    required TResult Function(String id, String token) delete,
+    required TResult Function(String id) delete,
   }) {
-    return delete(id, token);
+    return delete(id);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String token, String? status, String? name, int? page)?
-        fetch,
-    TResult? Function(String token, String? status, String? name)? fetchAll,
-    TResult? Function(String token, String? id)? fetchId,
+    TResult? Function(String? status, String? name, int? page)? fetch,
+    TResult? Function(String? status, String? name)? fetchAll,
+    TResult? Function(String? id)? fetchId,
     TResult? Function(
-            String token,
             String id,
             String name,
             String email,
@@ -1249,20 +1116,18 @@ class _$DeleteImpl implements _Delete {
             String address,
             String status)?
         edit,
-    TResult? Function(String id, String token)? delete,
+    TResult? Function(String id)? delete,
   }) {
-    return delete?.call(id, token);
+    return delete?.call(id);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String token, String? status, String? name, int? page)?
-        fetch,
-    TResult Function(String token, String? status, String? name)? fetchAll,
-    TResult Function(String token, String? id)? fetchId,
+    TResult Function(String? status, String? name, int? page)? fetch,
+    TResult Function(String? status, String? name)? fetchAll,
+    TResult Function(String? id)? fetchId,
     TResult Function(
-            String token,
             String id,
             String name,
             String email,
@@ -1273,11 +1138,11 @@ class _$DeleteImpl implements _Delete {
             String address,
             String status)?
         edit,
-    TResult Function(String id, String token)? delete,
+    TResult Function(String id)? delete,
     required TResult orElse(),
   }) {
     if (delete != null) {
-      return delete(id, token);
+      return delete(id);
     }
     return orElse();
   }
@@ -1324,16 +1189,12 @@ class _$DeleteImpl implements _Delete {
 }
 
 abstract class _Delete implements UserEvent {
-  const factory _Delete(
-      {required final String id, required final String token}) = _$DeleteImpl;
+  const factory _Delete({required final String id}) = _$DeleteImpl;
 
   String get id;
-  @override
-  String get token;
 
   /// Create a copy of UserEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeleteImplCopyWith<_$DeleteImpl> get copyWith =>
       throw _privateConstructorUsedError;

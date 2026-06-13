@@ -16,20 +16,19 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$BalanceEvent {
-  String get token => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String token) fetch,
+    required TResult Function() fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String token)? fetch,
+    TResult? Function()? fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String token)? fetch,
+    TResult Function()? fetch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -49,12 +48,6 @@ mixin _$BalanceEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
-  /// Create a copy of BalanceEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $BalanceEventCopyWith<BalanceEvent> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -62,8 +55,6 @@ abstract class $BalanceEventCopyWith<$Res> {
   factory $BalanceEventCopyWith(
           BalanceEvent value, $Res Function(BalanceEvent) then) =
       _$BalanceEventCopyWithImpl<$Res, BalanceEvent>;
-  @useResult
-  $Res call({String token});
 }
 
 /// @nodoc
@@ -78,29 +69,13 @@ class _$BalanceEventCopyWithImpl<$Res, $Val extends BalanceEvent>
 
   /// Create a copy of BalanceEvent
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? token = null,
-  }) {
-    return _then(_value.copyWith(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$FetchImplCopyWith<$Res>
-    implements $BalanceEventCopyWith<$Res> {
+abstract class _$$FetchImplCopyWith<$Res> {
   factory _$$FetchImplCopyWith(
           _$FetchImpl value, $Res Function(_$FetchImpl) then) =
       __$$FetchImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String token});
 }
 
 /// @nodoc
@@ -113,76 +88,51 @@ class __$$FetchImplCopyWithImpl<$Res>
 
   /// Create a copy of BalanceEvent
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? token = null,
-  }) {
-    return _then(_$FetchImpl(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$FetchImpl implements _Fetch {
-  const _$FetchImpl({required this.token});
-
-  @override
-  final String token;
+  const _$FetchImpl();
 
   @override
   String toString() {
-    return 'BalanceEvent.fetch(token: $token)';
+    return 'BalanceEvent.fetch()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$FetchImpl &&
-            (identical(other.token, token) || other.token == token));
+        (other.runtimeType == runtimeType && other is _$FetchImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, token);
-
-  /// Create a copy of BalanceEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
-      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String token) fetch,
+    required TResult Function() fetch,
   }) {
-    return fetch(token);
+    return fetch();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String token)? fetch,
+    TResult? Function()? fetch,
   }) {
-    return fetch?.call(token);
+    return fetch?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String token)? fetch,
+    TResult Function()? fetch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(token);
+      return fetch();
     }
     return orElse();
   }
@@ -217,17 +167,7 @@ class _$FetchImpl implements _Fetch {
 }
 
 abstract class _Fetch implements BalanceEvent {
-  const factory _Fetch({required final String token}) = _$FetchImpl;
-
-  @override
-  String get token;
-
-  /// Create a copy of BalanceEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _Fetch() = _$FetchImpl;
 }
 
 /// @nodoc

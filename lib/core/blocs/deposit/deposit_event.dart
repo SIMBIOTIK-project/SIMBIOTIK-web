@@ -18,21 +18,21 @@ part of 'deposit_bloc.dart';
 class DepositEvent with _$DepositEvent {
   const factory DepositEvent.postDeposit({
     required DepositRequestModel request,
-    required String token,
   }) = _PostDeposit;
   const factory DepositEvent.fetch({
-    required String token,
-    String? idUser,
-    int? page,
+    @Default('') String? idUser,
+    @Default(1) int page,
+    String? wasteTypeId,
+    String? date,
+    String? startDate,
+    String? endDate,
   }) = _Fetch;
 
   const factory DepositEvent.fetchAll({
-    required String token,
     String? idUser,
   }) = _FetchAll;
 
   const factory DepositEvent.delete({
     required String id,
-    required String token,
   }) = _Delete;
 }

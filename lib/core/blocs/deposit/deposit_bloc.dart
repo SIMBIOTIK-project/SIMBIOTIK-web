@@ -40,7 +40,6 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
     try {
       await _depositRepository.postDeposit(
         event.request,
-        event.token,
       );
       emit(state.copyWith(status: DepositStateStatus.loaded));
     } catch (e) {
@@ -58,9 +57,12 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
 
     try {
       final response = await _depositRepository.getDeposit(
-        event.token,
-        event.idUser,
-        event.page,
+        idUser: event.idUser,
+        page: event.page,
+        wasteTypeId: event.wasteTypeId,
+        date: event.date,
+        startDate: event.startDate,
+        endDate: event.endDate,
       );
       emit(
         state.copyWith(
@@ -84,7 +86,6 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
     try {
       final List<DepositModel> deposits =
           await _depositRepository.getAllDeposits(
-        event.token,
         event.idUser,
       );
 
@@ -109,7 +110,6 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
 
     try {
       await _depositRepository.delete(
-        event.token,
         event.id,
       );
 

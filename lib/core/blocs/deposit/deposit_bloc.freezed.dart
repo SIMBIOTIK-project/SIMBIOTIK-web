@@ -16,30 +16,34 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DepositEvent {
-  String get token => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DepositRequestModel request, String token)
-        postDeposit,
-    required TResult Function(String token, String? idUser, int? page) fetch,
-    required TResult Function(String token, String? idUser) fetchAll,
-    required TResult Function(String id, String token) delete,
+    required TResult Function(DepositRequestModel request) postDeposit,
+    required TResult Function(String? idUser, int page, String? wasteTypeId,
+            String? date, String? startDate, String? endDate)
+        fetch,
+    required TResult Function(String? idUser) fetchAll,
+    required TResult Function(String id) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DepositRequestModel request, String token)? postDeposit,
-    TResult? Function(String token, String? idUser, int? page)? fetch,
-    TResult? Function(String token, String? idUser)? fetchAll,
-    TResult? Function(String id, String token)? delete,
+    TResult? Function(DepositRequestModel request)? postDeposit,
+    TResult? Function(String? idUser, int page, String? wasteTypeId,
+            String? date, String? startDate, String? endDate)?
+        fetch,
+    TResult? Function(String? idUser)? fetchAll,
+    TResult? Function(String id)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DepositRequestModel request, String token)? postDeposit,
-    TResult Function(String token, String? idUser, int? page)? fetch,
-    TResult Function(String token, String? idUser)? fetchAll,
-    TResult Function(String id, String token)? delete,
+    TResult Function(DepositRequestModel request)? postDeposit,
+    TResult Function(String? idUser, int page, String? wasteTypeId,
+            String? date, String? startDate, String? endDate)?
+        fetch,
+    TResult Function(String? idUser)? fetchAll,
+    TResult Function(String id)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -68,12 +72,6 @@ mixin _$DepositEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
-  /// Create a copy of DepositEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $DepositEventCopyWith<DepositEvent> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -81,8 +79,6 @@ abstract class $DepositEventCopyWith<$Res> {
   factory $DepositEventCopyWith(
           DepositEvent value, $Res Function(DepositEvent) then) =
       _$DepositEventCopyWithImpl<$Res, DepositEvent>;
-  @useResult
-  $Res call({String token});
 }
 
 /// @nodoc
@@ -97,29 +93,15 @@ class _$DepositEventCopyWithImpl<$Res, $Val extends DepositEvent>
 
   /// Create a copy of DepositEvent
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? token = null,
-  }) {
-    return _then(_value.copyWith(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$PostDepositImplCopyWith<$Res>
-    implements $DepositEventCopyWith<$Res> {
+abstract class _$$PostDepositImplCopyWith<$Res> {
   factory _$$PostDepositImplCopyWith(
           _$PostDepositImpl value, $Res Function(_$PostDepositImpl) then) =
       __$$PostDepositImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({DepositRequestModel request, String token});
+  $Res call({DepositRequestModel request});
 
   $DepositRequestModelCopyWith<$Res> get request;
 }
@@ -138,17 +120,12 @@ class __$$PostDepositImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? request = null,
-    Object? token = null,
   }) {
     return _then(_$PostDepositImpl(
       request: null == request
           ? _value.request
           : request // ignore: cast_nullable_to_non_nullable
               as DepositRequestModel,
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 
@@ -166,16 +143,14 @@ class __$$PostDepositImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$PostDepositImpl implements _PostDeposit {
-  const _$PostDepositImpl({required this.request, required this.token});
+  const _$PostDepositImpl({required this.request});
 
   @override
   final DepositRequestModel request;
-  @override
-  final String token;
 
   @override
   String toString() {
-    return 'DepositEvent.postDeposit(request: $request, token: $token)';
+    return 'DepositEvent.postDeposit(request: $request)';
   }
 
   @override
@@ -183,12 +158,11 @@ class _$PostDepositImpl implements _PostDeposit {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PostDepositImpl &&
-            (identical(other.request, request) || other.request == request) &&
-            (identical(other.token, token) || other.token == token));
+            (identical(other.request, request) || other.request == request));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, request, token);
+  int get hashCode => Object.hash(runtimeType, request);
 
   /// Create a copy of DepositEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -201,37 +175,42 @@ class _$PostDepositImpl implements _PostDeposit {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DepositRequestModel request, String token)
-        postDeposit,
-    required TResult Function(String token, String? idUser, int? page) fetch,
-    required TResult Function(String token, String? idUser) fetchAll,
-    required TResult Function(String id, String token) delete,
+    required TResult Function(DepositRequestModel request) postDeposit,
+    required TResult Function(String? idUser, int page, String? wasteTypeId,
+            String? date, String? startDate, String? endDate)
+        fetch,
+    required TResult Function(String? idUser) fetchAll,
+    required TResult Function(String id) delete,
   }) {
-    return postDeposit(request, token);
+    return postDeposit(request);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DepositRequestModel request, String token)? postDeposit,
-    TResult? Function(String token, String? idUser, int? page)? fetch,
-    TResult? Function(String token, String? idUser)? fetchAll,
-    TResult? Function(String id, String token)? delete,
+    TResult? Function(DepositRequestModel request)? postDeposit,
+    TResult? Function(String? idUser, int page, String? wasteTypeId,
+            String? date, String? startDate, String? endDate)?
+        fetch,
+    TResult? Function(String? idUser)? fetchAll,
+    TResult? Function(String id)? delete,
   }) {
-    return postDeposit?.call(request, token);
+    return postDeposit?.call(request);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DepositRequestModel request, String token)? postDeposit,
-    TResult Function(String token, String? idUser, int? page)? fetch,
-    TResult Function(String token, String? idUser)? fetchAll,
-    TResult Function(String id, String token)? delete,
+    TResult Function(DepositRequestModel request)? postDeposit,
+    TResult Function(String? idUser, int page, String? wasteTypeId,
+            String? date, String? startDate, String? endDate)?
+        fetch,
+    TResult Function(String? idUser)? fetchAll,
+    TResult Function(String id)? delete,
     required TResult orElse(),
   }) {
     if (postDeposit != null) {
-      return postDeposit(request, token);
+      return postDeposit(request);
     }
     return orElse();
   }
@@ -275,31 +254,31 @@ class _$PostDepositImpl implements _PostDeposit {
 }
 
 abstract class _PostDeposit implements DepositEvent {
-  const factory _PostDeposit(
-      {required final DepositRequestModel request,
-      required final String token}) = _$PostDepositImpl;
+  const factory _PostDeposit({required final DepositRequestModel request}) =
+      _$PostDepositImpl;
 
   DepositRequestModel get request;
-  @override
-  String get token;
 
   /// Create a copy of DepositEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PostDepositImplCopyWith<_$PostDepositImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FetchImplCopyWith<$Res>
-    implements $DepositEventCopyWith<$Res> {
+abstract class _$$FetchImplCopyWith<$Res> {
   factory _$$FetchImplCopyWith(
           _$FetchImpl value, $Res Function(_$FetchImpl) then) =
       __$$FetchImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({String token, String? idUser, int? page});
+  $Res call(
+      {String? idUser,
+      int page,
+      String? wasteTypeId,
+      String? date,
+      String? startDate,
+      String? endDate});
 }
 
 /// @nodoc
@@ -315,23 +294,38 @@ class __$$FetchImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = null,
     Object? idUser = freezed,
-    Object? page = freezed,
+    Object? page = null,
+    Object? wasteTypeId = freezed,
+    Object? date = freezed,
+    Object? startDate = freezed,
+    Object? endDate = freezed,
   }) {
     return _then(_$FetchImpl(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
       idUser: freezed == idUser
           ? _value.idUser
           : idUser // ignore: cast_nullable_to_non_nullable
               as String?,
-      page: freezed == page
+      page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
+      wasteTypeId: freezed == wasteTypeId
+          ? _value.wasteTypeId
+          : wasteTypeId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String?,
+      startDate: freezed == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      endDate: freezed == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -339,18 +333,32 @@ class __$$FetchImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FetchImpl implements _Fetch {
-  const _$FetchImpl({required this.token, this.idUser, this.page});
+  const _$FetchImpl(
+      {this.idUser = '',
+      this.page = 1,
+      this.wasteTypeId,
+      this.date,
+      this.startDate,
+      this.endDate});
 
   @override
-  final String token;
-  @override
+  @JsonKey()
   final String? idUser;
   @override
-  final int? page;
+  @JsonKey()
+  final int page;
+  @override
+  final String? wasteTypeId;
+  @override
+  final String? date;
+  @override
+  final String? startDate;
+  @override
+  final String? endDate;
 
   @override
   String toString() {
-    return 'DepositEvent.fetch(token: $token, idUser: $idUser, page: $page)';
+    return 'DepositEvent.fetch(idUser: $idUser, page: $page, wasteTypeId: $wasteTypeId, date: $date, startDate: $startDate, endDate: $endDate)';
   }
 
   @override
@@ -358,13 +366,19 @@ class _$FetchImpl implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FetchImpl &&
-            (identical(other.token, token) || other.token == token) &&
             (identical(other.idUser, idUser) || other.idUser == idUser) &&
-            (identical(other.page, page) || other.page == page));
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.wasteTypeId, wasteTypeId) ||
+                other.wasteTypeId == wasteTypeId) &&
+            (identical(other.date, date) || other.date == date) &&
+            (identical(other.startDate, startDate) ||
+                other.startDate == startDate) &&
+            (identical(other.endDate, endDate) || other.endDate == endDate));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, token, idUser, page);
+  int get hashCode => Object.hash(
+      runtimeType, idUser, page, wasteTypeId, date, startDate, endDate);
 
   /// Create a copy of DepositEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -377,37 +391,42 @@ class _$FetchImpl implements _Fetch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DepositRequestModel request, String token)
-        postDeposit,
-    required TResult Function(String token, String? idUser, int? page) fetch,
-    required TResult Function(String token, String? idUser) fetchAll,
-    required TResult Function(String id, String token) delete,
+    required TResult Function(DepositRequestModel request) postDeposit,
+    required TResult Function(String? idUser, int page, String? wasteTypeId,
+            String? date, String? startDate, String? endDate)
+        fetch,
+    required TResult Function(String? idUser) fetchAll,
+    required TResult Function(String id) delete,
   }) {
-    return fetch(token, idUser, page);
+    return fetch(idUser, page, wasteTypeId, date, startDate, endDate);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DepositRequestModel request, String token)? postDeposit,
-    TResult? Function(String token, String? idUser, int? page)? fetch,
-    TResult? Function(String token, String? idUser)? fetchAll,
-    TResult? Function(String id, String token)? delete,
+    TResult? Function(DepositRequestModel request)? postDeposit,
+    TResult? Function(String? idUser, int page, String? wasteTypeId,
+            String? date, String? startDate, String? endDate)?
+        fetch,
+    TResult? Function(String? idUser)? fetchAll,
+    TResult? Function(String id)? delete,
   }) {
-    return fetch?.call(token, idUser, page);
+    return fetch?.call(idUser, page, wasteTypeId, date, startDate, endDate);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DepositRequestModel request, String token)? postDeposit,
-    TResult Function(String token, String? idUser, int? page)? fetch,
-    TResult Function(String token, String? idUser)? fetchAll,
-    TResult Function(String id, String token)? delete,
+    TResult Function(DepositRequestModel request)? postDeposit,
+    TResult Function(String? idUser, int page, String? wasteTypeId,
+            String? date, String? startDate, String? endDate)?
+        fetch,
+    TResult Function(String? idUser)? fetchAll,
+    TResult Function(String id)? delete,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(token, idUser, page);
+      return fetch(idUser, page, wasteTypeId, date, startDate, endDate);
     }
     return orElse();
   }
@@ -452,32 +471,34 @@ class _$FetchImpl implements _Fetch {
 
 abstract class _Fetch implements DepositEvent {
   const factory _Fetch(
-      {required final String token,
-      final String? idUser,
-      final int? page}) = _$FetchImpl;
+      {final String? idUser,
+      final int page,
+      final String? wasteTypeId,
+      final String? date,
+      final String? startDate,
+      final String? endDate}) = _$FetchImpl;
 
-  @override
-  String get token;
   String? get idUser;
-  int? get page;
+  int get page;
+  String? get wasteTypeId;
+  String? get date;
+  String? get startDate;
+  String? get endDate;
 
   /// Create a copy of DepositEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FetchAllImplCopyWith<$Res>
-    implements $DepositEventCopyWith<$Res> {
+abstract class _$$FetchAllImplCopyWith<$Res> {
   factory _$$FetchAllImplCopyWith(
           _$FetchAllImpl value, $Res Function(_$FetchAllImpl) then) =
       __$$FetchAllImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({String token, String? idUser});
+  $Res call({String? idUser});
 }
 
 /// @nodoc
@@ -493,14 +514,9 @@ class __$$FetchAllImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = null,
     Object? idUser = freezed,
   }) {
     return _then(_$FetchAllImpl(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
       idUser: freezed == idUser
           ? _value.idUser
           : idUser // ignore: cast_nullable_to_non_nullable
@@ -512,16 +528,14 @@ class __$$FetchAllImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FetchAllImpl implements _FetchAll {
-  const _$FetchAllImpl({required this.token, this.idUser});
+  const _$FetchAllImpl({this.idUser});
 
-  @override
-  final String token;
   @override
   final String? idUser;
 
   @override
   String toString() {
-    return 'DepositEvent.fetchAll(token: $token, idUser: $idUser)';
+    return 'DepositEvent.fetchAll(idUser: $idUser)';
   }
 
   @override
@@ -529,12 +543,11 @@ class _$FetchAllImpl implements _FetchAll {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FetchAllImpl &&
-            (identical(other.token, token) || other.token == token) &&
             (identical(other.idUser, idUser) || other.idUser == idUser));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, token, idUser);
+  int get hashCode => Object.hash(runtimeType, idUser);
 
   /// Create a copy of DepositEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -547,37 +560,42 @@ class _$FetchAllImpl implements _FetchAll {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DepositRequestModel request, String token)
-        postDeposit,
-    required TResult Function(String token, String? idUser, int? page) fetch,
-    required TResult Function(String token, String? idUser) fetchAll,
-    required TResult Function(String id, String token) delete,
+    required TResult Function(DepositRequestModel request) postDeposit,
+    required TResult Function(String? idUser, int page, String? wasteTypeId,
+            String? date, String? startDate, String? endDate)
+        fetch,
+    required TResult Function(String? idUser) fetchAll,
+    required TResult Function(String id) delete,
   }) {
-    return fetchAll(token, idUser);
+    return fetchAll(idUser);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DepositRequestModel request, String token)? postDeposit,
-    TResult? Function(String token, String? idUser, int? page)? fetch,
-    TResult? Function(String token, String? idUser)? fetchAll,
-    TResult? Function(String id, String token)? delete,
+    TResult? Function(DepositRequestModel request)? postDeposit,
+    TResult? Function(String? idUser, int page, String? wasteTypeId,
+            String? date, String? startDate, String? endDate)?
+        fetch,
+    TResult? Function(String? idUser)? fetchAll,
+    TResult? Function(String id)? delete,
   }) {
-    return fetchAll?.call(token, idUser);
+    return fetchAll?.call(idUser);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DepositRequestModel request, String token)? postDeposit,
-    TResult Function(String token, String? idUser, int? page)? fetch,
-    TResult Function(String token, String? idUser)? fetchAll,
-    TResult Function(String id, String token)? delete,
+    TResult Function(DepositRequestModel request)? postDeposit,
+    TResult Function(String? idUser, int page, String? wasteTypeId,
+            String? date, String? startDate, String? endDate)?
+        fetch,
+    TResult Function(String? idUser)? fetchAll,
+    TResult Function(String id)? delete,
     required TResult orElse(),
   }) {
     if (fetchAll != null) {
-      return fetchAll(token, idUser);
+      return fetchAll(idUser);
     }
     return orElse();
   }
@@ -621,30 +639,24 @@ class _$FetchAllImpl implements _FetchAll {
 }
 
 abstract class _FetchAll implements DepositEvent {
-  const factory _FetchAll({required final String token, final String? idUser}) =
-      _$FetchAllImpl;
+  const factory _FetchAll({final String? idUser}) = _$FetchAllImpl;
 
-  @override
-  String get token;
   String? get idUser;
 
   /// Create a copy of DepositEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FetchAllImplCopyWith<_$FetchAllImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$DeleteImplCopyWith<$Res>
-    implements $DepositEventCopyWith<$Res> {
+abstract class _$$DeleteImplCopyWith<$Res> {
   factory _$$DeleteImplCopyWith(
           _$DeleteImpl value, $Res Function(_$DeleteImpl) then) =
       __$$DeleteImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({String id, String token});
+  $Res call({String id});
 }
 
 /// @nodoc
@@ -661,16 +673,11 @@ class __$$DeleteImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? token = null,
   }) {
     return _then(_$DeleteImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -679,16 +686,14 @@ class __$$DeleteImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DeleteImpl implements _Delete {
-  const _$DeleteImpl({required this.id, required this.token});
+  const _$DeleteImpl({required this.id});
 
   @override
   final String id;
-  @override
-  final String token;
 
   @override
   String toString() {
-    return 'DepositEvent.delete(id: $id, token: $token)';
+    return 'DepositEvent.delete(id: $id)';
   }
 
   @override
@@ -696,12 +701,11 @@ class _$DeleteImpl implements _Delete {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeleteImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.token, token) || other.token == token));
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, token);
+  int get hashCode => Object.hash(runtimeType, id);
 
   /// Create a copy of DepositEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -714,37 +718,42 @@ class _$DeleteImpl implements _Delete {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DepositRequestModel request, String token)
-        postDeposit,
-    required TResult Function(String token, String? idUser, int? page) fetch,
-    required TResult Function(String token, String? idUser) fetchAll,
-    required TResult Function(String id, String token) delete,
+    required TResult Function(DepositRequestModel request) postDeposit,
+    required TResult Function(String? idUser, int page, String? wasteTypeId,
+            String? date, String? startDate, String? endDate)
+        fetch,
+    required TResult Function(String? idUser) fetchAll,
+    required TResult Function(String id) delete,
   }) {
-    return delete(id, token);
+    return delete(id);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DepositRequestModel request, String token)? postDeposit,
-    TResult? Function(String token, String? idUser, int? page)? fetch,
-    TResult? Function(String token, String? idUser)? fetchAll,
-    TResult? Function(String id, String token)? delete,
+    TResult? Function(DepositRequestModel request)? postDeposit,
+    TResult? Function(String? idUser, int page, String? wasteTypeId,
+            String? date, String? startDate, String? endDate)?
+        fetch,
+    TResult? Function(String? idUser)? fetchAll,
+    TResult? Function(String id)? delete,
   }) {
-    return delete?.call(id, token);
+    return delete?.call(id);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DepositRequestModel request, String token)? postDeposit,
-    TResult Function(String token, String? idUser, int? page)? fetch,
-    TResult Function(String token, String? idUser)? fetchAll,
-    TResult Function(String id, String token)? delete,
+    TResult Function(DepositRequestModel request)? postDeposit,
+    TResult Function(String? idUser, int page, String? wasteTypeId,
+            String? date, String? startDate, String? endDate)?
+        fetch,
+    TResult Function(String? idUser)? fetchAll,
+    TResult Function(String id)? delete,
     required TResult orElse(),
   }) {
     if (delete != null) {
-      return delete(id, token);
+      return delete(id);
     }
     return orElse();
   }
@@ -788,16 +797,12 @@ class _$DeleteImpl implements _Delete {
 }
 
 abstract class _Delete implements DepositEvent {
-  const factory _Delete(
-      {required final String id, required final String token}) = _$DeleteImpl;
+  const factory _Delete({required final String id}) = _$DeleteImpl;
 
   String get id;
-  @override
-  String get token;
 
   /// Create a copy of DepositEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeleteImplCopyWith<_$DeleteImpl> get copyWith =>
       throw _privateConstructorUsedError;

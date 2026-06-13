@@ -14,12 +14,19 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:simbiotik_web/core/networks/networks.dart';
+import 'package:simbiotik_web/core/storages/auth_storage.dart';
 import 'package:simbiotik_web/data/api_constants.dart';
 import 'package:simbiotik_web/models/sodakos/sodako_request_model.dart';
 import 'package:simbiotik_web/models/sodakos/sodako_response_model.dart';
 
 class SodakoRepository {
   final Dio _dio = Dio()
+    ..interceptors.add(
+      AuthInterceptor(
+        AuthStorage(),
+      ),
+    )
     ..interceptors.add(
       LogInterceptor(
         request: true,
@@ -31,43 +38,54 @@ class SodakoRepository {
     );
 
   final String api = dotenv.get('URL') + ApiConstants.sodako;
-  Future<SodakoResponseModel> getSodakos(
-    String token,
-    String idUser,
+  Future<SodakoResponseModel> getSodakos({
+    String? idUser,
     int? page,
-  ) async {
-    try {
-      final response = await _dio.get(
-        api,
-        options: Options(
-          headers: {
-            'Authorization': 'Bearer $token',
-          },
-        ),
-      );
+    String? date,
+    String? startDate,
+    String? endDate,
+  }) async {
+    final queryParameters = <String, dynamic>{
+      'page': page,
+    };
 
-      if (response.statusCode == 200) {
-        return SodakoResponseModel.fromJson(response.data['data']);
-      }
-      throw Exception(response.data['message'] ?? 'Failed to fetch sodakos');
-    } on DioException catch (e) {
-      throw Exception(
-        e.response?.data['message'] ?? e.message ?? 'Network error',
+    if (idUser != null && idUser.isNotEmpty) {
+      queryParameters['user_id'] = idUser;
+    }
+
+    if (date != null && date.isNotEmpty) {
+      queryParameters['date'] = date;
+    }
+
+    if (startDate != null && startDate.isNotEmpty) {
+      queryParameters['start_date'] = startDate;
+    }
+
+    if (endDate != null && endDate.isNotEmpty) {
+      queryParameters['end_date'] = endDate;
+    }
+
+    final response = await _dio.get(
+      api,
+      queryParameters: queryParameters,
+    );
+
+    if (response.statusCode == 200) {
+      return SodakoResponseModel.fromJson(
+        response.data['data'],
       );
     }
+
+    throw Exception('Gagal memuat data');
   }
 
   Future<void> createSodako(
-    String token,
     SodakoRequestModel request,
   ) async {
     try {
       final response = await _dio.post(
         api,
         data: request.toJson(),
-        options: Options(headers: {
-          'Authorization': 'Bearer $token',
-        }),
       );
 
       if (response.statusCode != 201 && response.statusCode != 200) {

@@ -16,23 +16,28 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SodakoEvent {
-  String get token => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String token, String? idUser, int? page) fetch,
-    required TResult Function(String token, SodakoRequestModel request) create,
+    required TResult Function(String? idUser, int? page, String? date,
+            String? startDate, String? endDate)
+        fetch,
+    required TResult Function(SodakoRequestModel request) create,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String token, String? idUser, int? page)? fetch,
-    TResult? Function(String token, SodakoRequestModel request)? create,
+    TResult? Function(String? idUser, int? page, String? date,
+            String? startDate, String? endDate)?
+        fetch,
+    TResult? Function(SodakoRequestModel request)? create,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String token, String? idUser, int? page)? fetch,
-    TResult Function(String token, SodakoRequestModel request)? create,
+    TResult Function(String? idUser, int? page, String? date, String? startDate,
+            String? endDate)?
+        fetch,
+    TResult Function(SodakoRequestModel request)? create,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -55,12 +60,6 @@ mixin _$SodakoEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
-  /// Create a copy of SodakoEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $SodakoEventCopyWith<SodakoEvent> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -68,8 +67,6 @@ abstract class $SodakoEventCopyWith<$Res> {
   factory $SodakoEventCopyWith(
           SodakoEvent value, $Res Function(SodakoEvent) then) =
       _$SodakoEventCopyWithImpl<$Res, SodakoEvent>;
-  @useResult
-  $Res call({String token});
 }
 
 /// @nodoc
@@ -84,29 +81,20 @@ class _$SodakoEventCopyWithImpl<$Res, $Val extends SodakoEvent>
 
   /// Create a copy of SodakoEvent
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? token = null,
-  }) {
-    return _then(_value.copyWith(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$FetchImplCopyWith<$Res>
-    implements $SodakoEventCopyWith<$Res> {
+abstract class _$$FetchImplCopyWith<$Res> {
   factory _$$FetchImplCopyWith(
           _$FetchImpl value, $Res Function(_$FetchImpl) then) =
       __$$FetchImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({String token, String? idUser, int? page});
+  $Res call(
+      {String? idUser,
+      int? page,
+      String? date,
+      String? startDate,
+      String? endDate});
 }
 
 /// @nodoc
@@ -122,15 +110,13 @@ class __$$FetchImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = null,
     Object? idUser = freezed,
     Object? page = freezed,
+    Object? date = freezed,
+    Object? startDate = freezed,
+    Object? endDate = freezed,
   }) {
     return _then(_$FetchImpl(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
       idUser: freezed == idUser
           ? _value.idUser
           : idUser // ignore: cast_nullable_to_non_nullable
@@ -139,6 +125,18 @@ class __$$FetchImplCopyWithImpl<$Res>
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as int?,
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String?,
+      startDate: freezed == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      endDate: freezed == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -146,18 +144,23 @@ class __$$FetchImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FetchImpl implements _Fetch {
-  const _$FetchImpl({required this.token, this.idUser, this.page});
+  const _$FetchImpl(
+      {this.idUser, this.page, this.date, this.startDate, this.endDate});
 
-  @override
-  final String token;
   @override
   final String? idUser;
   @override
   final int? page;
+  @override
+  final String? date;
+  @override
+  final String? startDate;
+  @override
+  final String? endDate;
 
   @override
   String toString() {
-    return 'SodakoEvent.fetch(token: $token, idUser: $idUser, page: $page)';
+    return 'SodakoEvent.fetch(idUser: $idUser, page: $page, date: $date, startDate: $startDate, endDate: $endDate)';
   }
 
   @override
@@ -165,13 +168,17 @@ class _$FetchImpl implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FetchImpl &&
-            (identical(other.token, token) || other.token == token) &&
             (identical(other.idUser, idUser) || other.idUser == idUser) &&
-            (identical(other.page, page) || other.page == page));
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.date, date) || other.date == date) &&
+            (identical(other.startDate, startDate) ||
+                other.startDate == startDate) &&
+            (identical(other.endDate, endDate) || other.endDate == endDate));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, token, idUser, page);
+  int get hashCode =>
+      Object.hash(runtimeType, idUser, page, date, startDate, endDate);
 
   /// Create a copy of SodakoEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -184,30 +191,36 @@ class _$FetchImpl implements _Fetch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String token, String? idUser, int? page) fetch,
-    required TResult Function(String token, SodakoRequestModel request) create,
+    required TResult Function(String? idUser, int? page, String? date,
+            String? startDate, String? endDate)
+        fetch,
+    required TResult Function(SodakoRequestModel request) create,
   }) {
-    return fetch(token, idUser, page);
+    return fetch(idUser, page, date, startDate, endDate);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String token, String? idUser, int? page)? fetch,
-    TResult? Function(String token, SodakoRequestModel request)? create,
+    TResult? Function(String? idUser, int? page, String? date,
+            String? startDate, String? endDate)?
+        fetch,
+    TResult? Function(SodakoRequestModel request)? create,
   }) {
-    return fetch?.call(token, idUser, page);
+    return fetch?.call(idUser, page, date, startDate, endDate);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String token, String? idUser, int? page)? fetch,
-    TResult Function(String token, SodakoRequestModel request)? create,
+    TResult Function(String? idUser, int? page, String? date, String? startDate,
+            String? endDate)?
+        fetch,
+    TResult Function(SodakoRequestModel request)? create,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(token, idUser, page);
+      return fetch(idUser, page, date, startDate, endDate);
     }
     return orElse();
   }
@@ -246,32 +259,32 @@ class _$FetchImpl implements _Fetch {
 
 abstract class _Fetch implements SodakoEvent {
   const factory _Fetch(
-      {required final String token,
-      final String? idUser,
-      final int? page}) = _$FetchImpl;
+      {final String? idUser,
+      final int? page,
+      final String? date,
+      final String? startDate,
+      final String? endDate}) = _$FetchImpl;
 
-  @override
-  String get token;
   String? get idUser;
   int? get page;
+  String? get date;
+  String? get startDate;
+  String? get endDate;
 
   /// Create a copy of SodakoEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$CreateImplCopyWith<$Res>
-    implements $SodakoEventCopyWith<$Res> {
+abstract class _$$CreateImplCopyWith<$Res> {
   factory _$$CreateImplCopyWith(
           _$CreateImpl value, $Res Function(_$CreateImpl) then) =
       __$$CreateImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({String token, SodakoRequestModel request});
+  $Res call({SodakoRequestModel request});
 
   $SodakoRequestModelCopyWith<$Res> get request;
 }
@@ -289,14 +302,9 @@ class __$$CreateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = null,
     Object? request = null,
   }) {
     return _then(_$CreateImpl(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
       request: null == request
           ? _value.request
           : request // ignore: cast_nullable_to_non_nullable
@@ -318,16 +326,14 @@ class __$$CreateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CreateImpl implements _Create {
-  const _$CreateImpl({required this.token, required this.request});
+  const _$CreateImpl({required this.request});
 
-  @override
-  final String token;
   @override
   final SodakoRequestModel request;
 
   @override
   String toString() {
-    return 'SodakoEvent.create(token: $token, request: $request)';
+    return 'SodakoEvent.create(request: $request)';
   }
 
   @override
@@ -335,12 +341,11 @@ class _$CreateImpl implements _Create {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CreateImpl &&
-            (identical(other.token, token) || other.token == token) &&
             (identical(other.request, request) || other.request == request));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, token, request);
+  int get hashCode => Object.hash(runtimeType, request);
 
   /// Create a copy of SodakoEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -353,30 +358,36 @@ class _$CreateImpl implements _Create {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String token, String? idUser, int? page) fetch,
-    required TResult Function(String token, SodakoRequestModel request) create,
+    required TResult Function(String? idUser, int? page, String? date,
+            String? startDate, String? endDate)
+        fetch,
+    required TResult Function(SodakoRequestModel request) create,
   }) {
-    return create(token, request);
+    return create(request);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String token, String? idUser, int? page)? fetch,
-    TResult? Function(String token, SodakoRequestModel request)? create,
+    TResult? Function(String? idUser, int? page, String? date,
+            String? startDate, String? endDate)?
+        fetch,
+    TResult? Function(SodakoRequestModel request)? create,
   }) {
-    return create?.call(token, request);
+    return create?.call(request);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String token, String? idUser, int? page)? fetch,
-    TResult Function(String token, SodakoRequestModel request)? create,
+    TResult Function(String? idUser, int? page, String? date, String? startDate,
+            String? endDate)?
+        fetch,
+    TResult Function(SodakoRequestModel request)? create,
     required TResult orElse(),
   }) {
     if (create != null) {
-      return create(token, request);
+      return create(request);
     }
     return orElse();
   }
@@ -414,17 +425,13 @@ class _$CreateImpl implements _Create {
 }
 
 abstract class _Create implements SodakoEvent {
-  const factory _Create(
-      {required final String token,
-      required final SodakoRequestModel request}) = _$CreateImpl;
+  const factory _Create({required final SodakoRequestModel request}) =
+      _$CreateImpl;
 
-  @override
-  String get token;
   SodakoRequestModel get request;
 
   /// Create a copy of SodakoEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CreateImplCopyWith<_$CreateImpl> get copyWith =>
       throw _privateConstructorUsedError;

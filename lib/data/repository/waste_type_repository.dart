@@ -14,11 +14,18 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:simbiotik_web/core/networks/auth_interceptor.dart';
+import 'package:simbiotik_web/core/storages/storage.dart';
 import 'package:simbiotik_web/data/data.dart';
 import 'package:simbiotik_web/models/models.dart';
 
 class WasteTypeRepository {
   final Dio _dio = Dio()
+    ..interceptors.add(
+      AuthInterceptor(
+        AuthStorage(),
+      ),
+    )
     ..interceptors.add(LogInterceptor(
       request: true,
       requestBody: true,
@@ -29,18 +36,13 @@ class WasteTypeRepository {
     ));
   final String api = dotenv.get('URL') + ApiConstants.wasteType;
   Future<WasteTypeResponseModel> getWasteType(
-    String token,
     int? page,
+    String? keyword,
   ) async {
-    final response = await _dio.get(api,
-        options: Options(
-          headers: {
-            'Authorization': 'Bearer $token',
-          },
-        ),
-        queryParameters: {
-          'page': page,
-        });
+    final response = await _dio.get(api, queryParameters: {
+      'page': page,
+      if (keyword != null && keyword.isNotEmpty) 'keyword': keyword,
+    });
 
     if (response.statusCode == 200) {
       return WasteTypeResponseModel.fromJson(response.data['data']);
@@ -50,16 +52,10 @@ class WasteTypeRepository {
   }
 
   Future<WasteTypeResponseModel> getWasteTypeId(
-    String token,
     String? id,
   ) async {
     final response = await _dio.get(
       '$api/$id',
-      options: Options(
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      ),
     );
 
     if (response.statusCode == 200) {
@@ -69,15 +65,13 @@ class WasteTypeRepository {
     }
   }
 
-  Future<List<WasteTypesModel>> getAllWasteType(
-    String token,
-  ) async {
+  Future<List<WasteTypesModel>> getAllWasteType() async {
     List<WasteTypesModel> allWasteTypes = [];
     int? currentPage = 1;
     int? totalPages;
 
     do {
-      final response = await getWasteType(token, currentPage);
+      final response = await getWasteType(currentPage, null);
       allWasteTypes.addAll(response.result?.data ?? []);
       totalPages = response.result?.totalPages;
       currentPage = (currentPage ?? 1) + 1;
@@ -87,17 +81,11 @@ class WasteTypeRepository {
   }
 
   Future<WasteTypeResponseModel> add(
-    String token,
     String type,
     String price,
   ) async {
     final response = await _dio.post(
       api,
-      options: Options(
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      ),
       data: {
         'type': type,
         'price': price,
@@ -112,18 +100,12 @@ class WasteTypeRepository {
   }
 
   Future<WasteTypeResponseModel> edit(
-    String token,
     String id,
     String type,
     String price,
   ) async {
     final response = await _dio.put(
       '$api/$id',
-      options: Options(
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      ),
       data: {
         'type': type,
         'price': price,
@@ -138,16 +120,10 @@ class WasteTypeRepository {
   }
 
   Future<void> delete(
-    String token,
     String id,
   ) async {
     final response = await _dio.delete(
       '$api/$id',
-      options: Options(
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      ),
     );
 
     if (response.statusCode != 200) {

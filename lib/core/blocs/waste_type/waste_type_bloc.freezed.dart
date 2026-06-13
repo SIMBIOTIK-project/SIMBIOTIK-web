@@ -16,37 +16,34 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$WasteTypeEvent {
-  String get token => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String token, int? page) fetch,
-    required TResult Function(String token, String? id) fetchId,
-    required TResult Function(String token) fetchAll,
-    required TResult Function(String token, String type, String price) add,
-    required TResult Function(
-            String token, String id, String type, String price)
-        edit,
-    required TResult Function(String id, String token) delete,
+    required TResult Function(int? page, String? keyword) fetch,
+    required TResult Function(String? id) fetchId,
+    required TResult Function() fetchAll,
+    required TResult Function(String type, String price) add,
+    required TResult Function(String id, String type, String price) edit,
+    required TResult Function(String id) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String token, int? page)? fetch,
-    TResult? Function(String token, String? id)? fetchId,
-    TResult? Function(String token)? fetchAll,
-    TResult? Function(String token, String type, String price)? add,
-    TResult? Function(String token, String id, String type, String price)? edit,
-    TResult? Function(String id, String token)? delete,
+    TResult? Function(int? page, String? keyword)? fetch,
+    TResult? Function(String? id)? fetchId,
+    TResult? Function()? fetchAll,
+    TResult? Function(String type, String price)? add,
+    TResult? Function(String id, String type, String price)? edit,
+    TResult? Function(String id)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String token, int? page)? fetch,
-    TResult Function(String token, String? id)? fetchId,
-    TResult Function(String token)? fetchAll,
-    TResult Function(String token, String type, String price)? add,
-    TResult Function(String token, String id, String type, String price)? edit,
-    TResult Function(String id, String token)? delete,
+    TResult Function(int? page, String? keyword)? fetch,
+    TResult Function(String? id)? fetchId,
+    TResult Function()? fetchAll,
+    TResult Function(String type, String price)? add,
+    TResult Function(String id, String type, String price)? edit,
+    TResult Function(String id)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -81,12 +78,6 @@ mixin _$WasteTypeEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
-  /// Create a copy of WasteTypeEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $WasteTypeEventCopyWith<WasteTypeEvent> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -94,8 +85,6 @@ abstract class $WasteTypeEventCopyWith<$Res> {
   factory $WasteTypeEventCopyWith(
           WasteTypeEvent value, $Res Function(WasteTypeEvent) then) =
       _$WasteTypeEventCopyWithImpl<$Res, WasteTypeEvent>;
-  @useResult
-  $Res call({String token});
 }
 
 /// @nodoc
@@ -110,29 +99,15 @@ class _$WasteTypeEventCopyWithImpl<$Res, $Val extends WasteTypeEvent>
 
   /// Create a copy of WasteTypeEvent
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? token = null,
-  }) {
-    return _then(_value.copyWith(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$FetchImplCopyWith<$Res>
-    implements $WasteTypeEventCopyWith<$Res> {
+abstract class _$$FetchImplCopyWith<$Res> {
   factory _$$FetchImplCopyWith(
           _$FetchImpl value, $Res Function(_$FetchImpl) then) =
       __$$FetchImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({String token, int? page});
+  $Res call({int? page, String? keyword});
 }
 
 /// @nodoc
@@ -148,18 +123,18 @@ class __$$FetchImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = null,
     Object? page = freezed,
+    Object? keyword = freezed,
   }) {
     return _then(_$FetchImpl(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
       page: freezed == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as int?,
+      keyword: freezed == keyword
+          ? _value.keyword
+          : keyword // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -167,16 +142,16 @@ class __$$FetchImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FetchImpl implements _Fetch {
-  const _$FetchImpl({required this.token, this.page});
+  const _$FetchImpl({this.page, this.keyword});
 
   @override
-  final String token;
-  @override
   final int? page;
+  @override
+  final String? keyword;
 
   @override
   String toString() {
-    return 'WasteTypeEvent.fetch(token: $token, page: $page)';
+    return 'WasteTypeEvent.fetch(page: $page, keyword: $keyword)';
   }
 
   @override
@@ -184,12 +159,12 @@ class _$FetchImpl implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FetchImpl &&
-            (identical(other.token, token) || other.token == token) &&
-            (identical(other.page, page) || other.page == page));
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.keyword, keyword) || other.keyword == keyword));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, token, page);
+  int get hashCode => Object.hash(runtimeType, page, keyword);
 
   /// Create a copy of WasteTypeEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -202,44 +177,42 @@ class _$FetchImpl implements _Fetch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String token, int? page) fetch,
-    required TResult Function(String token, String? id) fetchId,
-    required TResult Function(String token) fetchAll,
-    required TResult Function(String token, String type, String price) add,
-    required TResult Function(
-            String token, String id, String type, String price)
-        edit,
-    required TResult Function(String id, String token) delete,
+    required TResult Function(int? page, String? keyword) fetch,
+    required TResult Function(String? id) fetchId,
+    required TResult Function() fetchAll,
+    required TResult Function(String type, String price) add,
+    required TResult Function(String id, String type, String price) edit,
+    required TResult Function(String id) delete,
   }) {
-    return fetch(token, page);
+    return fetch(page, keyword);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String token, int? page)? fetch,
-    TResult? Function(String token, String? id)? fetchId,
-    TResult? Function(String token)? fetchAll,
-    TResult? Function(String token, String type, String price)? add,
-    TResult? Function(String token, String id, String type, String price)? edit,
-    TResult? Function(String id, String token)? delete,
+    TResult? Function(int? page, String? keyword)? fetch,
+    TResult? Function(String? id)? fetchId,
+    TResult? Function()? fetchAll,
+    TResult? Function(String type, String price)? add,
+    TResult? Function(String id, String type, String price)? edit,
+    TResult? Function(String id)? delete,
   }) {
-    return fetch?.call(token, page);
+    return fetch?.call(page, keyword);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String token, int? page)? fetch,
-    TResult Function(String token, String? id)? fetchId,
-    TResult Function(String token)? fetchAll,
-    TResult Function(String token, String type, String price)? add,
-    TResult Function(String token, String id, String type, String price)? edit,
-    TResult Function(String id, String token)? delete,
+    TResult Function(int? page, String? keyword)? fetch,
+    TResult Function(String? id)? fetchId,
+    TResult Function()? fetchAll,
+    TResult Function(String type, String price)? add,
+    TResult Function(String id, String type, String price)? edit,
+    TResult Function(String id)? delete,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(token, page);
+      return fetch(page, keyword);
     }
     return orElse();
   }
@@ -289,30 +262,25 @@ class _$FetchImpl implements _Fetch {
 }
 
 abstract class _Fetch implements WasteTypeEvent {
-  const factory _Fetch({required final String token, final int? page}) =
-      _$FetchImpl;
+  const factory _Fetch({final int? page, final String? keyword}) = _$FetchImpl;
 
-  @override
-  String get token;
   int? get page;
+  String? get keyword;
 
   /// Create a copy of WasteTypeEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FetchIdImplCopyWith<$Res>
-    implements $WasteTypeEventCopyWith<$Res> {
+abstract class _$$FetchIdImplCopyWith<$Res> {
   factory _$$FetchIdImplCopyWith(
           _$FetchIdImpl value, $Res Function(_$FetchIdImpl) then) =
       __$$FetchIdImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({String token, String? id});
+  $Res call({String? id});
 }
 
 /// @nodoc
@@ -328,14 +296,9 @@ class __$$FetchIdImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = null,
     Object? id = freezed,
   }) {
     return _then(_$FetchIdImpl(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -347,16 +310,14 @@ class __$$FetchIdImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FetchIdImpl implements _FetchId {
-  const _$FetchIdImpl({required this.token, this.id});
+  const _$FetchIdImpl({this.id});
 
-  @override
-  final String token;
   @override
   final String? id;
 
   @override
   String toString() {
-    return 'WasteTypeEvent.fetchId(token: $token, id: $id)';
+    return 'WasteTypeEvent.fetchId(id: $id)';
   }
 
   @override
@@ -364,12 +325,11 @@ class _$FetchIdImpl implements _FetchId {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FetchIdImpl &&
-            (identical(other.token, token) || other.token == token) &&
             (identical(other.id, id) || other.id == id));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, token, id);
+  int get hashCode => Object.hash(runtimeType, id);
 
   /// Create a copy of WasteTypeEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -382,44 +342,42 @@ class _$FetchIdImpl implements _FetchId {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String token, int? page) fetch,
-    required TResult Function(String token, String? id) fetchId,
-    required TResult Function(String token) fetchAll,
-    required TResult Function(String token, String type, String price) add,
-    required TResult Function(
-            String token, String id, String type, String price)
-        edit,
-    required TResult Function(String id, String token) delete,
+    required TResult Function(int? page, String? keyword) fetch,
+    required TResult Function(String? id) fetchId,
+    required TResult Function() fetchAll,
+    required TResult Function(String type, String price) add,
+    required TResult Function(String id, String type, String price) edit,
+    required TResult Function(String id) delete,
   }) {
-    return fetchId(token, id);
+    return fetchId(id);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String token, int? page)? fetch,
-    TResult? Function(String token, String? id)? fetchId,
-    TResult? Function(String token)? fetchAll,
-    TResult? Function(String token, String type, String price)? add,
-    TResult? Function(String token, String id, String type, String price)? edit,
-    TResult? Function(String id, String token)? delete,
+    TResult? Function(int? page, String? keyword)? fetch,
+    TResult? Function(String? id)? fetchId,
+    TResult? Function()? fetchAll,
+    TResult? Function(String type, String price)? add,
+    TResult? Function(String id, String type, String price)? edit,
+    TResult? Function(String id)? delete,
   }) {
-    return fetchId?.call(token, id);
+    return fetchId?.call(id);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String token, int? page)? fetch,
-    TResult Function(String token, String? id)? fetchId,
-    TResult Function(String token)? fetchAll,
-    TResult Function(String token, String type, String price)? add,
-    TResult Function(String token, String id, String type, String price)? edit,
-    TResult Function(String id, String token)? delete,
+    TResult Function(int? page, String? keyword)? fetch,
+    TResult Function(String? id)? fetchId,
+    TResult Function()? fetchAll,
+    TResult Function(String type, String price)? add,
+    TResult Function(String id, String type, String price)? edit,
+    TResult Function(String id)? delete,
     required TResult orElse(),
   }) {
     if (fetchId != null) {
-      return fetchId(token, id);
+      return fetchId(id);
     }
     return orElse();
   }
@@ -469,30 +427,22 @@ class _$FetchIdImpl implements _FetchId {
 }
 
 abstract class _FetchId implements WasteTypeEvent {
-  const factory _FetchId({required final String token, final String? id}) =
-      _$FetchIdImpl;
+  const factory _FetchId({final String? id}) = _$FetchIdImpl;
 
-  @override
-  String get token;
   String? get id;
 
   /// Create a copy of WasteTypeEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FetchIdImplCopyWith<_$FetchIdImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FetchAllImplCopyWith<$Res>
-    implements $WasteTypeEventCopyWith<$Res> {
+abstract class _$$FetchAllImplCopyWith<$Res> {
   factory _$$FetchAllImplCopyWith(
           _$FetchAllImpl value, $Res Function(_$FetchAllImpl) then) =
       __$$FetchAllImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String token});
 }
 
 /// @nodoc
@@ -505,93 +455,66 @@ class __$$FetchAllImplCopyWithImpl<$Res>
 
   /// Create a copy of WasteTypeEvent
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? token = null,
-  }) {
-    return _then(_$FetchAllImpl(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$FetchAllImpl implements _FetchAll {
-  const _$FetchAllImpl({required this.token});
-
-  @override
-  final String token;
+  const _$FetchAllImpl();
 
   @override
   String toString() {
-    return 'WasteTypeEvent.fetchAll(token: $token)';
+    return 'WasteTypeEvent.fetchAll()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$FetchAllImpl &&
-            (identical(other.token, token) || other.token == token));
+        (other.runtimeType == runtimeType && other is _$FetchAllImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, token);
-
-  /// Create a copy of WasteTypeEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$FetchAllImplCopyWith<_$FetchAllImpl> get copyWith =>
-      __$$FetchAllImplCopyWithImpl<_$FetchAllImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String token, int? page) fetch,
-    required TResult Function(String token, String? id) fetchId,
-    required TResult Function(String token) fetchAll,
-    required TResult Function(String token, String type, String price) add,
-    required TResult Function(
-            String token, String id, String type, String price)
-        edit,
-    required TResult Function(String id, String token) delete,
+    required TResult Function(int? page, String? keyword) fetch,
+    required TResult Function(String? id) fetchId,
+    required TResult Function() fetchAll,
+    required TResult Function(String type, String price) add,
+    required TResult Function(String id, String type, String price) edit,
+    required TResult Function(String id) delete,
   }) {
-    return fetchAll(token);
+    return fetchAll();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String token, int? page)? fetch,
-    TResult? Function(String token, String? id)? fetchId,
-    TResult? Function(String token)? fetchAll,
-    TResult? Function(String token, String type, String price)? add,
-    TResult? Function(String token, String id, String type, String price)? edit,
-    TResult? Function(String id, String token)? delete,
+    TResult? Function(int? page, String? keyword)? fetch,
+    TResult? Function(String? id)? fetchId,
+    TResult? Function()? fetchAll,
+    TResult? Function(String type, String price)? add,
+    TResult? Function(String id, String type, String price)? edit,
+    TResult? Function(String id)? delete,
   }) {
-    return fetchAll?.call(token);
+    return fetchAll?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String token, int? page)? fetch,
-    TResult Function(String token, String? id)? fetchId,
-    TResult Function(String token)? fetchAll,
-    TResult Function(String token, String type, String price)? add,
-    TResult Function(String token, String id, String type, String price)? edit,
-    TResult Function(String id, String token)? delete,
+    TResult Function(int? page, String? keyword)? fetch,
+    TResult Function(String? id)? fetchId,
+    TResult Function()? fetchAll,
+    TResult Function(String type, String price)? add,
+    TResult Function(String id, String type, String price)? edit,
+    TResult Function(String id)? delete,
     required TResult orElse(),
   }) {
     if (fetchAll != null) {
-      return fetchAll(token);
+      return fetchAll();
     }
     return orElse();
   }
@@ -641,27 +564,15 @@ class _$FetchAllImpl implements _FetchAll {
 }
 
 abstract class _FetchAll implements WasteTypeEvent {
-  const factory _FetchAll({required final String token}) = _$FetchAllImpl;
-
-  @override
-  String get token;
-
-  /// Create a copy of WasteTypeEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FetchAllImplCopyWith<_$FetchAllImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _FetchAll() = _$FetchAllImpl;
 }
 
 /// @nodoc
-abstract class _$$AddImplCopyWith<$Res>
-    implements $WasteTypeEventCopyWith<$Res> {
+abstract class _$$AddImplCopyWith<$Res> {
   factory _$$AddImplCopyWith(_$AddImpl value, $Res Function(_$AddImpl) then) =
       __$$AddImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({String token, String type, String price});
+  $Res call({String type, String price});
 }
 
 /// @nodoc
@@ -676,15 +587,10 @@ class __$$AddImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = null,
     Object? type = null,
     Object? price = null,
   }) {
     return _then(_$AddImpl(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -700,11 +606,8 @@ class __$$AddImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AddImpl implements _Add {
-  const _$AddImpl(
-      {required this.token, required this.type, required this.price});
+  const _$AddImpl({required this.type, required this.price});
 
-  @override
-  final String token;
   @override
   final String type;
   @override
@@ -712,7 +615,7 @@ class _$AddImpl implements _Add {
 
   @override
   String toString() {
-    return 'WasteTypeEvent.add(token: $token, type: $type, price: $price)';
+    return 'WasteTypeEvent.add(type: $type, price: $price)';
   }
 
   @override
@@ -720,13 +623,12 @@ class _$AddImpl implements _Add {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AddImpl &&
-            (identical(other.token, token) || other.token == token) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.price, price) || other.price == price));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, token, type, price);
+  int get hashCode => Object.hash(runtimeType, type, price);
 
   /// Create a copy of WasteTypeEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -739,44 +641,42 @@ class _$AddImpl implements _Add {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String token, int? page) fetch,
-    required TResult Function(String token, String? id) fetchId,
-    required TResult Function(String token) fetchAll,
-    required TResult Function(String token, String type, String price) add,
-    required TResult Function(
-            String token, String id, String type, String price)
-        edit,
-    required TResult Function(String id, String token) delete,
+    required TResult Function(int? page, String? keyword) fetch,
+    required TResult Function(String? id) fetchId,
+    required TResult Function() fetchAll,
+    required TResult Function(String type, String price) add,
+    required TResult Function(String id, String type, String price) edit,
+    required TResult Function(String id) delete,
   }) {
-    return add(token, type, price);
+    return add(type, price);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String token, int? page)? fetch,
-    TResult? Function(String token, String? id)? fetchId,
-    TResult? Function(String token)? fetchAll,
-    TResult? Function(String token, String type, String price)? add,
-    TResult? Function(String token, String id, String type, String price)? edit,
-    TResult? Function(String id, String token)? delete,
+    TResult? Function(int? page, String? keyword)? fetch,
+    TResult? Function(String? id)? fetchId,
+    TResult? Function()? fetchAll,
+    TResult? Function(String type, String price)? add,
+    TResult? Function(String id, String type, String price)? edit,
+    TResult? Function(String id)? delete,
   }) {
-    return add?.call(token, type, price);
+    return add?.call(type, price);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String token, int? page)? fetch,
-    TResult Function(String token, String? id)? fetchId,
-    TResult Function(String token)? fetchAll,
-    TResult Function(String token, String type, String price)? add,
-    TResult Function(String token, String id, String type, String price)? edit,
-    TResult Function(String id, String token)? delete,
+    TResult Function(int? page, String? keyword)? fetch,
+    TResult Function(String? id)? fetchId,
+    TResult Function()? fetchAll,
+    TResult Function(String type, String price)? add,
+    TResult Function(String id, String type, String price)? edit,
+    TResult Function(String id)? delete,
     required TResult orElse(),
   }) {
     if (add != null) {
-      return add(token, type, price);
+      return add(type, price);
     }
     return orElse();
   }
@@ -827,32 +727,25 @@ class _$AddImpl implements _Add {
 
 abstract class _Add implements WasteTypeEvent {
   const factory _Add(
-      {required final String token,
-      required final String type,
-      required final String price}) = _$AddImpl;
+      {required final String type, required final String price}) = _$AddImpl;
 
-  @override
-  String get token;
   String get type;
   String get price;
 
   /// Create a copy of WasteTypeEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AddImplCopyWith<_$AddImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$EditImplCopyWith<$Res>
-    implements $WasteTypeEventCopyWith<$Res> {
+abstract class _$$EditImplCopyWith<$Res> {
   factory _$$EditImplCopyWith(
           _$EditImpl value, $Res Function(_$EditImpl) then) =
       __$$EditImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({String token, String id, String type, String price});
+  $Res call({String id, String type, String price});
 }
 
 /// @nodoc
@@ -867,16 +760,11 @@ class __$$EditImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = null,
     Object? id = null,
     Object? type = null,
     Object? price = null,
   }) {
     return _then(_$EditImpl(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -896,14 +784,8 @@ class __$$EditImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$EditImpl implements _Edit {
-  const _$EditImpl(
-      {required this.token,
-      required this.id,
-      required this.type,
-      required this.price});
+  const _$EditImpl({required this.id, required this.type, required this.price});
 
-  @override
-  final String token;
   @override
   final String id;
   @override
@@ -913,7 +795,7 @@ class _$EditImpl implements _Edit {
 
   @override
   String toString() {
-    return 'WasteTypeEvent.edit(token: $token, id: $id, type: $type, price: $price)';
+    return 'WasteTypeEvent.edit(id: $id, type: $type, price: $price)';
   }
 
   @override
@@ -921,14 +803,13 @@ class _$EditImpl implements _Edit {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$EditImpl &&
-            (identical(other.token, token) || other.token == token) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.price, price) || other.price == price));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, token, id, type, price);
+  int get hashCode => Object.hash(runtimeType, id, type, price);
 
   /// Create a copy of WasteTypeEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -941,44 +822,42 @@ class _$EditImpl implements _Edit {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String token, int? page) fetch,
-    required TResult Function(String token, String? id) fetchId,
-    required TResult Function(String token) fetchAll,
-    required TResult Function(String token, String type, String price) add,
-    required TResult Function(
-            String token, String id, String type, String price)
-        edit,
-    required TResult Function(String id, String token) delete,
+    required TResult Function(int? page, String? keyword) fetch,
+    required TResult Function(String? id) fetchId,
+    required TResult Function() fetchAll,
+    required TResult Function(String type, String price) add,
+    required TResult Function(String id, String type, String price) edit,
+    required TResult Function(String id) delete,
   }) {
-    return edit(token, id, type, price);
+    return edit(id, type, price);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String token, int? page)? fetch,
-    TResult? Function(String token, String? id)? fetchId,
-    TResult? Function(String token)? fetchAll,
-    TResult? Function(String token, String type, String price)? add,
-    TResult? Function(String token, String id, String type, String price)? edit,
-    TResult? Function(String id, String token)? delete,
+    TResult? Function(int? page, String? keyword)? fetch,
+    TResult? Function(String? id)? fetchId,
+    TResult? Function()? fetchAll,
+    TResult? Function(String type, String price)? add,
+    TResult? Function(String id, String type, String price)? edit,
+    TResult? Function(String id)? delete,
   }) {
-    return edit?.call(token, id, type, price);
+    return edit?.call(id, type, price);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String token, int? page)? fetch,
-    TResult Function(String token, String? id)? fetchId,
-    TResult Function(String token)? fetchAll,
-    TResult Function(String token, String type, String price)? add,
-    TResult Function(String token, String id, String type, String price)? edit,
-    TResult Function(String id, String token)? delete,
+    TResult Function(int? page, String? keyword)? fetch,
+    TResult Function(String? id)? fetchId,
+    TResult Function()? fetchAll,
+    TResult Function(String type, String price)? add,
+    TResult Function(String id, String type, String price)? edit,
+    TResult Function(String id)? delete,
     required TResult orElse(),
   }) {
     if (edit != null) {
-      return edit(token, id, type, price);
+      return edit(id, type, price);
     }
     return orElse();
   }
@@ -1029,34 +908,28 @@ class _$EditImpl implements _Edit {
 
 abstract class _Edit implements WasteTypeEvent {
   const factory _Edit(
-      {required final String token,
-      required final String id,
+      {required final String id,
       required final String type,
       required final String price}) = _$EditImpl;
 
-  @override
-  String get token;
   String get id;
   String get type;
   String get price;
 
   /// Create a copy of WasteTypeEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$EditImplCopyWith<_$EditImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$DeleteImplCopyWith<$Res>
-    implements $WasteTypeEventCopyWith<$Res> {
+abstract class _$$DeleteImplCopyWith<$Res> {
   factory _$$DeleteImplCopyWith(
           _$DeleteImpl value, $Res Function(_$DeleteImpl) then) =
       __$$DeleteImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({String id, String token});
+  $Res call({String id});
 }
 
 /// @nodoc
@@ -1073,16 +946,11 @@ class __$$DeleteImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? token = null,
   }) {
     return _then(_$DeleteImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -1091,16 +959,14 @@ class __$$DeleteImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DeleteImpl implements _Delete {
-  const _$DeleteImpl({required this.id, required this.token});
+  const _$DeleteImpl({required this.id});
 
   @override
   final String id;
-  @override
-  final String token;
 
   @override
   String toString() {
-    return 'WasteTypeEvent.delete(id: $id, token: $token)';
+    return 'WasteTypeEvent.delete(id: $id)';
   }
 
   @override
@@ -1108,12 +974,11 @@ class _$DeleteImpl implements _Delete {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeleteImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.token, token) || other.token == token));
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, token);
+  int get hashCode => Object.hash(runtimeType, id);
 
   /// Create a copy of WasteTypeEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -1126,44 +991,42 @@ class _$DeleteImpl implements _Delete {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String token, int? page) fetch,
-    required TResult Function(String token, String? id) fetchId,
-    required TResult Function(String token) fetchAll,
-    required TResult Function(String token, String type, String price) add,
-    required TResult Function(
-            String token, String id, String type, String price)
-        edit,
-    required TResult Function(String id, String token) delete,
+    required TResult Function(int? page, String? keyword) fetch,
+    required TResult Function(String? id) fetchId,
+    required TResult Function() fetchAll,
+    required TResult Function(String type, String price) add,
+    required TResult Function(String id, String type, String price) edit,
+    required TResult Function(String id) delete,
   }) {
-    return delete(id, token);
+    return delete(id);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String token, int? page)? fetch,
-    TResult? Function(String token, String? id)? fetchId,
-    TResult? Function(String token)? fetchAll,
-    TResult? Function(String token, String type, String price)? add,
-    TResult? Function(String token, String id, String type, String price)? edit,
-    TResult? Function(String id, String token)? delete,
+    TResult? Function(int? page, String? keyword)? fetch,
+    TResult? Function(String? id)? fetchId,
+    TResult? Function()? fetchAll,
+    TResult? Function(String type, String price)? add,
+    TResult? Function(String id, String type, String price)? edit,
+    TResult? Function(String id)? delete,
   }) {
-    return delete?.call(id, token);
+    return delete?.call(id);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String token, int? page)? fetch,
-    TResult Function(String token, String? id)? fetchId,
-    TResult Function(String token)? fetchAll,
-    TResult Function(String token, String type, String price)? add,
-    TResult Function(String token, String id, String type, String price)? edit,
-    TResult Function(String id, String token)? delete,
+    TResult Function(int? page, String? keyword)? fetch,
+    TResult Function(String? id)? fetchId,
+    TResult Function()? fetchAll,
+    TResult Function(String type, String price)? add,
+    TResult Function(String id, String type, String price)? edit,
+    TResult Function(String id)? delete,
     required TResult orElse(),
   }) {
     if (delete != null) {
-      return delete(id, token);
+      return delete(id);
     }
     return orElse();
   }
@@ -1213,16 +1076,12 @@ class _$DeleteImpl implements _Delete {
 }
 
 abstract class _Delete implements WasteTypeEvent {
-  const factory _Delete(
-      {required final String id, required final String token}) = _$DeleteImpl;
+  const factory _Delete({required final String id}) = _$DeleteImpl;
 
   String get id;
-  @override
-  String get token;
 
   /// Create a copy of WasteTypeEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeleteImplCopyWith<_$DeleteImpl> get copyWith =>
       throw _privateConstructorUsedError;

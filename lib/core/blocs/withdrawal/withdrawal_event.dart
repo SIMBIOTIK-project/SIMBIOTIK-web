@@ -18,21 +18,20 @@ part of 'withdrawal_bloc.dart';
 class WithdrawalEvent with _$WithdrawalEvent {
   const factory WithdrawalEvent.postWithdrawal({
     required WithdrawalsRequestModel request,
-    required String token,
   }) = _PostWithdrawal;
   const factory WithdrawalEvent.fetch({
-    required String token,
     String? idUser,
     int? page,
+    String? date,
+    String? startDate,
+    String? endDate,
   }) = _Fetch;
 
   const factory WithdrawalEvent.fetchAll({
-    required String token,
     String? idUser,
   }) = _FetchAll;
 
   const factory WithdrawalEvent.delete({
     required String id,
-    required String token,
   }) = _Delete;
 }

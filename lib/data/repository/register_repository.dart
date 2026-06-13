@@ -14,11 +14,19 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:simbiotik_web/core/networks/auth_interceptor.dart';
+import 'package:simbiotik_web/core/storages/auth_storage.dart';
 import 'package:simbiotik_web/data/data.dart';
 import 'package:simbiotik_web/models/auth/register_response.dart';
+import 'package:simbiotik_web/models/auth/user_action_response.dart';
 
 class RegisterRepository {
   final Dio _dio = Dio()
+    ..interceptors.add(
+      AuthInterceptor(
+        AuthStorage(),
+      ),
+    )
     ..interceptors.add(LogInterceptor(
       request: true,
       requestBody: true,
@@ -38,28 +46,34 @@ class RegisterRepository {
     String address,
     String status,
   ) async {
-    final response = await _dio.post(
-      api,
-      data: {
-        'name': name,
-        'email': email,
-        'password': password,
-        'password_confirmation': passwordConfirmation,
-        'nik': nik,
-        'phone_number': phoneNumber,
-        'address': address,
-        'status': status,
-      },
-    );
+    try {
+      final response = await _dio.post(
+        api,
+        data: {
+          'name': name,
+          'email': email,
+          'password': password,
+          'password_confirmation': passwordConfirmation,
+          'nik': nik,
+          'phone_number': phoneNumber,
+          'address': address,
+          'status': status,
+        },
+      );
 
-    if (response.statusCode == 200) {
       return RegisterResponse.fromJson(response.data);
-    } else {
-      throw Exception('Gagal registrasi');
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 422) {
+        throw Exception(
+          e.response?.data['email']?.first ?? 'Data tidak valid',
+        );
+      }
+
+      throw Exception('Gagal melakukan registrasi');
     }
   }
 
-  Future<RegisterResponse> update(
+  Future<UserActionResponse> update(
     String id,
     String name,
     String email,
@@ -70,24 +84,30 @@ class RegisterRepository {
     String address,
     String status,
   ) async {
-    final response = await _dio.put(
-      '${dotenv.get('URL')}/user/$id', // endpoint edit
-      data: {
-        'name': name,
-        'email': email,
-        'password': password,
-        'password_confirmation': passwordConfirmation,
-        'nik': nik,
-        'phone_number': phoneNumber,
-        'address': address,
-        'status': status,
-      },
-    );
+    try {
+      final response = await _dio.put(
+        '${dotenv.get('URL')}/users/$id', // endpoint edit
+        data: {
+          'name': name,
+          'email': email,
+          'password': password,
+          'password_confirmation': passwordConfirmation,
+          'nik': nik,
+          'phone_number': phoneNumber,
+          'address': address,
+          'status': status,
+        },
+      );
 
-    if (response.statusCode == 200) {
-      return RegisterResponse.fromJson(response.data);
-    } else {
-      throw Exception('Gagal update');
+      return UserActionResponse.fromJson(response.data);
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 422) {
+        throw Exception(
+          e.response?.data['email']?.first ?? 'Data tidak valid',
+        );
+      }
+
+      throw Exception('Gagal melakukan pembaruan data');
     }
   }
 }

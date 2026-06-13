@@ -84,18 +84,49 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
     super.initState();
   }
 
+  void _showLogoutDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: const Text('Keluar'),
+          content: const Text(
+            'Apakah anda yakin akan keluar dari Dashboard?',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(dialogContext).pop();
+              },
+              child: const Text('Tidak'),
+            ),
+            TextButton(
+              onPressed: () {
+                context.read<LogoutBloc>().add(
+                      const LogoutEvent.logout(),
+                    );
+              },
+              child: const Text('Ya, Keluar'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: BlocListener<LogoutBloc, LogoutState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state.status.isLoaded) {
             Navigator.of(context).pop();
-            GoRouter.of(context).pushReplacement(
-              '/',
-            );
-            _logout(context);
+            await _logout();
+
+            if (context.mounted) {
+              context.go('/');
+            }
           }
         },
         child: Row(
@@ -171,72 +202,6 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
                   ),
                 ],
               ),
-              footer: Padding(
-                padding: const EdgeInsets.all(8),
-                child: InkWell(
-                  child: Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 8,
-                        horizontal: 8,
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.exit_to_app,
-                            color: Colors.white,
-                          ),
-                          Gap(8.0),
-                          Text(
-                            'Keluar',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext dialogContext) {
-                        return AlertDialog(
-                          title: const Text('Keluar'),
-                          content: const Text(
-                              'Apakah anda yakin akan keluar dari Dashboard?'),
-                          actions: <Widget>[
-                            TextButton(
-                              onPressed: () {
-                                context.read<LogoutBloc>().add(
-                                      const LogoutEvent.logout(),
-                                    );
-                              },
-                              child: const Text('Ya, Keluar'),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(dialogContext).pop();
-                              },
-                              child: const Text('Tidak'),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                ),
-              ),
               items: [
                 SideMenuItem(
                   title: 'Beranda',
@@ -259,13 +224,22 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
                   },
                   icon: const Icon(Icons.people),
                 ),
+                // SideMenuItem(
+                //   title: 'Ubah Kata Sandi',
+                //   onTap: (index, _) {
+                //     sideMenu.changePage(index);
+                //   },
+                //   icon: const Icon(
+                //     Icons.restore,
+                //   ),
+                // )
                 SideMenuItem(
-                  title: 'Ubah Kata Sandi',
+                  title: 'Keluar',
                   onTap: (index, _) {
-                    sideMenu.changePage(index);
+                    _showLogoutDialog();
                   },
                   icon: const Icon(
-                    Icons.restore,
+                    Icons.logout,
                   ),
                 )
               ],
@@ -291,7 +265,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
     );
   }
 
-  void _logout(BuildContext context) async {
+  Future<void> _logout() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('token');
   }

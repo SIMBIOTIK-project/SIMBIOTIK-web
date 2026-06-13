@@ -49,3 +49,48 @@ String formattedDate(String time) {
   );
   return date;
 }
+
+bool isValidEmail(String? email) {
+  if (email == null || email.trim().isEmpty) {
+    return false;
+  }
+
+  return RegExp(
+    r'^[\w\.-]+@[\w\.-]+\.[a-zA-Z]{2,}$',
+  ).hasMatch(email.trim());
+}
+
+bool isValidNik(String? nik) {
+  if (nik == null) {
+    return false;
+  }
+
+  return RegExp(r'^[0-9]{16}$').hasMatch(nik);
+}
+
+bool isValidPhoneNumber(String? phoneNumber) {
+  if (phoneNumber == null) {
+    return false;
+  }
+
+  return RegExp(r'^08[0-9]{8,11}$').hasMatch(phoneNumber);
+}
+
+bool isRequired(String? value) {
+  return value != null && value.trim().isNotEmpty;
+}
+
+bool isValidPassword(String? password) {
+  if (password == null) {
+    return false;
+  }
+
+  return password.length >= 6;
+}
+
+bool isPasswordMatch(
+  String? password,
+  String? confirmation,
+) {
+  return password == confirmation;
+}

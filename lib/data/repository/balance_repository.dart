@@ -14,11 +14,18 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:simbiotik_web/core/networks/networks.dart';
+import 'package:simbiotik_web/core/storages/auth_storage.dart';
 import 'package:simbiotik_web/data/api_constants.dart';
 import 'package:simbiotik_web/models/balances/balance_response_model.dart';
 
 class BalanceRepository {
   final Dio _dio = Dio()
+    ..interceptors.add(
+      AuthInterceptor(
+        AuthStorage(),
+      ),
+    )
     ..interceptors.add(LogInterceptor(
       request: true,
       requestBody: true,
@@ -27,17 +34,10 @@ class BalanceRepository {
       error: true,
     ));
   final String api = dotenv.get('URL') + ApiConstants.balance;
-  Future<BalanceResponseModel> getBalance(
-    String token,
-  ) async {
+  Future<BalanceResponseModel> getBalance() async {
     try {
       final response = await _dio.get(
         api,
-        options: Options(
-          headers: {
-            'Authorization': 'Bearer $token',
-          },
-        ),
       );
 
       if (response.statusCode == 200) {

@@ -20,6 +20,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:simbiotik_web/core/blocs/auth/register_bloc.dart';
 import 'package:simbiotik_web/data/repository/register_repository.dart';
 import 'package:simbiotik_web/models/users/user_model.dart';
+import 'package:simbiotik_web/utils/utils.dart';
 
 class RegisterDialog extends StatefulWidget {
   final UserModel? user;
@@ -66,6 +67,27 @@ class _RegisterDialogState extends State<RegisterDialog> {
       _address.text = widget.user!.address ?? '';
       selectStatusItem = widget.user!.status;
     }
+
+    _name.addListener(_refresh);
+    _email.addListener(_refresh);
+    _nik.addListener(_refresh);
+    _phoneNumber.addListener(_refresh);
+    _address.addListener(_refresh);
+  }
+
+  void _refresh() {
+    if (mounted) setState(() {});
+  }
+
+  @override
+  void dispose() {
+    _name.removeListener(_refresh);
+    _email.removeListener(_refresh);
+    _nik.removeListener(_refresh);
+    _phoneNumber.removeListener(_refresh);
+    _address.removeListener(_refresh);
+
+    super.dispose();
   }
 
   @override
@@ -99,7 +121,7 @@ class _RegisterDialogState extends State<RegisterDialog> {
                   ),
                   sliver: SliverPersistentHeader(
                     delegate: _SectionHeaderDelegate(
-                      title: 'Registrasi Akun',
+                      title: widget.isEdit ? 'Edit Akun' : 'Registrasi Akun',
                       onPressedClose: () {
                         Navigator.of(context).pop();
                       },
@@ -203,6 +225,11 @@ class _RegisterDialogState extends State<RegisterDialog> {
                           ),
                         ),
                       ),
+                      if (_email.text.isNotEmpty && !isValidEmail(_email.text))
+                        const Text(
+                          'Email tidak valid!',
+                          style: TextStyle(color: Colors.red),
+                        ),
                       const Gap(8),
                       const Row(
                         children: [
@@ -239,7 +266,9 @@ class _RegisterDialogState extends State<RegisterDialog> {
                         child: TextFormField(
                           // controller: _password,
                           decoration: InputDecoration(
-                              hintText: 'Masukkan Password',
+                              hintText: widget.isEdit
+                                  ? 'Masukkan Password Baru'
+                                  : 'Masukkan Password',
                               border: InputBorder.none,
                               contentPadding: const EdgeInsets.symmetric(
                                 vertical: 12.0,
@@ -265,6 +294,13 @@ class _RegisterDialogState extends State<RegisterDialog> {
                           },
                         ),
                       ),
+                      if (!widget.isEdit &&
+                          _password.text.isNotEmpty &&
+                          !isValidPassword(_password.text))
+                        const Text(
+                          'Password tidak valid! Password harus terdiri dari minimal 6 karakter.',
+                          style: TextStyle(color: Colors.red),
+                        ),
                       const Gap(8),
                       const Row(
                         children: [
@@ -301,7 +337,9 @@ class _RegisterDialogState extends State<RegisterDialog> {
                         child: TextFormField(
                           // controller: _passwordConfirmation,
                           decoration: InputDecoration(
-                            hintText: 'Masukkan Password Konfirmasi',
+                            hintText: widget.isEdit
+                                ? 'Masukkan Password Konfirmasi Baru'
+                                : 'Masukkan Password Konfirmasi',
                             border: InputBorder.none,
                             contentPadding: const EdgeInsets.symmetric(
                               vertical: 12.0,
@@ -383,6 +421,11 @@ class _RegisterDialogState extends State<RegisterDialog> {
                           ),
                         ),
                       ),
+                      if (_nik.text.isNotEmpty && !isValidNik(_nik.text))
+                        const Text(
+                          'NIK tidak valid! NIK harus terdiri dari 16 digit angka.',
+                          style: TextStyle(color: Colors.red),
+                        ),
                       const Gap(8),
                       const Row(
                         children: [
@@ -432,6 +475,12 @@ class _RegisterDialogState extends State<RegisterDialog> {
                           ),
                         ),
                       ),
+                      if (_phoneNumber.text.isNotEmpty &&
+                          !isValidPhoneNumber(_phoneNumber.text))
+                        const Text(
+                          'Nomor telepon tidak valid! Nomor telepon harus dimulai dengan 08 dan terdiri dari 10-13 digit angka.',
+                          style: TextStyle(color: Colors.red),
+                        ),
                       const Gap(8),
                       const Row(
                         children: [
@@ -509,12 +558,14 @@ class _RegisterDialogState extends State<RegisterDialog> {
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           isExpanded: true,
                           hint: const Text(
-                            'Pilih jenis registrasi',
+                            'Pilih jenis akun',
                             style: TextStyle(
                               fontWeight: FontWeight.w300,
                             ),
                           ),
-                          value: selectStatusItem,
+                          value: status.contains(selectStatusItem)
+                              ? selectStatusItem
+                              : null,
                           items: status.map<DropdownMenuItem<String>>((e) {
                             return DropdownMenuItem(
                               value: e,
@@ -537,24 +588,44 @@ class _RegisterDialogState extends State<RegisterDialog> {
                             );
                           } else if (state.status.isLoaded) {
                             Navigator.of(context).pop(true);
-                            Navigator.of(context).pop(true);
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content:
-                                    Text('Akun baru berhasil ditambahkan!'),
+                              SnackBar(
+                                content: widget.isEdit
+                                    ? const Text('Akun berhasil diperbarui!')
+                                    : const Text(
+                                        'Akun baru berhasil ditambahkan!'),
                               ),
                             );
                           } else if (state.status.isError) {
                             Navigator.of(context).pop();
-                            Navigator.of(context).pop();
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Gagal menambahkan akun!'),
+                              SnackBar(
+                                content: Text(widget.isEdit
+                                    ? 'Gagal mengupdate akun! ${state.error}'
+                                    : 'Gagal menambahkan akun! ${state.error}'),
                               ),
                             );
                           }
                         },
                         builder: (context, state) {
+                          final isValid = widget.isEdit
+                              ? isRequired(_name.text) &&
+                                  isValidEmail(_email.text) &&
+                                  isValidNik(_nik.text) &&
+                                  isValidPhoneNumber(_phoneNumber.text) &&
+                                  isRequired(_address.text) &&
+                                  selectStatusItem != null
+                              : isRequired(_name.text) &&
+                                  isValidEmail(_email.text) &&
+                                  isValidPassword(_password.text) &&
+                                  isPasswordMatch(
+                                    _password.text,
+                                    _passwordConfirmation.text,
+                                  ) &&
+                                  isValidNik(_nik.text) &&
+                                  isValidPhoneNumber(_phoneNumber.text) &&
+                                  isRequired(_address.text) &&
+                                  selectStatusItem != null;
                           return SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
@@ -563,65 +634,19 @@ class _RegisterDialogState extends State<RegisterDialog> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(5.0),
                                   )),
-                              onPressed: (_name.text.isNotEmpty &&
-                                      _email.text.isNotEmpty &&
-                                      _password.text.isNotEmpty &&
-                                      _passwordConfirmation.text.isNotEmpty &&
-                                      _nik.text.isNotEmpty &&
-                                      _phoneNumber.text.isNotEmpty &&
-                                      _address.text.isNotEmpty &&
-                                      selectStatusItem != null &&
-                                      (_password.text ==
-                                          _passwordConfirmation.text))
+                              onPressed: isValid
                                   ? () {
                                       showDialog(
                                         context: context,
                                         builder: (BuildContext dialogContext) {
                                           return AlertDialog(
-                                            title: const Text('Register Akun'),
-                                            content: const Text(
-                                                'Apakah anda yakin akan menyimpan data?'),
+                                            title: Text(widget.isEdit
+                                                ? 'Edit Akun'
+                                                : 'Register Akun'),
+                                            content: Text(widget.isEdit
+                                                ? 'Apakah anda yakin akan mengupdate data?'
+                                                : 'Apakah anda yakin akan menyimpan data?'),
                                             actions: <Widget>[
-                                              TextButton(
-                                                onPressed: () {
-                                                  if (widget.isEdit) {
-                                                    context.read<RegisterBloc>().add(
-                                                      RegisterEvent.update(
-                                                        id: widget.user!.id.toString(),
-                                                        name: _name.text,
-                                                        email: _email.text,
-                                                        password: _password.text,
-                                                        passwordConfirmation: _passwordConfirmation.text,
-                                                        nik: _nik.text,
-                                                        phoneNumber: _phoneNumber.text,
-                                                        address: _address.text,
-                                                        status: selectStatusItem!,
-                                                      ),
-                                                    );
-                                                  } else {
-                                                    context
-                                                      .read<RegisterBloc>()
-                                                      .add(RegisterEvent
-                                                          .register(
-                                                        name: _name.text,
-                                                        email: _email.text,
-                                                        password:
-                                                            _password.text,
-                                                        passwordConfirmation:
-                                                            _passwordConfirmation
-                                                                .text,
-                                                        nik: _nik.text,
-                                                        phoneNumber:
-                                                            _phoneNumber.text,
-                                                        address: _address.text,
-                                                        status:
-                                                            selectStatusItem!,
-                                                      ),
-                                                    );
-                                                  }
-                                                },
-                                                child: const Text('Ya, Simpan'),
-                                              ),
                                               TextButton(
                                                 onPressed: () {
                                                   Navigator.of(dialogContext)
@@ -629,13 +654,68 @@ class _RegisterDialogState extends State<RegisterDialog> {
                                                 },
                                                 child: const Text('Tidak'),
                                               ),
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.of(dialogContext)
+                                                      .pop();
+                                                  if (widget.isEdit) {
+                                                    context
+                                                        .read<RegisterBloc>()
+                                                        .add(
+                                                          RegisterEvent.update(
+                                                            id: widget.user!.id
+                                                                .toString(),
+                                                            name: _name.text,
+                                                            email: _email.text,
+                                                            password:
+                                                                _password.text,
+                                                            passwordConfirmation:
+                                                                _passwordConfirmation
+                                                                    .text,
+                                                            nik: _nik.text,
+                                                            phoneNumber:
+                                                                _phoneNumber
+                                                                    .text,
+                                                            address:
+                                                                _address.text,
+                                                            status:
+                                                                selectStatusItem!,
+                                                          ),
+                                                        );
+                                                  } else {
+                                                    context
+                                                        .read<RegisterBloc>()
+                                                        .add(
+                                                          RegisterEvent
+                                                              .register(
+                                                            name: _name.text,
+                                                            email: _email.text,
+                                                            password:
+                                                                _password.text,
+                                                            passwordConfirmation:
+                                                                _passwordConfirmation
+                                                                    .text,
+                                                            nik: _nik.text,
+                                                            phoneNumber:
+                                                                _phoneNumber
+                                                                    .text,
+                                                            address:
+                                                                _address.text,
+                                                            status:
+                                                                selectStatusItem!,
+                                                          ),
+                                                        );
+                                                  }
+                                                },
+                                                child: const Text('Ya, Simpan'),
+                                              ),
                                             ],
                                           );
                                         },
                                       );
                                     }
                                   : null,
-                              child:  Text(
+                              child: Text(
                                 widget.isEdit ? 'Perbarui' : 'Daftar',
                                 style: const TextStyle(
                                   color: Colors.white,

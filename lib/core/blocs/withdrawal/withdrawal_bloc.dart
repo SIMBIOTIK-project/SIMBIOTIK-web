@@ -40,7 +40,6 @@ class WithdrawalBloc extends Bloc<WithdrawalEvent, WithdrawalState> {
     try {
       await _withdrawalRepository.postWithdrawal(
         event.request,
-        event.token,
       );
 
       emit(state.copyWith(status: WithdrawalStateStatus.loaded));
@@ -59,9 +58,11 @@ class WithdrawalBloc extends Bloc<WithdrawalEvent, WithdrawalState> {
 
     try {
       final response = await _withdrawalRepository.getWithdrawal(
-        event.token,
-        event.idUser,
-        event.page,
+        idUser: event.idUser,
+        page: event.page,
+        date: event.date,
+        startDate: event.startDate,
+        endDate: event.endDate,
       );
 
       emit(
@@ -87,7 +88,6 @@ class WithdrawalBloc extends Bloc<WithdrawalEvent, WithdrawalState> {
     try {
       final List<WithdrawalModel> withdrawals =
           await _withdrawalRepository.getAllWithdrawal(
-        event.token,
         event.idUser,
       );
 
@@ -112,7 +112,6 @@ class WithdrawalBloc extends Bloc<WithdrawalEvent, WithdrawalState> {
 
     try {
       await _withdrawalRepository.delete(
-        event.token,
         event.id,
       );
 

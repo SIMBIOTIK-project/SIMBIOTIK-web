@@ -17,27 +17,22 @@ part of 'waste_type_bloc.dart';
 @freezed
 class WasteTypeEvent with _$WasteTypeEvent {
   const factory WasteTypeEvent.fetch({
-    required String token,
     int? page,
+    String? keyword,
   }) = _Fetch;
 
   const factory WasteTypeEvent.fetchId({
-    required String token,
     String? id,
   }) = _FetchId;
 
-  const factory WasteTypeEvent.fetchAll({
-    required String token,
-  }) = _FetchAll;
+  const factory WasteTypeEvent.fetchAll() = _FetchAll;
 
   const factory WasteTypeEvent.add({
-    required String token,
     required String type,
     required String price,
   }) = _Add;
 
   const factory WasteTypeEvent.edit({
-    required String token,
     required String id,
     required String type,
     required String price,
@@ -45,6 +40,5 @@ class WasteTypeEvent with _$WasteTypeEvent {
 
   const factory WasteTypeEvent.delete({
     required String id,
-    required String token,
   }) = _Delete;
 }
